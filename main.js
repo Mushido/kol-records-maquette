@@ -173,7 +173,7 @@
     });
     $$('.reveal').forEach(el=>{
       const inHero = !!el.closest('.hero,.phero,.lhero');
-      gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',delay:(el.dataset.delay?+el.dataset.delay:0)+(inHero?.3:0),scrollTrigger: inHero ? null : {trigger:el,start:'top 95%',once:true}, clearProps:'transform'});
+      gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',delay:(el.dataset.delay?+el.dataset.delay:0)+(inHero?.3:0),scrollTrigger: inHero ? null : {trigger:el,start:'top 95%',once:true}});
     });
     $$('[data-stagger]').forEach(g=>{
       gsap.from(g.children,{opacity:0,y:50,duration:1,ease:'expo.out',stagger:.06,clearProps:'transform',scrollTrigger:{trigger:g,start:'top 88%',once:true}});
