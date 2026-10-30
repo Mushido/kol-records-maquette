@@ -5,7 +5,7 @@
 <title>Booking d’artistes — Communes, festivals, entreprises · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body data-page="booking">
 
@@ -35,7 +35,9 @@
     <aside class="bk-aside">
       <span class="eyebrow">Fiche de renseignements</span>
       <h2 class="display" style="font-size:clamp(56px,7vw,120px);margin-top:18px">Votre<br><span class="serif accent">événement.</span></h2>
-      <p class="muted" style="margin-top:20px;max-width:420px">Quatre étapes, deux minutes. Plus votre brief est précis, plus notre proposition sera juste.</p>
+      <p class="muted" style="margin-top:20px;max-width:420px">Quatre étapes, deux minutes. L’affiche de votre événement se met à jour pendant que vous remplissez la fiche.</p>
+      <div class="poster" id="bkPoster" style="margin-top:30px;max-width:420px"></div>
+      <button class="btn btn-ghost" id="bkDl" style="margin-top:14px">Télécharger l’affiche (PNG)</button>
       <div class="card">
         <a href="tel:+33652231000"><span>Booking</span><span>+33 6 52 23 10 00</span></a>
         <a href="https://wa.me/33652231000" target="_blank"><span>WhatsApp</span><span>Écrire ↗</span></a>
@@ -116,7 +118,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=5"></script>
+<script src="data.js?v=20"></script>
+<script src="poster.js?v=20"></script>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
   const K = window.KOL, SL = window.KOL_SL;
@@ -151,9 +154,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   };
   next.addEventListener('click',()=>{ if(step<3) go(step+1); else document.getElementById('ok').classList.add('on'); });
+  const pData=()=>({names:SL.get(),event:document.getElementById('event').value,date:document.getElementById('date').value,city:document.getElementById('ville').value,venue:document.getElementById('lieu').value});
+  const pRender=()=>KOL_POSTER.render(document.getElementById('bkPoster'),pData());
+  ['event','date','ville','lieu'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{ clearTimeout(window.__pt); window.__pt=setTimeout(pRender,250); }));
+  document.addEventListener('sl:change',pRender); pRender();
+  document.getElementById('bkDl').addEventListener('click',()=>KOL_POSTER.download(pData()));
   prev.addEventListener('click',()=>go(Math.max(0,step-1)));
 });
 </script>
-<script src="main.js?v=5"></script>
+<script src="main.js?v=20"></script>
 </body>
 </html>

@@ -142,6 +142,7 @@
     }
   };
   window.KOL_SL = SL;
+  window.KOL_TOAST = (html) => { let t=$('.toast'); if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t);} t.innerHTML=html; t.classList.add('on'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('on'),3200); };
   document.addEventListener('click',e=>{const b=e.target.closest('[data-sl-add]'); if(!b) return; e.preventDefault(); e.stopPropagation(); SL.toggle(b.dataset.slAdd);});
 
   /* ---------- reveal animations ---------- */
@@ -193,12 +194,19 @@
     $$('[data-parallax]').forEach(el=>{
       gsap.fromTo(el,{yPercent:-(+el.dataset.parallax||10)},{yPercent:+el.dataset.parallax||10,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
     });
-    // horizontal pinned sections
+    // carrousels glissables (sans blocage du scroll)
     $$('[data-hscroll]').forEach(sec=>{
-      const track = $('.h-track',sec);
-      if (innerWidth < 800){ track.style.overflowX='auto'; track.style.width='auto'; return; }
-      const dist = () => track.scrollWidth - innerWidth;
-      gsap.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:sec,start:'top top',end:()=>'+='+dist(),pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true}});
+      const row = $('.drag-row',sec) || sec; const prog = $('.row-prog i',sec);
+      let down=false, sx=0, sl=0, moved=0, vx=0, lx=0, raf=null;
+      const upd=()=>{ if(prog) prog.style.transform='scaleX('+Math.max(.08,(row.scrollLeft)/(row.scrollWidth-row.clientWidth||1))+')'; };
+      row.addEventListener('scroll',upd,{passive:true}); upd();
+      row.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; down=true; moved=0; sx=e.clientX; lx=e.clientX; sl=row.scrollLeft; vx=0; cancelAnimationFrame(raf); });
+      addEventListener('pointermove',e=>{ if(!down) return; const dx=e.clientX-sx; moved=Math.max(moved,Math.abs(dx)); if(moved>5) row.classList.add('dragging'); row.scrollLeft=sl-dx; vx=e.clientX-lx; lx=e.clientX; });
+      addEventListener('pointerup',()=>{ if(!down) return; down=false; setTimeout(()=>row.classList.remove('dragging'),30);
+        let v=-vx*1.6; const glide=()=>{ row.scrollLeft+=v; v*=.93; if(Math.abs(v)>.5) raf=requestAnimationFrame(glide); }; glide(); });
+      row.addEventListener('click',e=>{ if(moved>5){ e.preventDefault(); e.stopPropagation(); } },true);
+      $$('[data-row]',sec).forEach(b=>b.addEventListener('click',()=>row.scrollBy({left:(+b.dataset.row)*row.clientWidth*.7,behavior:'smooth'})));
+      gsap.from($$('.h-track > *',sec),{x:120,opacity:0,duration:1.2,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:sec,start:'top 75%',once:true}});
     });
     // skew on velocity for marquees
     $$('.mq-band').forEach(b=>{

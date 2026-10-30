@@ -6,7 +6,7 @@
 <meta name="description" content="KoL Records, label indépendant parisien : production, management, édition, branding et booking d’artistes pour festivals, communes et entreprises.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body data-page="home">
 
@@ -24,6 +24,10 @@
   <div class="hero-inner">
     <span class="eyebrow reveal">Label indépendant · Paris · Depuis 2006</span>
     <h1 class="display" data-split style="margin-top:18px">L’artiste<br>au <span class="serif">centre</span><br>de tout.</h1>
+    <div class="qs reveal" data-delay=".4" id="qs">
+      <div class="qs-in"><span class="muted">⌕</span><input id="qsIn" placeholder="Quel artiste pour votre événement ? Gims, Amel Bent…" autocomplete="off" aria-label="Rechercher un artiste"><a href="artistes.html" class="btn btn-accent" style="padding:12px 18px">Catalogue</a></div>
+      <div class="qs-res" id="qsRes"></div>
+    </div>
     <div class="hero-meta">
       <p class="reveal" data-delay=".5">Production musicale, management, édition, branding — et une antenne booking qui place les plus grands noms sur les scènes des festivals, des communes et des entreprises.</p>
       <div class="tags reveal" data-delay=".6"><span class="tag">Production</span><span class="tag">Management</span><span class="tag">Publishing</span><span class="tag">Branding</span><span class="tag">Booking</span></div>
@@ -68,17 +72,14 @@
   </div>
 </section>
 
-<!-- LEGENDS horizontal -->
-<section class="legends section" data-hscroll style="padding:0">
-  <div style="height:100vh;display:flex;align-items:center">
-    <div class="h-track" id="lgTrack">
-      <div class="lg-intro">
-        <span class="eyebrow" style="color:var(--gold)">KoL Legends</span>
-        <h2 class="display">Ils ont<br>travaillé<br><span class="serif gold">avec nous.</span></h2>
-        <p class="muted" style="max-width:360px">Artistes internationaux avec lesquels nos méthodes de travail et nos stratégies marketing ont fait leurs preuves. Chaque légende dispose de son press kit dédié.</p>
-      </div>
-    </div>
+<!-- LEGENDS carrousel glissable -->
+<section class="legends section" data-hscroll style="padding-bottom:40px">
+  <div class="wrap sh" style="margin-bottom:40px">
+    <div><span class="eyebrow" style="color:var(--gold)">KoL Legends</span><h2 class="display" data-split>Ils ont travaillé<br><span class="serif gold">avec nous.</span></h2></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:18px"><p class="muted" style="max-width:380px;text-align:right">Artistes internationaux avec lesquels nos méthodes et nos stratégies marketing ont fait leurs preuves. Glissez pour parcourir.</p><div class="row-nav"><button data-row="-1" aria-label="Précédent">←</button><button data-row="1" aria-label="Suivant">→</button></div></div>
   </div>
+  <div class="drag-row" data-cursor="Glisser"><div class="h-track" id="lgTrack"></div></div>
+  <div class="row-prog"><i></i></div>
 </section>
 
 <!-- ACCENT MARQUEE -->
@@ -95,6 +96,25 @@
     <div class="reveal"><p>Une sélection des artistes avec lesquels nous travaillons. Ajoutez-les à votre demande en un clic.</p><a href="artistes.html" class="btn btn-light" style="margin-top:20px">Tout le catalogue <span class="arr">→</span></a></div>
   </div>
   <div class="rlist" id="rlist"></div>
+</section>
+
+<!-- AFFICHE LIVE -->
+<section class="section wrap line-t">
+  <div class="demo-poster">
+    <div>
+      <span class="eyebrow">Exclusivité KoL</span>
+      <h2 class="display" data-split style="font-size:clamp(56px,8vw,140px);margin-top:18px">Votre affiche,<br><span class="serif accent">avant le contrat.</span></h2>
+      <p class="reveal" style="color:var(--bone-2);max-width:520px;margin-top:24px;font-size:18px">Composez votre plateau dans le catalogue : l’affiche de votre événement se génère en direct. Téléchargez-la pour la présenter à votre conseil municipal, à votre direction ou à vos partenaires.</p>
+      <ol class="demo-steps reveal">
+        <li><span><b>Écoutez</b> les artistes directement depuis le catalogue.</span></li>
+        <li><span><b>Ajoutez-les</b> à votre demande : l’affiche se compose toute seule.</span></li>
+        <li><span><b>Renseignez</b> date, ville et lieu : l’affiche se met à jour.</span></li>
+        <li><span><b>Envoyez</b> la demande à notre équipe booking.</span></li>
+      </ol>
+      <a href="artistes.html" class="btn btn-accent" data-magnetic>Composer mon affiche <span class="arr">→</span></a>
+    </div>
+    <div><div class="poster" id="demoPoster"></div><p class="note" style="text-align:center;margin-top:16px">Exemple de rendu · affiche générée automatiquement</p></div>
+  </div>
 </section>
 
 <!-- FORMATS -->
@@ -155,7 +175,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=5"></script>
+<script src="data.js?v=20"></script>
+<script src="poster.js?v=20"></script>
 <script>
 (function(){
   const K = window.KOL;
@@ -190,12 +211,36 @@
   });
   document.addEventListener('DOMContentLoaded',()=>window.KOL_floatList && KOL_floatList(rl));
   // logos
-  const url = f => f.startsWith('24:') ? K.logoBase24 + f.slice(3) : K.logoBase + f;
-  document.getElementById('mqCorpo').innerHTML = K.clients.corpo.map(f=>`<div class="logo-tile"><img src="${url(f)}" alt="" loading="lazy"></div>`).join('');
-  document.getElementById('mqComm').innerHTML = K.clients.communes.map(f=>`<div class="logo-tile"><img src="${url(f)}" alt="" loading="lazy"></div>`).join('');
+  const tile = l => `<div class="logo-tile" title="${l.name}"><img src="${l.file}" alt="${l.name}" loading="lazy"></div>`;
+  document.getElementById('mqCorpo').innerHTML = K.logos.filter(l=>l.cat==='corpo').map(tile).join('');
+  document.getElementById('mqComm').innerHTML = K.logos.filter(l=>l.cat==='communes').map(tile).join('');
   document.getElementById('awards').innerHTML = K.awards.map(a=>`<div class="award"><div class="lg"><img src="${a.img}" alt="${a.n}"></div><span>${a.n}</span></div>`).join('');
 })();
 </script>
-<script src="main.js?v=5"></script>
+<script src="main.js?v=20"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const K=window.KOL, all=[...K.roster,...K.legends.map(l=>({...l,cat:'legend'}))];
+  /* recherche rapide */
+  const qs=document.getElementById('qs'), qi=document.getElementById('qsIn'), qr=document.getElementById('qsRes'); let sel=0, list=[];
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const draw=()=>{ const q=norm(qi.value.trim()); list=(q?all.filter(a=>norm(a.n).includes(q)||norm(a.d).includes(q)):K.roster.slice(0,5)).slice(0,6);
+    qr.innerHTML=list.length?list.map((a,i)=>`<button data-i="${i}" class="${i===sel?'k':''}">${a.img?`<img src="${KOL_small(a.img)}" alt="">`:'<span class="ph"></span>'}<span><b>${a.n}</b><small>${a.cat==='legend'?'Légende · collaboration':K.cats[a.cat]+' · '+a.d}</small></span><span class="act">${a.cat==='legend'?(a.page?'Press kit →':''):'+ Ajouter à ma demande'}</span></button>`).join(''):'<p class="muted" style="padding:12px">Pas trouvé ? <a href="booking.html" style="text-decoration:underline">Faites une demande libre</a>, nous trouvons l’artiste.</p>';
+    qs.classList.add('open'); };
+  const pick=i=>{ const a=list[i]; if(!a) return; if(a.cat==='legend'){ if(a.page) location.href=a.page; return; }
+    const s=KOL_SL.get(); if(!s.includes(a.n)) KOL_SL.toggle(a.n);
+    KOL_TOAST(`✓ ${a.n} ajouté à votre demande <a href="booking.html">Voir ma demande</a>`); qi.value=''; qs.classList.remove('open'); };
+  qi.addEventListener('focus',draw); qi.addEventListener('input',()=>{sel=0;draw();});
+  qi.addEventListener('keydown',e=>{ if(e.key==='ArrowDown'){sel=Math.min(sel+1,list.length-1);draw();e.preventDefault();} if(e.key==='ArrowUp'){sel=Math.max(sel-1,0);draw();e.preventDefault();} if(e.key==='Enter'){pick(sel);} if(e.key==='Escape') qs.classList.remove('open'); });
+  qr.addEventListener('mousedown',e=>{ const b=e.target.closest('button'); if(b){ e.preventDefault(); pick(+b.dataset.i);} });
+  document.addEventListener('click',e=>{ if(!qs.contains(e.target)) qs.classList.remove('open'); });
+  /* démo affiche */
+  const demos=[{names:['Kendji Girac','Amel Bent','Claudio Capéo','Jimmy Sax'],event:'Fête de la ville',city:'Votre ville',date:'',venue:'Place centrale'},
+               {names:['Gims','Dadju','Black M','Wejdene','Hatik'],event:'Festival d’été',city:'Votre ville',date:'',venue:'Scène plein air'},
+               {names:['Slimane','Camélia Jordana','Patrick Fiori'],event:'Soirée de gala',city:'Votre entreprise',date:'',venue:'Grand auditorium'}];
+  const dp=document.getElementById('demoPoster'); let di=0; KOL_POSTER.render(dp,demos[0]);
+  let dt=null; ScrollTrigger.create({trigger:dp,start:'top bottom',end:'bottom top',onToggle:s=>{ clearInterval(dt); if(s.isActive) dt=setInterval(()=>{ di=(di+1)%demos.length; KOL_POSTER.render(dp,demos[di]); },3600); }});
+});
+</script>
 </body>
 </html>

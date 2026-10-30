@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Références — Entreprises & communes · KoL Records</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body data-page="clients">
 
@@ -13,49 +13,82 @@
   <div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Références</span></div>
   <h1 class="display" data-split>Ils nous<br>font <span class="serif accent">confiance.</span></h1>
   <div class="sub">
-    <p class="reveal">Nous travaillons avec un grand nombre de communes et d’organisateurs que nous avons su fidéliser — des grandes entreprises aux villes de toute la France.</p>
-    <div class="reveal" style="justify-self:end"><a href="booking.html" class="btn btn-accent">Rejoindre nos clients <span class="arr">→</span></a></div>
+    <p class="reveal">Nous travaillons avec un grand nombre de communes et d’organisateurs que nous avons su fidéliser, des grandes entreprises aux villes de toute la France.</p>
+    <div class="reveal" style="justify-self:end;display:flex;gap:10px;flex-wrap:wrap"><a href="#entreprises" class="btn btn-ghost">Entreprises ↓</a><a href="#carte" class="btn btn-ghost">Communes ↓</a><a href="booking.html" class="btn btn-accent">Rejoindre nos clients →</a></div>
   </div>
 </section>
 
-<section class="wrap" style="padding-bottom:120px">
-  <div class="toolbar" style="justify-content:flex-start">
-    <div class="chips" id="lchips">
-      <button class="chip on" data-f="all">Toutes</button>
-      <button class="chip" data-f="corpo">Entreprises</button>
-      <button class="chip" data-f="communes">Communes</button>
+<!-- ENTREPRISES -->
+<section class="wrap" id="entreprises" style="padding-bottom:clamp(60px,8vw,120px)">
+  <div class="lgrp-title"><h3>Entreprises</h3><small>Corporate, centres commerciaux, médias, sport</small></div>
+  <div class="lwall" id="wCorpo"></div>
+</section>
+
+<!-- CARTE -->
+<section class="section wrap line-t" id="carte">
+  <div class="fr-map">
+    <div class="fr-svg" id="frMap"></div>
+    <div>
+      <span class="eyebrow">Partout en France</span>
+      <h2 class="display" data-split style="font-size:clamp(48px,5.4vw,96px);margin-top:18px">Des communes<br><span class="serif accent">du Nord au Sud.</span></h2>
+      <p class="reveal" style="color:var(--bone-2);margin-top:20px;max-width:460px">Fêtes de ville, plateaux plein air, saisons culturelles : survolez la carte ou la liste pour voir chaque commune.</p>
+      <ul class="fr-list" id="frList"></ul>
     </div>
   </div>
-  <div class="logos-grid" id="lg"></div>
+</section>
+
+<!-- COMMUNES -->
+<section class="wrap" style="padding-bottom:clamp(60px,8vw,120px)">
+  <div class="lgrp-title"><h3>Communes</h3><small>Mairies et collectivités</small></div>
+  <div class="lwall" id="wComm"></div>
 </section>
 
 <section class="section wrap line-t">
   <div class="sh"><div><span class="eyebrow">Terrains de jeu</span><h2 class="display" data-split>Une expérience<br><span class="serif accent">multiple.</span></h2></div></div>
   <div class="formats" data-stagger>
-    <div class="fmt"><div class="ic">✦</div><h4>Festivals</h4><p>Programmation de têtes d’affiche.</p></div>
-    <div class="fmt"><div class="ic">◎</div><h4>Plateaux<br>plein air</h4><p>Les grands rendez-vous des mairies.</p></div>
-    <div class="fmt"><div class="ic">◉</div><h4>Plateaux<br>radio</h4><p>Des line-ups pour les radios.</p></div>
-    <div class="fmt"><div class="ic">◆</div><h4>Corporate<br>& privé</h4><p>Entreprises et particuliers.</p></div>
+    <a href="booking.html?type=festival" class="fmt"><div class="ic">✦</div><h4>Festivals</h4><p>Programmation de têtes d’affiche.</p></a>
+    <a href="booking.html?type=commune" class="fmt"><div class="ic">◎</div><h4>Plateaux<br>plein air</h4><p>Les grands rendez-vous des mairies.</p></a>
+    <a href="booking.html?type=corporate" class="fmt"><div class="ic">◉</div><h4>Plateaux<br>radio</h4><p>Des line-ups pour les radios.</p></a>
+    <a href="booking.html?type=prive" class="fmt"><div class="ic">◆</div><h4>Corporate<br>& privé</h4><p>Entreprises et particuliers.</p></a>
   </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=5"></script>
+<script src="data.js?v=20"></script>
+<script src="france.js?v=20"></script>
+<script src="main.js?v=20"></script>
 <script>
-  const K=window.KOL;
-  const url = f => f.startsWith('24:') ? K.logoBase24 + f.slice(3) : K.logoBase + f;
-  const lg = document.getElementById('lg');
-  lg.innerHTML = [...K.clients.corpo.map(f=>[f,'corpo']),...K.clients.communes.map(f=>[f,'communes'])].map(([f,c])=>`<div class="logo-tile" data-c="${c}"><img src="${url(f)}" alt="" loading="lazy"></div>`).join('');
-  document.getElementById('lchips').addEventListener('click',e=>{
-    const b=e.target.closest('.chip'); if(!b) return;
-    document.querySelectorAll('#lchips .chip').forEach(x=>x.classList.toggle('on',x===b));
-    const shown=[]; lg.querySelectorAll('.logo-tile').forEach(t=>{const ok=b.dataset.f==='all'||t.dataset.c===b.dataset.f; t.style.display=ok?'':'none'; if(ok) shown.push(t);});
-    if(window.gsap) gsap.fromTo(shown,{opacity:0,scale:.9},{opacity:1,scale:1,duration:.5,stagger:.015,ease:'expo.out'});
-  });
-  if(window.gsap) document.addEventListener('DOMContentLoaded',()=>gsap.from('#lg .logo-tile',{opacity:0,y:30,duration:.8,stagger:.02,ease:'expo.out',scrollTrigger:{trigger:'#lg',start:'top 85%'}}));
+document.addEventListener('DOMContentLoaded',()=>{
+  const K=window.KOL, M=window.KOL_MAP;
+  const tile=l=>`<div class="lw" data-name="${l.name}"><img src="${l.file}" alt="${l.name||'Commune cliente'}" loading="lazy">${l.name?`<span>${l.name}</span>`:''}</div>`;
+  document.getElementById('wCorpo').innerHTML=K.logos.filter(l=>l.cat==='corpo').map(tile).join('');
+  document.getElementById('wComm').innerHTML=K.logos.filter(l=>l.cat==='communes').map(tile).join('');
+  // apparition des logos : visibles par défaut, animation seulement si l'écran les atteint
+  document.querySelectorAll('.lwall').forEach(w=>{ const t=w.querySelectorAll('.lw'); gsap.fromTo(t,{y:40,opacity:0},{y:0,opacity:1,duration:.8,ease:'expo.out',stagger:.025,immediateRender:false,scrollTrigger:{trigger:w,start:'top 92%',once:true}}); });
+  // carte
+  const logoOf=c=>{ const l=K.logos.find(x=>x.name===c); return l?l.file:''; };
+  const pts=M.pts.slice().sort((a,b)=>a.y-b.y);
+  document.getElementById('frMap').innerHTML=`<svg viewBox="-20 -20 ${M.W+40} ${M.H+40}" aria-label="Carte des communes clientes"><path class="land" d="${M.d}"/>${pts.map((p,i)=>`<g class="dot" data-c="${p.c}" transform="translate(${p.x} ${p.y})"><circle class="p" r="7"/><circle class="c" r="7"/></g>`).join('')}</svg><div class="fr-tip" id="frTip"><img alt=""><span></span></div>`;
+  document.getElementById('frList').innerHTML=M.pts.slice().sort((a,b)=>a.c.localeCompare(b.c,'fr')).map(p=>`<li data-c="${p.c}">${p.c}</li>`).join('');
+  const svg=document.querySelector('#frMap svg'), tip=document.getElementById('frTip'), dots=[...svg.querySelectorAll('.dot')], lis=[...document.querySelectorAll('#frList li')];
+  const show=c=>{ const g=dots.find(d=>d.dataset.c===c); if(!g) return; const p=M.pts.find(x=>x.c===c); const box=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    tip.style.left=((p.x-vb.x)/vb.width*box.width)+'px'; tip.style.top=((p.y-vb.y)/vb.height*box.height)+'px';
+    tip.querySelector('img').src=logoOf(c); tip.querySelector('span').textContent=c; tip.classList.add('on');
+    dots.forEach(d=>{ d.classList.toggle('hl',d===g); d.classList.toggle('dim',d!==g); }); lis.forEach(l=>l.classList.toggle('hl',l.dataset.c===c)); };
+  const hide=()=>{ tip.classList.remove('on'); dots.forEach(d=>d.classList.remove('hl','dim')); lis.forEach(l=>l.classList.remove('hl')); };
+  dots.forEach(d=>{ d.addEventListener('mouseenter',()=>show(d.dataset.c)); d.addEventListener('mouseleave',hide); });
+  lis.forEach(l=>{ l.addEventListener('mouseenter',()=>show(l.dataset.c)); l.addEventListener('mouseleave',hide); });
+  // animation : le contour se dessine puis les points apparaissent du nord au sud
+  const land=svg.querySelector('.land'); const len=land.getTotalLength();
+  land.style.strokeDasharray=len; land.style.strokeDashoffset=len; land.style.fillOpacity=0;
+  gsap.timeline({scrollTrigger:{trigger:'#frMap',start:'top 75%',once:true}})
+    .to(land,{strokeDashoffset:0,duration:2.2,ease:'power2.inOut'})
+    .to(land,{fillOpacity:1,duration:.8},'-=.6')
+    .fromTo(dots,{scale:0,transformOrigin:'50% 50%'},{scale:1,duration:.5,ease:'back.out(3)',stagger:.06,onComplete:function(){ this.targets().forEach(d=>d.classList.add('on')); }},'-=.4')
+    .add(()=>dots.forEach(d=>d.classList.add('on')));
+});
 </script>
-<script src="main.js?v=5"></script>
 </body>
 </html>

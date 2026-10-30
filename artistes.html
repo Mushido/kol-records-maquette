@@ -5,7 +5,7 @@
 <title>Artistes — Catalogue booking · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body data-page="artistes">
 
@@ -13,7 +13,7 @@
   <div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Artistes</span></div>
   <h1 class="display" data-split>Le<br><span class="serif accent">catalogue.</span></h1>
   <div class="sub">
-    <p class="reveal">Les artistes avec lesquels nous travaillons pour vos événements. Filtrez, comparez, ajoutez-les à votre demande : nous revenons vers vous avec les disponibilités.</p>
+    <p class="reveal">Les artistes avec lesquels nous travaillons pour vos événements. Écoutez-les, ajoutez-les à votre demande : l’affiche de votre événement se compose en direct.</p>
     <div class="reveal" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end"><a href="#legendes" class="btn btn-ghost">Les légendes ↓</a><a href="booking.html" class="btn btn-accent">Ma demande <span class="badge" data-sl-count>0</span></a></div>
   </div>
 </section>
@@ -56,19 +56,36 @@
 <div class="shortlist">
   <span class="cnt">0</span>
   <span class="names"></span>
+  <button class="btn btn-ghost" id="openPoster" style="color:var(--ink);border-color:rgba(8,8,8,.25);background:transparent">Voir mon affiche</button>
   <a href="booking.html" class="btn">Envoyer ma demande <span class="arr">→</span></a>
+</div>
+<div class="pst-modal" id="pm">
+  <button class="pm-x" id="pmX" aria-label="Fermer">×</button>
+  <div class="pm-box">
+    <div class="poster" id="pmPoster"></div>
+    <div class="pm-side">
+      <span class="eyebrow">Votre affiche</span>
+      <h3 style="margin-top:12px">Votre plateau</h3>
+      <p>Le premier nom est la tête d’affiche. Changez l’ordre avec les flèches, puis téléchargez l’affiche ou envoyez la demande.</p>
+      <ul class="pm-order" id="pmOrder"></ul>
+      <div class="pm-btns"><button class="btn btn-light" id="pmDl">Télécharger l’affiche (PNG)</button><a href="booking.html" class="btn btn-accent">Envoyer la demande →</a></div>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=5"></script>
+<script src="data.js?v=20"></script>
+<script src="poster.js?v=20"></script>
+<script src="player.js?v=20"></script>
 <script>
 (function(){
   const K = window.KOL;
   const grid = document.getElementById('grid');
   const card = (a, legend) => `<article class="acard" data-cat="${a.cat||'legend'}" data-name="${a.n.toLowerCase()}" ${legend&&a.page?'data-cursor="Press kit"':''}>
       ${a.img?`<img src="${a.img}" alt="${a.n}" loading="lazy">`:`<div class="noimg">${a.n.split(' ').map(w=>w[0]).join('')}</div>`}
+      ${a.sp?`<button class="listen" data-sp="${a.sp}" data-name="${a.n}" aria-label="Écouter ${a.n}"><i>▶</i>Écouter</button>`:''}
       ${legend? (a.page?`<a href="${a.page}" class="add on" style="background:var(--gold)">Press kit ↗</a>`:`<span class="add">Press kit · bientôt</span>`)
               : `<button class="add" data-sl-add="${a.n}">+ Ajouter</button>`}
       <div class="info"><span class="c" ${legend?'style="color:var(--gold)"':''}>${legend?'Légende':K.cats[a.cat]}</span><h3>${a.n}</h3><p>${a.d}</p></div>
@@ -94,6 +111,22 @@
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('on',x===b)); grid.classList.toggle('list',b.dataset.view==='list'); apply();}));
 })();
 </script>
-<script src="main.js?v=5"></script>
+<script src="main.js?v=20"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  /* écoute */
+  document.addEventListener('click',e=>{ const b=e.target.closest('.listen'); if(!b) return; e.preventDefault(); e.stopPropagation(); KOL_PLAY('spotify:artist:'+b.dataset.sp, b.dataset.name, 'Titres populaires'); });
+  document.addEventListener('kol:playing',e=>{ const u=e.detail.uri||''; document.querySelectorAll('.acard').forEach(c=>{ const b=c.querySelector('.listen'); const on=!!b && e.detail.playing && u==='spotify:artist:'+b.dataset.sp; c.classList.toggle('playing',on); if(b) b.innerHTML=on?'<i>❚❚</i>En écoute':'<i>▶</i>Écouter'; }); });
+  /* affiche */
+  const pm=document.getElementById('pm'), pp=document.getElementById('pmPoster'), po=document.getElementById('pmOrder');
+  const data=()=>({names:KOL_SL.get(),event:'Votre événement',city:'Votre ville'});
+  const drawOrder=()=>{ const s=KOL_SL.get(); po.innerHTML=s.map((n,i)=>`<li><small>${i?String(i+1).padStart(2,'0'):'Tête d’affiche'}</small><b>${n}</b><button data-up="${i}" aria-label="Monter" ${i?'':'disabled'}>↑</button><button data-rm="${n}" aria-label="Retirer">×</button></li>`).join('')||'<li>Aucun artiste sélectionné</li>'; KOL_POSTER.render(pp,data()); };
+  po.addEventListener('click',e=>{ const u=e.target.closest('[data-up]'), r=e.target.closest('[data-rm]'); if(u){ const s=KOL_SL.get(), i=+u.dataset.up; [s[i-1],s[i]]=[s[i],s[i-1]]; KOL_SL.set(s);} if(r) KOL_SL.toggle(r.dataset.rm); drawOrder(); });
+  document.getElementById('openPoster').addEventListener('click',()=>{ drawOrder(); pm.classList.add('on'); window.__lenis&&__lenis.stop(); gsap.fromTo('#pmPoster',{rotate:-6,scale:.85,opacity:0},{rotate:0,scale:1,opacity:1,duration:.9,ease:'expo.out'}); });
+  const close=()=>{ pm.classList.remove('on'); window.__lenis&&__lenis.start(); };
+  document.getElementById('pmX').addEventListener('click',close); pm.addEventListener('click',e=>{ if(e.target===pm) close(); }); addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  document.getElementById('pmDl').addEventListener('click',()=>KOL_POSTER.download(data()));
+});
+</script>
 </body>
 </html>
