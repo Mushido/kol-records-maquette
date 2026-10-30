@@ -5,71 +5,75 @@
 <title>KoL Legends — Press kits · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=32">
+<link rel="stylesheet" href="style.css?v=33">
+<link rel="stylesheet" href="legend.css?v=33">
 <style>
   body{--accent:#d6b46a}
-  .lh-hub{padding-top:120px;min-height:100svh;display:flex;flex-direction:column}
-  .hub-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;padding-bottom:30px}
-  .hub-head h1{font-size:clamp(60px,9vw,160px)}
+  .vhub{min-height:100svh;padding-top:120px;display:flex;flex-direction:column;background:radial-gradient(60% 55% at 50% 60%,#17120a,#060606 70%)}
+  .hub-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+  .hub-head h1{font-size:clamp(56px,8vw,150px)}
   .hub-head p{max-width:420px;color:var(--bone-2)}
-  .panels{flex:1;display:flex;gap:10px;min-height:68vh;padding:0 var(--pad) 30px}
-  .pn{position:relative;flex:1;border-radius:22px;overflow:hidden;transition:flex .9s cubic-bezier(.7,0,.2,1);min-width:0;background:#111;isolation:isolate}
-  .panels:hover .pn{flex:.7}
-  .panels .pn:hover{flex:2.4}
-  .pn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.55);transform:scale(1.08);transition:filter .9s,transform 1.4s cubic-bezier(.2,.8,.2,1);z-index:-2}
-  .pn:hover img{filter:grayscale(0) brightness(.75);transform:scale(1)}
-  .pn:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.95) 0%,rgba(6,6,6,.2) 55%,rgba(6,6,6,.5) 100%);z-index:-1}
-  .pn .idx{position:absolute;top:22px;left:24px;font-size:12px;letter-spacing:.24em;color:var(--gold)}
-  .pn .vname{position:absolute;left:24px;bottom:28px;font-family:var(--display);text-transform:uppercase;font-size:clamp(48px,5vw,90px);line-height:.85;writing-mode:vertical-rl;transform:rotate(180deg);transition:opacity .4s}
-  .pn .body{position:absolute;left:30px;right:30px;bottom:30px;opacity:0;transform:translateY(30px);transition:opacity .5s .15s,transform .7s .15s cubic-bezier(.2,.8,.2,1)}
-  .pn:hover .vname{opacity:0}
-  .pn:hover .body{opacity:1;transform:none}
-  .pn .body .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-  .pn .body h2{font-family:var(--display);text-transform:uppercase;font-weight:400;font-size:clamp(64px,7vw,130px);line-height:.85;margin:10px 0 18px}
-  .pn .facts{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:22px}
-  .pn .facts div{border-left:2px solid var(--gold);padding-left:12px}
-  .pn .facts b{display:block;font-family:var(--display);font-weight:400;font-size:38px;line-height:1}
-  .pn .facts small{font-size:12px;color:var(--bone-2)}
-  .pn .go{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;background:var(--gold);color:#120d04;font-weight:700;font-size:14px}
+  .crates{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,50px);align-items:center;padding:40px var(--pad) 60px}
+  .rec{position:relative;display:block;aspect-ratio:1.45/1;cursor:none}
+  .rec .disc{position:absolute;top:4%;bottom:4%;left:14%;aspect-ratio:1;z-index:1;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+  .rec .disc .vinyl{width:100%;height:100%;animation:vspin 7s linear infinite;animation-play-state:paused}
+  .rec:hover .disc{transform:translateX(42%)}
+  .rec:hover .disc .vinyl{animation-play-state:running;animation-duration:2.6s}
+  .rec .sleeve{position:absolute;top:0;bottom:0;left:0;aspect-ratio:1;z-index:2;border-radius:6px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.7);transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+  .rec:hover .sleeve{transform:translateX(-6%) rotate(-2deg)}
+  .rec .sleeve img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.1) brightness(.8);transition:filter .8s}
+  .rec:hover .sleeve img{filter:none}
+  .rec .sleeve:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 35%),linear-gradient(to top,rgba(0,0,0,.85),transparent 55%)}
+  .rec .sl-t{position:absolute;left:18px;right:18px;bottom:16px;z-index:3}
+  .rec .sl-t small{display:block;font-size:11px;letter-spacing:.22em;color:var(--gold)}
+  .rec .sl-t b{display:block;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,3.4vw,62px);line-height:.88;margin-top:6px}
+  .rec .sl-i{position:absolute;top:14px;left:16px;z-index:3;font-size:11px;letter-spacing:.24em;color:var(--bone-2)}
+  .rec .vinyl .vl b{font-size:clamp(9px,1vw,16px)}
+  .rec-meta{margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:12px;opacity:.75;transition:opacity .4s}
+  .rec-wrap:hover .rec-meta{opacity:1}
+  .rec-meta .facts{font-size:13px;color:var(--bone-2)}
+  .rec-meta .facts b{color:var(--gold);font-weight:600}
+  .rec-meta .go{font-size:13px;font-weight:700;color:#120d04;background:var(--gold);padding:11px 16px;border-radius:100px;white-space:nowrap}
+  .zoomer{position:fixed;z-index:9990;border-radius:50%;pointer-events:none;display:none}
   .soon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .soon{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
   .soon img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.45)}
   .soon span{position:absolute;left:16px;bottom:14px;right:16px}
   .soon b{display:block;font-family:var(--display);font-weight:400;font-size:30px;text-transform:uppercase;line-height:.95}
   .soon small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  @media (max-width:900px){.panels{flex-direction:column;min-height:0}.pn{min-height:62vh;flex:none!important}.pn .vname{display:none}.pn .body{opacity:1;transform:none}.pn img{filter:grayscale(.2) brightness(.6)}.soon-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:900px){.crates{grid-template-columns:1fr;gap:60px}.rec .disc{transform:translateX(30%)}.rec .disc .vinyl{animation-play-state:running}.rec .sleeve img{filter:grayscale(.2)}.soon-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body data-page="legend">
 
-<section class="lh-hub">
+<section class="vhub">
   <div class="wrap hub-head">
     <div><div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Légendes</span></div>
-      <h1 class="display" data-split>KoL <span class="serif gold">Legends.</span></h1></div>
-    <p class="reveal">Trois press kits premium, réservés aux plus grands noms. Survolez une légende, puis ouvrez son press kit.</p>
+      <h1 class="display" data-split>Choisissez<br>votre <span class="serif gold">légende.</span></h1></div>
+    <p class="reveal">Trois press kits premium. Survolez un vinyle pour le sortir de sa pochette, cliquez pour entrer.</p>
   </div>
-  <div class="panels" id="panels">
-    <a class="pn" href="snoop-dogg.html" data-cursor="Ouvrir">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg" style="object-position:50% 18%">
-      <span class="idx">L—01</span><span class="vname">Snoop Dogg</span>
-      <div class="body"><span class="k">Long Beach · The Doggfather</span><h2>Snoop<br>Dogg</h2>
-        <div class="facts"><div><b>35M+</b><small>disques vendus dans le monde</small></div><div><b>16</b><small>nominations aux Grammy</small></div></div>
-        <span class="go">Ouvrir le press kit →</span></div>
-    </a>
-    <a class="pn" href="lil-wayne.html" data-cursor="Ouvrir">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/960px-Lil_Wayne_Feb._2020.jpg" alt="Lil Wayne" style="object-position:50% 20%">
-      <span class="idx">L—02</span><span class="vname">Lil Wayne</span>
-      <div class="body"><span class="k">La Nouvelle-Orléans · Young Money</span><h2>Lil<br>Wayne</h2>
-        <div class="facts"><div><b>120M+</b><small>disques vendus dans le monde</small></div><div><b>5</b><small>Grammy remportés</small></div></div>
-        <span class="go">Ouvrir le press kit →</span></div>
-    </a>
-    <a class="pn" href="gims.html" data-cursor="Ouvrir">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/960px-NDLE2025Gims_1.jpg" alt="Gims" style="object-position:50% 20%">
-      <span class="idx">L—03</span><span class="vname">Gims</span>
-      <div class="body"><span class="k">Kinshasa · Paris · Sexion d’Assaut</span><h2>Gims</h2>
-        <div class="facts"><div><b>3×</b><small>Diamant SNEP · Ceinture noire</small></div><div><b>72 000</b><small>au Stade de France, 2019</small></div></div>
-        <span class="go">Ouvrir le press kit →</span></div>
-    </a>
+  <div class="crates">
+    <div class="rec-wrap">
+      <a class="rec" href="snoop-dogg.html" data-cursor="Play" aria-label="Press kit Snoop Dogg">
+        <div class="disc"><div class="vinyl"><div class="vl"><b>Snoop</b><b>Dogg</b><small>KoL Legends · L—01</small></div></div></div>
+        <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg"><span class="sl-i">L—01</span><span class="sl-t"><small>Long Beach</small><b>Snoop Dogg</b></span></div>
+      </a>
+      <div class="rec-meta"><span class="facts"><b>35M+</b> disques · <b>16</b> nominations Grammy</span><a class="go" href="snoop-dogg.html">Press kit →</a></div>
+    </div>
+    <div class="rec-wrap">
+      <a class="rec" href="lil-wayne.html" data-cursor="Play" aria-label="Press kit Lil Wayne">
+        <div class="disc"><div class="vinyl"><div class="vl"><b>Lil</b><b>Wayne</b><small>KoL Legends · L—02</small></div></div></div>
+        <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/960px-Lil_Wayne_Feb._2020.jpg" alt="Lil Wayne"><span class="sl-i">L—02</span><span class="sl-t"><small>La Nouvelle-Orléans</small><b>Lil Wayne</b></span></div>
+      </a>
+      <div class="rec-meta"><span class="facts"><b>120M+</b> disques · <b>5</b> Grammy</span><a class="go" href="lil-wayne.html">Press kit →</a></div>
+    </div>
+    <div class="rec-wrap">
+      <a class="rec" href="gims.html" data-cursor="Play" aria-label="Press kit Gims">
+        <div class="disc"><div class="vinyl"><div class="vl"><b>Gims</b><b>Djuna</b><small>KoL Legends · L—03</small></div></div></div>
+        <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/960px-NDLE2025Gims_1.jpg" alt="Gims"><span class="sl-i">L—03</span><span class="sl-t"><small>Kinshasa · Paris</small><b>Gims</b></span></div>
+      </a>
+      <div class="rec-meta"><span class="facts"><b>3× Diamant</b> SNEP · <b>Stade de France</b> 2019</span><a class="go" href="gims.html">Press kit →</a></div>
+    </div>
   </div>
   <p class="wrap note" style="padding-bottom:40px">Chiffres sourcés dans chaque press kit (Wikipédia, Grammy.com, SNEP, Le Parisien).</p>
 </section>
@@ -82,15 +86,28 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=32"></script>
+<script src="data.js?v=33"></script>
 <script>
   document.getElementById('soon').innerHTML = KOL.legends.filter(l=>!l.page).map(l=>`<div class="soon"><img src="${KOL_small(l.img)}" alt="${l.n}" loading="lazy"><span><small>Press kit · bientôt</small><b>${l.n}</b></span></div>`).join('');
 </script>
-<script src="main.js?v=32"></script>
+<script src="main.js?v=33"></script>
 <script>
   document.addEventListener('DOMContentLoaded',()=>{
     if(!window.gsap) return;
-    gsap.from('.pn',{yPercent:30,opacity:0,duration:1.3,ease:'expo.out',stagger:.12,delay:.3,clearProps:'all'});
+    gsap.from('.rec .sleeve',{y:80,opacity:0,rotate:-6,duration:1.3,ease:'expo.out',stagger:.15,delay:.25,clearProps:'transform,opacity'});
+    gsap.from('.rec .disc',{xPercent:-30,rotate:-180,opacity:0,duration:1.6,ease:'expo.out',stagger:.15,delay:.5,clearProps:'transform,opacity'});
+    gsap.from('.rec-meta',{y:20,opacity:0,duration:1,ease:'expo.out',stagger:.15,delay:.9,clearProps:'transform,opacity'});
+    // clic : le vinyle grossit jusqu'à remplir l'écran, puis on ouvre le press kit
+    document.querySelectorAll('.rec').forEach(a=>a.addEventListener('click',e=>{
+      e.preventDefault(); e.stopPropagation();
+      const v=a.querySelector('.disc'), r=v.getBoundingClientRect(), z=v.cloneNode(true);
+      z.className='zoomer'; Object.assign(z.style,{display:'block',left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});
+      document.body.appendChild(z);
+      const s=Math.hypot(innerWidth,innerHeight)/r.width*1.2;
+      gsap.timeline({onComplete:()=>location.href=a.getAttribute('href')})
+        .to(z,{x:innerWidth/2-(r.left+r.width/2),y:innerHeight/2-(r.top+r.height/2),duration:.6,ease:'expo.inOut'})
+        .to(z,{scale:s,duration:.9,ease:'expo.in'},'-=.15');
+    },true));
   });
 </script>
 </body>
