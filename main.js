@@ -158,7 +158,8 @@
         scrollTrigger: el.closest('.hero,.phero') ? null : {trigger:el,start:'top 85%'}});
     });
     $$('.reveal').forEach(el=>{
-      gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',delay:el.dataset.delay?+el.dataset.delay:0,scrollTrigger:{trigger:el,start:'top 90%'}});
+      const inHero = !!el.closest('.hero,.phero,.lhero');
+      gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',delay:(el.dataset.delay?+el.dataset.delay:0)+(inHero?.3:0),scrollTrigger: inHero ? null : {trigger:el,start:'top 95%'}});
     });
     $$('[data-stagger]').forEach(g=>{
       gsap.from(g.children,{opacity:0,y:50,duration:1,ease:'expo.out',stagger:.07,scrollTrigger:{trigger:g,start:'top 85%'}});
