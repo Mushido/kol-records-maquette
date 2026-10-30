@@ -568,3 +568,28 @@ body:has(.kdock.on) .shortlist{bottom:150px}
 
 .nav-dd .chev{display:inline-block;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);margin-left:8px;transition:transform .3s}
 .nav-dd:hover .chev{transform:rotate(225deg) translate(-1px,-1px)}
+
+/* newsletter footer */
+.nl{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,60px);align-items:end;padding:clamp(30px,4vw,48px);margin-bottom:clamp(50px,6vw,80px);border:1px solid var(--line);border-radius:24px;background:radial-gradient(90% 120% at 0% 0%,rgba(255,77,26,.16),transparent 60%),#111}
+.nl h4{font-size:clamp(40px,4.4vw,72px);line-height:.9;margin-top:12px}
+.nl-seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.nl-seg input{display:none}.nl-seg label{cursor:none}
+.nl-seg span{display:inline-block;padding:10px 16px;border-radius:100px;border:1px solid var(--line);font-size:13px;color:var(--bone-2);transition:all .3s}
+.nl-seg input:checked+span{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.nl-row{display:flex;gap:10px}
+.nl-row input{flex:1;min-width:0;background:transparent;border:1px solid var(--line);border-radius:100px;padding:0 22px;color:var(--bone);font:inherit;font-size:15px;height:54px;outline:none;transition:border-color .3s}
+.nl-row input:focus{border-color:var(--accent)}
+.nl-ok{display:none;margin-top:12px;color:var(--accent);font-size:14px}
+.nl.done .nl-ok{display:block}.nl.done .nl-row{opacity:.4;pointer-events:none}
+@media (max-width:860px){.nl{grid-template-columns:1fr}.nl-row{flex-direction:column}.nl-row input{height:52px}}
+/* FAQ organisateurs */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,80px);align-items:start}
+@media (max-width:900px){.faq-grid{grid-template-columns:1fr}}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:none;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;font-size:clamp(18px,1.6vw,22px);font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.faq .a{padding:0 50px 26px 0;color:var(--bone-2);line-height:1.6;max-width:680px}
+.faq .a small{display:block;margin-top:10px;color:var(--muted);font-size:12px}
+.faq .a small a{text-decoration:underline}

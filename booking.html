@@ -5,7 +5,7 @@
 <title>Booking d’artistes — Communes, festivals, entreprises · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="style.css?v=40">
 </head>
 <body data-page="booking">
 
@@ -115,6 +115,23 @@
   </div>
 </section>
 
+<section class="wrap section line-t" id="faq" style="padding-top:clamp(60px,8vw,120px)">
+  <div class="faq-grid">
+    <div><span class="eyebrow reveal">Mairies · Entreprises</span><h2 class="display reveal" style="font-size:clamp(52px,6vw,104px);margin-top:16px">Les questions<br><span class="serif accent">qu’on nous pose.</span></h2>
+      <p class="reveal muted" style="margin-top:22px;max-width:380px">Le cadre administratif d’un concert, en clair. Pour un cas précis, l’équipe booking vous répond.</p>
+      <a href="tel:+33652231000" class="btn btn-light reveal" style="margin-top:26px;display:inline-flex">+33 6 52 23 10 00 <span class="arr">↗</span></a></div>
+    <div class="faq reveal">
+      <details><summary>Quel contrat signe-t-on pour faire venir un artiste ?<i>+</i></summary><div class="a">Le cadre habituel est le <b>contrat de cession du droit d’exploitation d’un spectacle</b> : le producteur livre le spectacle entièrement monté et en garde la responsabilité artistique ; l’organisateur paie un prix de cession et accueille le public. <small>Fiche explicative : <a href="https://www.artcena.fr/precis-juridique/etudes/contrats-de-diffusion/contrat-de-cession-du-droit-dexploitation-dun-spectacle" target="_blank">ARTCENA, contrat de cession du droit d’exploitation d’un spectacle</a></small></div></details>
+      <details><summary>Une mairie doit-elle passer par un appel d’offres ?<i>+</i></summary><div class="a">Pas forcément. Le Code de la commande publique permet un marché <b>sans publicité ni mise en concurrence</b> lorsqu’il porte sur « une œuvre d’art ou une performance artistique unique ». L’acheteur doit pouvoir justifier ce choix artistique.<small>Source : <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037730879" target="_blank">article R2122-3, Code de la commande publique (Légifrance)</a></small></div></details>
+      <details><summary>Faut-il passer par le GUSO ?<i>+</i></summary><div class="a">Le <b>GUSO</b> (Guichet unique du spectacle occasionnel) concerne l’organisateur qui <b>emploie directement</b> des artistes alors que le spectacle n’est pas son activité principale (commune, comité des fêtes, entreprise). Avec un contrat de cession, c’est le producteur qui emploie et déclare les artistes.<small>Source : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F1928" target="_blank">service-public.gouv.fr, fiche F1928</a></small></div></details>
+      <details><summary>Et la SACEM ?<i>+</i></summary><div class="a">Diffuser de la musique en public implique une <b>déclaration à la SACEM</b> par l’organisateur, pour chaque événement, afin de rémunérer les auteurs et compositeurs.<small>Source : <a href="https://clients.sacem.fr" target="_blank">clients.sacem.fr</a></small></div></details>
+      <details><summary>Une commune a-t-elle besoin d’une licence de spectacles ?<i>+</i></summary><div class="a">Pas pour quelques dates par an : les comités des fêtes et les communes qui n’organisent <b>pas plus de 6 spectacles</b> lors de festivités annuelles n’ont aucune déclaration à faire. Au-delà, un récépissé d’entrepreneur de spectacles (ex-licence) est obligatoire, et son numéro doit figurer sur les affiches, prospectus et billets.<small>Source : <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F22365" target="_blank">entreprendre.service-public.gouv.fr, fiche F22365</a></small></div></details>
+      <details><summary>Que préparer pour recevoir une proposition ?<i>+</i></summary><div class="a">La date, la ville, le type d’événement, la <b>jauge</b> attendue, le format souhaité (concert, showcase, acoustique…), la durée du show et une idée de budget. C’est exactement ce que demande le <a href="#form" style="text-decoration:underline">formulaire ci-dessus</a>.</div></details>
+    </div>
+  </div>
+</section>
+
+
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -162,6 +179,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   prev.addEventListener('click',()=>go(Math.max(0,step-1)));
 });
 </script>
-<script src="main.js?v=35"></script>
+<script src="main.js?v=40"></script>
 </body>
 </html>

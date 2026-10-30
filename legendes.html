@@ -5,7 +5,7 @@
 <title>KoL Legends — Press kits · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="style.css?v=40">
 <link rel="stylesheet" href="legend.css?v=35">
 <style>
   body{--accent:#d6b46a}
@@ -90,7 +90,7 @@
 <script>
   document.getElementById('soon').innerHTML = KOL.legends.filter(l=>!l.page).map(l=>`<div class="soon"><img src="${KOL_small(l.img)}" alt="${l.n}" loading="lazy"><span><small>Press kit · bientôt</small><b>${l.n}</b></span></div>`).join('');
 </script>
-<script src="main.js?v=35"></script>
+<script src="main.js?v=40"></script>
 <script>
   document.addEventListener('DOMContentLoaded',()=>{
     if(!window.gsap) return;

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Envoyer mon projet — Artistes · KoL Records</title>
+<meta name="description" content="Artistes : envoyez votre projet à KoL Records, label indépendant parisien (production, management, édition, booking).">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=40">
+<style>
+  .pj{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px);align-items:start}
+  @media (max-width:1000px){.pj{grid-template-columns:1fr}}
+  .pj-side{position:sticky;top:110px}
+  .acard-prev{border-radius:20px;overflow:hidden;background:radial-gradient(120% 80% at 20% 0%,rgba(255,77,26,.35),transparent 60%),#121110;border:1px solid var(--line);padding:28px;min-height:420px;display:flex;flex-direction:column;gap:18px}
+  .acard-prev .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+  .acard-prev h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(48px,5vw,84px);line-height:.88;word-break:break-word}
+  .acard-prev .chips2{display:flex;gap:6px;flex-wrap:wrap}
+  .acard-prev .chips2 span{font-size:12px;padding:6px 11px;border-radius:100px;border:1px solid var(--line);color:var(--bone-2)}
+  .acard-prev .chips2 span.on{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+  .acard-prev .embed{border-radius:14px;overflow:hidden;background:#0b0b0b;border:1px dashed var(--line);min-height:90px;display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center;padding:0}
+  .acard-prev .embed iframe{width:100%;border:0;display:block}
+  .pj-steps{list-style:none;margin-top:26px}
+  .pj-steps li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);color:var(--bone-2);font-size:15px}
+  .pj-steps li b{color:var(--bone)}
+  .pj-steps li span.n{font-family:var(--display);color:var(--accent);font-size:22px;min-width:32px}
+  .cnt-hint{position:absolute;right:14px;bottom:10px;font-size:11px;color:var(--muted)}
+  .multi{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .multi label{cursor:none}.multi input{display:none}
+  .multi span{display:inline-block;padding:12px 18px;border-radius:100px;border:1px solid var(--line);font-size:14px;transition:all .3s}
+  .multi input:checked+span{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+</style>
+</head>
+<body data-page="projet">
+
+<section class="phero wrap">
+  <div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Envoyer mon projet</span></div>
+  <h1 class="display" data-split>Votre son,<br><span class="serif accent">notre écoute.</span></h1>
+  <div class="sub">
+    <p class="reveal">KoL Records se veut un découvreur de talents, très souvent le premier label de ses artistes. Production, management, édition, branding : présentez votre projet en quelques minutes, votre lien d’écoute s’affiche en direct.</p>
+    <div class="reveal" style="justify-self:end"><a href="#form" class="btn btn-accent" data-magnetic>Envoyer mon projet <span class="arr">↓</span></a></div>
+  </div>
+</section>
+
+<section class="wrap section line-t" id="form" style="padding-top:clamp(60px,8vw,110px)">
+  <div class="pj">
+    <form class="form" id="pjForm" onsubmit="return false">
+      <h3 class="display" style="font-size:clamp(40px,4vw,64px);margin-bottom:26px">Le projet</h3>
+      <div class="frow"><div class="field"><input id="aName" placeholder=" " required><label for="aName">Nom d’artiste</label></div><div class="field"><input id="aCity" placeholder=" "><label for="aCity">Ville</label></div></div>
+      <div class="frow"><div class="field"><input id="aContact" placeholder=" " required><label for="aContact">Prénom et nom</label></div><div class="field"><input id="aMail" type="email" placeholder=" " required><label for="aMail">E-mail</label></div></div>
+      <span class="flabel">Univers</span>
+      <div class="multi" id="aGenre">
+        <label><input type="radio" name="g" value="Rap"><span>Rap</span></label><label><input type="radio" name="g" value="RnB / Soul"><span>RnB / Soul</span></label><label><input type="radio" name="g" value="Pop / Variété"><span>Pop / Variété</span></label><label><input type="radio" name="g" value="Afro"><span>Afro</span></label><label><input type="radio" name="g" value="Électro"><span>Électro</span></label><label><input type="radio" name="g" value="Autre"><span>Autre</span></label>
+      </div>
+      <span class="flabel">Vous cherchez</span>
+      <div class="multi" id="aNeeds">
+        <label><input type="checkbox" value="Production"><span>Production</span></label><label><input type="checkbox" value="Management"><span>Management</span></label><label><input type="checkbox" value="Édition"><span>Édition</span></label><label><input type="checkbox" value="Branding"><span>Branding</span></label><label><input type="checkbox" value="Booking"><span>Booking / scène</span></label>
+      </div>
+      <div class="field"><input id="aLink" placeholder=" " required><label for="aLink">Lien d’écoute (Spotify, YouTube, SoundCloud…)</label></div>
+      <div class="field"><input id="aSocial" placeholder=" "><label for="aSocial">Réseau social principal (Instagram, TikTok…)</label></div>
+      <div class="field" style="position:relative"><textarea id="q1" maxlength="400" placeholder=" "></textarea><label for="q1">Qui êtes-vous ? Votre parcours en quelques lignes</label><span class="cnt-hint">0 / 400</span></div>
+      <div class="field" style="position:relative"><textarea id="q2" maxlength="400" placeholder=" "></textarea><label for="q2">Votre actualité : sorties, concerts, projets en cours</label><span class="cnt-hint">0 / 400</span></div>
+      <div class="field" style="position:relative"><textarea id="q3" maxlength="400" placeholder=" "></textarea><label for="q3">Pourquoi KoL Records ?</label><span class="cnt-hint">0 / 400</span></div>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--bone-2);margin:6px 0 22px"><input type="checkbox" required style="margin-top:3px"> J’accepte que KoL Records conserve ces informations pour étudier mon projet.</label>
+      <button class="btn btn-accent" id="pjSend" type="submit">Envoyer mon projet <span class="arr">→</span></button>
+      <div class="success" id="pjOk"><span class="eyebrow" style="color:var(--ink)">Projet reçu</span><h3 style="margin-top:16px">Merci,<br>on écoute.</h3><p style="margin-top:20px;max-width:420px">L’équipe artistique de KoL Records étudie chaque projet reçu. (Maquette : aucun envoi réel.)</p></div>
+    </form>
+
+    <aside class="pj-side">
+      <span class="eyebrow">Aperçu</span>
+      <div class="acard-prev" id="prev" style="margin-top:16px">
+        <span class="k" id="pK">Nouveau projet · <span id="pCity">Ville</span></span>
+        <h3 id="pName">Votre nom d’artiste</h3>
+        <div class="chips2" id="pChips"></div>
+        <div class="embed" id="pEmbed">Collez un lien Spotify ou YouTube :<br>l’écoute apparaît ici.</div>
+      </div>
+      <ol class="pj-steps">
+        <li><span class="n">01</span><span><b>Un seul lien</b> suffit : votre meilleur titre.</span></li>
+        <li><span class="n">02</span><span><b>Soyez précis</b> : 400 caractères par réponse.</span></li>
+        <li><span class="n">03</span><span><b>Précisez votre besoin</b> : production, management, édition…</span></li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="main.js?v=40"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const $=s=>document.querySelector(s);
+  const upd=()=>{
+    $('#pName').textContent=$('#aName').value||'Votre nom d’artiste';
+    $('#pCity').textContent=$('#aCity').value||'Ville';
+    const g=document.querySelector('#aGenre input:checked'); const needs=[...document.querySelectorAll('#aNeeds input:checked')].map(i=>i.value);
+    $('#pChips').innerHTML=(g?`<span class="on">${g.value}</span>`:'')+needs.map(n=>`<span>${n}</span>`).join('');
+  };
+  document.querySelectorAll('#pjForm input, #pjForm textarea').forEach(el=>el.addEventListener('input',upd));
+  document.querySelectorAll('#pjForm textarea').forEach(t=>t.addEventListener('input',()=>{ t.parentElement.querySelector('.cnt-hint').textContent=t.value.length+' / 400'; }));
+  // aperçu d'écoute à partir du lien
+  let last='';
+  $('#aLink').addEventListener('input',e=>{
+    const v=e.target.value.trim(); if(v===last) return; last=v; let html='';
+    const sp=v.match(/open\.spotify\.com\/(?:intl-[a-z]+\/)?(track|album|artist|playlist)\/([A-Za-z0-9]+)/);
+    const yt=v.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([A-Za-z0-9_-]{6,})/);
+    if(sp) html=`<iframe src="https://open.spotify.com/embed/${sp[1]}/${sp[2]}?theme=0" height="${sp[1]==='track'?152:232}" allow="encrypted-media" loading="lazy"></iframe>`;
+    else if(yt) html=`<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" style="aspect-ratio:16/9;height:auto" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+    else if(v) html='Lien enregistré. L’aperçu s’affiche pour les liens Spotify et YouTube.';
+    else html='Collez un lien Spotify ou YouTube :<br>l’écoute apparaît ici.';
+    $('#pEmbed').innerHTML=html;
+    if(window.gsap && (sp||yt)) gsap.from('#pEmbed iframe',{y:20,opacity:0,duration:.6,ease:'expo.out'});
+  });
+  $('#pjForm').addEventListener('submit',()=>{ if($('#pjForm').checkValidity()) $('#pjOk').classList.add('on'); });
+});
+</script>
+</body>
+</html>

@@ -37,12 +37,20 @@
   const ft = document.createElement('footer');
   ft.className = 'footer';
   ft.innerHTML = `<div class="wrap">
+    <form class="nl" onsubmit="event.preventDefault();this.classList.add('done')">
+      <div class="nl-t"><span class="eyebrow">Newsletter</span><h4 class="display">Restez dans <span class="serif accent">la boucle.</span></h4></div>
+      <div class="nl-f">
+        <div class="nl-seg"><label><input type="radio" name="nlseg" checked><span>Organisateur · artistes disponibles</span></label><label><input type="radio" name="nlseg"><span>Fan · sorties et concerts</span></label></div>
+        <div class="nl-row"><input type="email" required placeholder="Votre e-mail" aria-label="Votre e-mail"><button class="btn btn-accent" type="submit">S’inscrire <span class="arr">→</span></button></div>
+        <p class="nl-ok">Inscription enregistrée. (Maquette : aucun envoi réel.)</p>
+      </div>
+    </form>
     <div class="ft-grid">
       <div><h5>KoL Records</h5><p style="max-width:340px">Label indépendant de production musicale basé à Paris. Production, management, édition, branding et booking d’artistes.</p>
         <a href="booking.html" class="btn btn-light" style="margin-top:18px;display:inline-flex">Demander un artiste <span class="arr">→</span></a></div>
       <div><h5>Navigation</h5>${NAV.map(([h,t])=>`<a href="${h}">${t}</a>`).join('')}</div>
       <div><h5>Contact</h5><a href="tel:+33615296949">Label · +33 6 15 29 69 49</a><a href="tel:+33652231000">Booking · +33 6 52 23 10 00</a><a href="mailto:contact@kolrecords.com">contact@kolrecords.com</a><p>226 Rue Saint-Honoré<br>75001 Paris</p><p>Lun – Dim · 9h – 23h</p></div>
-      <div><h5>Suivre</h5><a href="https://www.instagram.com/_kolrecords/" target="_blank">Instagram · Label ↗</a><a href="https://www.instagram.com/kolrecords_booking/" target="_blank">Instagram · Booking ↗</a><a href="https://www.facebook.com/kol.record" target="_blank">Facebook ↗</a></div>
+      <div><h5>Suivre</h5><a href="https://www.instagram.com/_kolrecords/" target="_blank">Instagram · Label ↗</a><a href="https://www.instagram.com/kolrecords_booking/" target="_blank">Instagram · Booking ↗</a><a href="https://www.facebook.com/kol.record" target="_blank">Facebook ↗</a><h5 style="margin-top:26px">Artistes</h5><a href="projet.html">Envoyer mon projet →</a></div>
     </div>
     <div class="ft-word">KoL Records</div>
     <div class="ft-bottom"><span>© 2026 KoL Records · Maquette de refonte — document de travail non contractuel</span><span>Photos d’artistes : Wikimedia Commons (licences libres, auteurs crédités sur les fichiers source) · Logos : kolrecords.com</span></div>
