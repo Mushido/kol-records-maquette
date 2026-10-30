@@ -103,6 +103,13 @@
     gsap.set(photo,{clipPath:'inset(50% 50% 50% 50% round 10px)'});
     gsap.set(words,{yPercent:110,opacity:0});
     gsap.set(hm,{opacity:0,y:20});
+    const spot={tx:50,ty:40,cx:50,cy:40,run:false,apply(){ col.style.setProperty('--x',this.cx+'%'); col.style.setProperty('--y',this.cy+'%'); }};
+    const spotLoop=()=>{ spot.cx+=(spot.tx-spot.cx)*.18; spot.cy+=(spot.ty-spot.cy)*.18; spot.apply(); if(Math.abs(spot.tx-spot.cx)+Math.abs(spot.ty-spot.cy)>.1) requestAnimationFrame(spotLoop); else spot.run=false; };
+    if (!touch){
+      photo.addEventListener('mousemove',e=>{ const r=photo.getBoundingClientRect(); spot.tx=(e.clientX-r.left)/r.width*100; spot.ty=(e.clientY-r.top)/r.height*100; if(!spot.run){spot.run=true;requestAnimationFrame(spotLoop);} });
+      photo.addEventListener('mouseenter',()=>photo.classList.add('hot'));
+      photo.addEventListener('mouseleave',()=>photo.classList.remove('hot'));
+    } else photo.addEventListener('click',()=>photo.classList.toggle('hot'));
     const heroIn = () => {
       const t=gsap.timeline();
       t.to(photo,{clipPath:'inset(0% 0% 0% 0% round 10px)',duration:1.6,ease:'expo.inOut'})
@@ -110,16 +117,8 @@
        .to('.lh-word.w1',{yPercent:0,opacity:1,duration:1.4,ease:'expo.out'},'<.3')
        .to('.lh-word.w2',{yPercent:0,opacity:1,duration:1.4,ease:'expo.out'},'<.12')
        .to(hm,{opacity:1,y:0,duration:1,stagger:.08,ease:'expo.out'},'<.5')
-       .to(col,{'--r':'260px',duration:1.2,ease:'power2.inOut'},'-=.6')
-       .to(col,{'--x':'60%','--y':'30%',duration:1.2,ease:'power2.inOut'},'<')
-       .to(col,{'--r':'0px',duration:.9,ease:'power2.in'});
+       .add(()=>{ spot.tx=56; spot.ty=32; spot.cx=56; spot.cy=32; spot.apply(); photo.classList.add('hot'); setTimeout(()=>{ if(!photo.matches(':hover')) photo.classList.remove('hot'); },1600); },'-=.4');
     };
-    if (!touch){
-      const qx=gsap.quickTo(col,'--x',{duration:.5,ease:'power3'}), qy=gsap.quickTo(col,'--y',{duration:.5,ease:'power3'});
-      photo.addEventListener('mousemove',e=>{const r=photo.getBoundingClientRect(); qx((e.clientX-r.left)/r.width*100+'%'); qy((e.clientY-r.top)/r.height*100+'%');});
-      photo.addEventListener('mouseenter',()=>gsap.to(col,{'--r':'190px',duration:.6,ease:'power3.out',overwrite:'auto'}));
-      photo.addEventListener('mouseleave',()=>gsap.to(col,{'--r':'0px',duration:.6,ease:'power3.out',overwrite:'auto'}));
-    }
     const heroST = {trigger:'.lh',start:'top top',end:'bottom top',scrub:.5};
     gsap.to('.lh-word.w1',{xPercent:-35,ease:'none',scrollTrigger:heroST});
     gsap.to('.lh-word.w2',{xPercent:35,ease:'none',scrollTrigger:{...heroST}});
