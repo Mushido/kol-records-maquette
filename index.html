@@ -4,7 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KoL Records — Label indépendant & booking d’artistes · Paris</title>
 <meta name="description" content="KoL Records, label indépendant parisien : production, management, édition, branding et booking d’artistes pour festivals, communes et entreprises.">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body data-page="home">
 
@@ -153,17 +155,18 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=3"></script>
+<script src="data.js?v=4"></script>
 <script>
 (function(){
   const K = window.KOL;
-  // hero wall
-  const pics = [...K.legends, ...K.roster].filter(a=>a.img).map(a=>a.img);
+  // hero wall (vignettes 330px, 4 colonnes)
+  const pics = [...K.legends, ...K.roster].filter(a=>a.img).map(a=>KOL_small(a.img));
   const wall = document.getElementById('wall');
-  for (let c=0;c<5;c++){
-    const col = document.createElement('div'); col.className='col'; col.style.animationDuration = (50+c*9)+'s';
-    const set = pics.filter((_,i)=>i%5===c).concat(pics.filter((_,i)=>i%5===(c+2)%5)).slice(0,6);
-    [...set,...set].forEach(src=>{const im=new Image(); im.src=src; im.loading='lazy'; im.alt=''; col.appendChild(im);});
+  const NC = innerWidth < 900 ? 3 : 4;
+  for (let c=0;c<NC;c++){
+    const col = document.createElement('div'); col.className='col'; col.style.animationDuration = (55+c*10)+'s';
+    const set = pics.filter((_,i)=>i%NC===c).slice(0,5);
+    [...set,...set].forEach((src,k)=>{const im=new Image(); im.src=src; im.decoding='async'; if(k>2) im.loading='lazy'; im.alt=''; col.appendChild(im);});
     wall.appendChild(col);
   }
   // legends
@@ -193,6 +196,6 @@
   document.getElementById('awards').innerHTML = K.awards.map(a=>`<div class="award"><div class="lg"><img src="${a.img}" alt="${a.n}"></div><span>${a.n}</span></div>`).join('');
 })();
 </script>
-<script src="main.js?v=3"></script>
+<script src="main.js?v=4"></script>
 </body>
 </html>
