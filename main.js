@@ -102,8 +102,8 @@
   /* ---------- page transitions ---------- */
   const curtain = $('.curtain');
   if (hasGSAP){
-    gsap.set(curtain,{scaleY:1,transformOrigin:'top'});
-    gsap.to(curtain,{scaleY:0,duration:.75,ease:'expo.inOut'});
+    if (sessionStorage.getItem('kol_vinyl_in')) gsap.set(curtain,{scaleY:0});
+    else { gsap.set(curtain,{scaleY:1,transformOrigin:'top'}); gsap.to(curtain,{scaleY:0,duration:.75,ease:'expo.inOut'}); }
   } else curtain.style.transform='scaleY(0)';
   document.addEventListener('click',e=>{
     const a = e.target.closest('a');

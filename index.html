@@ -217,7 +217,7 @@
   document.getElementById('awards').innerHTML = K.awards.map(a=>`<div class="award"><div class="lg"><img src="${a.img}" alt="${a.n}"></div><span>${a.n}</span></div>`).join('');
 })();
 </script>
-<script src="main.js?v=32"></script>
+<script src="main.js?v=34"></script>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
   const K=window.KOL, all=[...K.roster,...K.legends.map(l=>({...l,cat:'legend'}))];

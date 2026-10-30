@@ -89,8 +89,10 @@
       if (L) L.stop();
       document.documentElement.style.overflow='hidden';
       const gv=$('#gVinyl'), gChars=[]; $$('#gTitle > div').forEach(d=>{ const gold=d.classList.contains('gold-text'); d.classList.remove('gold-text'); splitChars(d).forEach(c=>{ if(gold) c.classList.add('gold-text'); gChars.push(c);}); });
+      const fromVinyl = !!sessionStorage.getItem('kol_vinyl_in'); sessionStorage.removeItem('kol_vinyl_in');
+      const gvR = gv.getBoundingClientRect(); const big = Math.hypot(innerWidth,innerHeight)*1.08/(gvR.width||1);
       gsap.timeline()
-        .from(gv,{scale:.2,opacity:0,rotate:-200,duration:1.8,ease:'expo.out'})
+        .from(gv, fromVinyl ? {scale:big,duration:1.5,ease:'expo.out',force3D:true} : {scale:.2,opacity:0,rotate:-200,duration:1.8,ease:'expo.out'})
         .from(gChars,{yPercent:130,rotateX:-90,opacity:0,filter:'blur(12px)',duration:1.3,ease:'expo.out',stagger:.05},'<.3')
         .from('.g-top, .g-bot',{opacity:0,y:10,duration:.8},'<.6')
         .from('#enter',{opacity:0,y:20,duration:.8,ease:'expo.out'},'<.2');
