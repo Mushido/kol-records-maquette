@@ -277,8 +277,8 @@ html{overflow-x:clip}
 .dock{position:fixed;right:24px;bottom:24px;z-index:980;width:min(380px,calc(100vw - 32px));background:#111;border:1px solid rgba(214,180,106,.35);border-radius:18px;padding:12px;box-shadow:0 24px 60px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .7s var(--ease)}
 .dock.on{transform:none}
 .dock-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.vinyl.mini{width:44px;height:44px;flex-shrink:0;animation:vspin 3s linear infinite;animation-play-state:paused}
-.dock.playing .vinyl.mini{animation-play-state:running}
+.vinyl.vmini{width:44px;height:44px;flex-shrink:0;animation:vspin 3s linear infinite;animation-play-state:paused}
+.dock.playing .vinyl.vmini{animation-play-state:running}
 .dock-t{flex:1;min-width:0}
 .dock-t small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .dock-t b{font-family:var(--display);font-weight:400;font-size:22px;text-transform:uppercase;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
