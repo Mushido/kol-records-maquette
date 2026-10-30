@@ -5,317 +5,199 @@
 <title>Snoop Dogg — Press kit · KoL Legends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
-<style>
-  body.legend{--accent:#d6b46a}
-  .gate{position:fixed;inset:0;z-index:9990;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:26px;padding:30px}
-  .gate .pre{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)}
-  .gate h1{font-family:var(--display);font-size:clamp(70px,15vw,250px);line-height:.85;text-transform:uppercase;background:linear-gradient(180deg,#f5e3b5,#d6b46a 55%,#8a6a2c);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .gate .enter{width:150px;height:150px;border-radius:50%;border:1px solid rgba(214,180,106,.5);display:grid;place-items:center;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);position:relative;background:transparent}
-  .gate .enter:before{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(214,180,106,.2);animation:pulse 2.4s ease-out infinite}
-  @keyframes pulse{from{transform:scale(.9);opacity:1}to{transform:scale(1.35);opacity:0}}
-  .gate small{color:var(--muted);font-size:12px}
-
-  .lhero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:110px;position:relative;overflow:hidden}
-  .lhero .bgname{position:absolute;inset:auto 0 -4vw 0;font-family:var(--display);font-size:34vw;line-height:.8;text-transform:uppercase;color:rgba(214,180,106,.045);white-space:nowrap;text-align:center;pointer-events:none}
-  .lhero .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-  .lname{font-family:var(--display);text-transform:uppercase;font-size:clamp(70px,16vw,300px);line-height:.84;display:flex;align-items:center;gap:.08em;flex-wrap:wrap;margin:30px 0}
-  .lname .pic{display:inline-block;width:.95em;height:.78em;border-radius:.1em;overflow:hidden;position:relative;transform:rotate(-4deg)}
-  .lname .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
-  .lname .d{color:var(--gold)}
-  .lhero .bottom{display:grid;grid-template-columns:1.2fr 1fr auto;gap:40px;align-items:end;padding-top:26px;border-top:1px solid var(--line)}
-  .lhero .bottom p{color:var(--bone-2);max-width:520px;font-size:17px}
-  .platforms{display:flex;gap:8px;flex-wrap:wrap}
-  @media (max-width:900px){.lhero .bottom{grid-template-columns:1fr}}
-
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-  .stat{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(24px,3vw,44px);min-height:250px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:background .5s}
-  .stat:hover{background:linear-gradient(160deg,rgba(214,180,106,.12),transparent)}
-  .stat .v{font-family:var(--display);font-size:clamp(60px,6.4vw,118px);line-height:.9;color:var(--bone)}
-  .stat .v em{font-style:normal;color:var(--gold)}
-  .stat .l{font-size:15px;color:var(--bone-2);margin-top:12px}
-  .stat .s{font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.04em}
-  @media (max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}}
-
-  .bio-img{border-radius:18px;overflow:hidden;aspect-ratio:4/5;position:relative}
-  .bio-img img{width:100%;height:120%;object-fit:cover;position:absolute;top:-10%}
-  .bio-img figcaption{position:absolute;left:14px;bottom:12px;font-size:11px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.5);padding:4px 8px;border-radius:6px}
-  .bio p{font-size:19px;color:var(--bone-2);margin-bottom:22px;max-width:620px}
-  .bio p b{color:var(--bone);font-weight:600}
-  .aka{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
-
-  .tl-h .h-track{align-items:stretch}
-  .tl-card{width:clamp(280px,26vw,400px);flex-shrink:0;border-left:1px solid var(--line);padding:0 30px 0 30px;display:flex;flex-direction:column;position:relative}
-  .tl-card:before{content:"";position:absolute;left:-6px;top:10px;width:11px;height:11px;border-radius:50%;background:var(--gold)}
-  .tl-card .y{font-family:var(--display);font-size:clamp(70px,7vw,130px);line-height:.9;color:var(--bone)}
-  .tl-card .dt{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:10px}
-  .tl-card h4{font-size:24px;font-weight:600;margin:18px 0 10px;line-height:1.15}
-  .tl-card p{color:var(--bone-2);font-size:15px}
-
-  .moments{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-  .mom{border-radius:20px;overflow:hidden;position:relative;min-height:420px;background:var(--ink-2);border:1px solid var(--line);padding:30px;display:flex;flex-direction:column;justify-content:flex-end}
-  .mom.w3{grid-column:span 3}.mom.w2{grid-column:span 2}.mom.w4{grid-column:span 4}
-  .mom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.3) brightness(.55);transition:transform 1.2s var(--ease),filter .6s}
-  .mom:hover img{transform:scale(1.05);filter:grayscale(0) brightness(.65)}
-  .mom > *:not(img){position:relative}
-  .mom .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-  .mom h3{font-family:var(--display);font-size:clamp(40px,4vw,72px);text-transform:uppercase;line-height:.9;font-weight:400;margin:12px 0}
-  .mom p{color:var(--bone-2);max-width:520px}
-  .mom .cr{position:absolute;right:14px;top:12px;font-size:10px;color:rgba(255,255,255,.6)}
-  .mom.gold{background:var(--gold);color:var(--ink);border:0}
-  .mom.gold .k,.mom.gold p{color:rgba(8,8,8,.75)}
-  @media (max-width:1000px){.moments{grid-template-columns:1fr}.mom.w3,.mom.w2,.mom.w4{grid-column:auto}}
-
-  .disco{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
-  .alb{background:var(--ink);padding:22px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;transition:background .4s;position:relative}
-  .alb:hover{background:var(--ink-2)}
-  .alb .yr{font-size:12px;letter-spacing:.16em;color:var(--muted)}
-  .alb h4{font-family:var(--display);font-size:30px;text-transform:uppercase;font-weight:400;line-height:.95;margin:10px 0}
-  .alb .tags{display:flex;gap:6px;flex-wrap:wrap}
-  .alb .t{font-size:11px;padding:5px 9px;border-radius:100px;border:1px solid var(--line);color:var(--bone-2)}
-  .alb .t.g{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
-  .alb.major{background:linear-gradient(160deg,rgba(214,180,106,.14),var(--ink) 70%)}
-  .alb.major:after{content:"★";position:absolute;top:18px;right:20px;color:var(--gold)}
-  .dfilter{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-
-  .singles{width:100%;border-collapse:collapse}
-  .singles tr{border-bottom:1px solid var(--line);transition:background .3s}
-  .singles tr:hover{background:var(--ink-2)}
-  .singles td,.singles th{padding:20px 12px;text-align:left}
-  .singles th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500}
-  .singles .t{font-family:var(--display);font-size:clamp(26px,2.6vw,44px);text-transform:uppercase;line-height:1}
-  .singles .f{color:var(--muted);font-size:14px}
-  .singles .pk{font-family:var(--display);font-size:40px;color:var(--gold)}
-  .singles .cert{font-size:12px;color:var(--bone-2)}
-  @media (max-width:800px){.singles .f,.singles .hide-m{display:none}}
-
-  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:280px;gap:14px}
-  .gallery figure{position:relative;border-radius:16px;overflow:hidden}
-  .gallery figure:first-child{grid-row:span 2}
-  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-  .gallery figure:hover img{transform:scale(1.06)}
-  .gallery figcaption{position:absolute;left:12px;bottom:10px;font-size:11px;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:6px;color:#ddd}
-  @media (max-width:800px){.gallery{grid-template-columns:1fr 1fr}.gallery figure:first-child{grid-column:span 2}}
-
-  .sources{columns:2;column-gap:40px;font-size:13px;color:var(--muted)}
-  .sources li{margin-bottom:8px;break-inside:avoid}
-  .sources a{text-decoration:underline;text-underline-offset:3px}
-  @media (max-width:800px){.sources{columns:1}}
-  .spot{border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-</style>
+<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="legend.css?v=6">
+<link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg">
 </head>
 <body data-page="legend" class="legend">
 
+<div class="lg-progress" id="lgProg"></div>
+<div class="chapter" id="chapter"><span class="num"><span>01</span></span><span class="lbl2"><span>Intro</span></span></div>
+
+<!-- ============ GATE ============ -->
 <div class="gate" id="gate">
-  <span class="pre">KoL Records présente</span>
-  <h1>Snoop<br>Dogg</h1>
-  <span class="pre">Press kit · Légende · 2026</span>
-  <button class="enter" id="enter" data-cursor="Entrer">Entrer</button>
-  <small>KoL Legends · Format press kit premium réservé aux légendes</small>
+  <div class="g-inner">
+    <div class="g-top"><span>KoL Records présente</span><span>KoL Legends · L—01</span></div>
+    <div class="vinyl g-vinyl spin" id="gVinyl"><div class="vl"><b>KoL</b><b>Legends</b><small>Side A · 2026</small></div></div>
+    <div class="g-title" id="gTitle"><div class="gold-text">Snoop</div><div>Dogg</div></div>
+    <button class="g-enter" id="enter" data-cursor="Play"><i></i>Entrer</button>
+    <div class="g-bot"><span>Press kit officiel</span><span>Long Beach · 1971 — Aujourd’hui</span></div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lhero wrap">
-  <div class="bgname">Doggfather</div>
-  <div class="top reveal"><span>KoL Legends · L—01</span><span>Long Beach, Californie</span><span>Depuis 1991</span></div>
-  <h1 class="lname" id="lname"><span>Snoop</span><span class="pic"><img fetchpriority="high" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg"></span><span class="d">Dogg</span></h1>
-  <div class="bottom">
-    <p class="reveal">Calvin Cordozar Broadus Jr., né le 20 octobre 1971 à Long Beach. Rappeur, producteur, entrepreneur — révélé en 1992 aux côtés de Dr. Dre, il incarne depuis plus de trente ans le son de la West Coast.</p>
-    <div class="platforms reveal" data-delay=".1">
-      <a class="tag" href="https://open.spotify.com/artist/7hJcb9fa4alzcOq3EaNPoG" target="_blank">Spotify ↗</a>
-      <a class="tag" href="https://www.youtube.com/channel/UC-OO324clObi3H-U0bP77dw" target="_blank">YouTube ↗</a>
-      <a class="tag" href="https://www.instagram.com/snoopdogg/" target="_blank">Instagram ↗</a>
-      <a class="tag" href="https://snoopdogg.com/" target="_blank">snoopdogg.com ↗</a>
-    </div>
-    <a href="#contact-pk" class="btn btn-accent reveal" data-delay=".2" data-magnetic>Demande pro <span class="arr">→</span></a>
+<!-- ============ HERO ============ -->
+<section class="lh" data-chapter="Intro">
+  <div class="lh-stage lh-back"><div class="lh-word w1">Snoop</div><div class="lh-word w2">Dogg</div></div>
+  <div class="lh-photo" id="lhPhoto">
+    <img class="bw" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg" fetchpriority="high">
+    <img class="col" id="lhCol" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="">
+    <span class="tag-sl">© Glenn Francis · CC BY-SA 4.0</span>
+  </div>
+  <div class="lh-stage lh-front"><div class="lh-word w1">Snoop</div><div class="lh-word w2">Dogg</div></div>
+  <div class="lh-meta m1 hm">Calvin Cordozar Broadus Jr.<br><b>20.10.1971</b> · Long Beach, CA<br>Actif depuis 1991</div>
+  <div class="lh-meta m2 hm">Rappeur<br>Producteur<br>Entrepreneur<br><b>The Doggfather</b></div>
+  <div class="lh-hint hm">Survolez le portrait</div>
+  <div class="lh-cta hm">
+    <a class="tag" href="https://open.spotify.com/artist/7hJcb9fa4alzcOq3EaNPoG" target="_blank">Spotify ↗</a>
+    <a class="tag" href="https://www.instagram.com/snoopdogg/" target="_blank">Instagram ↗</a>
+    <a class="tag" href="https://snoopdogg.com/" target="_blank">snoopdogg.com ↗</a>
+    <a class="btn btn-accent" href="#contact-pk" style="padding:10px 18px">Demande pro →</a>
   </div>
 </section>
 
-<div class="mq-band">
-  <div class="marquee" style="--speed:45s"><div class="track">
-    <span class="item">The Doggfather <i>✦</i></span><span class="item o">Snoop Doggy Dogg <i>✦</i></span><span class="item">Uncle Snoop <i>✦</i></span><span class="item o">Snoop Lion <i>✦</i></span><span class="item">DJ Snoopadelic <i>✦</i></span><span class="item o">Snoopzilla <i>✦</i></span>
-  </div></div>
+<!-- ============ ZOOM ============ -->
+<section class="zoom" id="zoom" data-chapter="The Doggfather">
+  <div class="zbg"></div>
+  <div class="zt" id="zt">The D<span id="zo">o</span>ggfather</div>
+  <div class="zs" id="zs">Plus de trente ans au sommet.</div>
+</section>
+
+<!-- ============ STATS STACK ============ -->
+<section class="stack" id="stack" data-chapter="Chiffres">
+  <div class="scard c1"><div class="ghost">35M</div>
+    <div><span class="k">01 — Ventes</span><div class="big"><span data-cnt="35">0</span><em>M+</em></div></div>
+    <div><div class="lab">disques vendus dans le monde.</div><div class="src">Source : Wikipédia (EN) — « has sold over 35 million records worldwide »</div></div></div>
+  <div class="scard c2"><div class="ghost">16</div>
+    <div><span class="k">02 — Grammy Awards</span><div class="big"><span data-cnt="16">0</span><em>×</em></div></div>
+    <div><div class="lab">nominations aux Grammy Awards.</div><div class="src">Source : Grammy.com, 2 février 2026 — « Snoop leads this pack with a total of 16 nominations »</div></div></div>
+  <div class="scard c3"><div class="ghost">37,2</div>
+    <div><span class="k">03 — Streaming</span><div class="big"><span data-cnt="37.2">0</span><em>M</em></div></div>
+    <div><div class="lab">auditeurs mensuels sur Spotify, plus de trente ans après ses débuts.</div><div class="src">Source : Spotify, page artiste, lue le 30/10/2026</div></div></div>
+  <div class="scard c4"><div class="ghost">4×</div>
+    <div><span class="k">04 — Doggystyle</span><div class="big"><span data-cnt="4">0</span>× Platine</div></div>
+    <div><div class="lab">pour <em class="serif">Doggystyle</em>, entré directement n°1 du Billboard 200 en 1993.</div><div class="src">Source : RIAA — certifié le 31 mai 1994</div></div></div>
+</section>
+<div class="minis" data-stagger>
+  <div class="mini"><div class="v"><span data-cnt="806">0</span>K</div><div><div class="l">exemplaires de <i>Doggystyle</i> en 1re semaine</div><div class="s">Wikipédia (EN) — « 806,000 copies sold in its first week »</div></div></div>
+  <div class="mini"><div class="v"><span data-cnt="22">0</span></div><div><div class="l">albums studio, de 1993 à 2026</div><div class="s">Wikipédia (EN), albums discography</div></div></div>
+  <div class="mini"><div class="v"><span data-cnt="87">0</span>M</div><div><div class="l">followers sur Instagram</div><div class="s">Instagram @snoopdogg, lu le 30/10/2026</div></div></div>
+  <div class="mini"><div class="v">6×</div><div><div class="l">Platine RIAA · « Young, Wild & Free »</div><div class="s">RIAA — certifié le 25 sept. 2019</div></div></div>
 </div>
 
-<!-- STATS -->
-<section class="section wrap">
-  <div class="sh"><div><span class="eyebrow">Chiffres clés</span><h2 class="display" data-split>Une carrière<br><span class="serif gold">hors norme.</span></h2></div>
-    <p class="reveal">Chaque chiffre est cité tel qu’il apparaît dans sa source, avec sa date de lecture.</p></div>
-  <div class="stats" data-stagger>
-    <div class="stat"><div class="v"><span data-count="35">0</span><em>M+</em></div><div><div class="l">disques vendus dans le monde</div><div class="s">Source : Wikipédia (EN) — « over 35 million records worldwide »</div></div></div>
-    <div class="stat"><div class="v"><span data-count="16">0</span></div><div><div class="l">nominations aux Grammy Awards</div><div class="s">Source : Grammy.com, 2 févr. 2026</div></div></div>
-    <div class="stat"><div class="v"><span data-count="37.2">0</span><em>M</em></div><div><div class="l">auditeurs mensuels sur Spotify</div><div class="s">Source : Spotify, lu le 30/10/2026</div></div></div>
-    <div class="stat"><div class="v"><span data-count="87">0</span><em>M</em></div><div><div class="l">followers sur Instagram</div><div class="s">Source : Instagram @snoopdogg, lu le 30/10/2026</div></div></div>
-    <div class="stat"><div class="v"><em>4×</em></div><div><div class="l">Platine RIAA pour <i>Doggystyle</i> (1993)</div><div class="s">Source : RIAA — certifié le 31 mai 1994</div></div></div>
-    <div class="stat"><div class="v"><span data-count="806">0</span><em>K</em></div><div><div class="l">exemplaires de <i>Doggystyle</i> en 1re semaine — n°1 Billboard 200</div><div class="s">Source : Wikipédia (EN) — « 806,000 copies sold in its first week »</div></div></div>
-    <div class="stat"><div class="v"><span data-count="22">0</span></div><div><div class="l">albums studio, de 1993 à 2026</div><div class="s">Source : Wikipédia (EN), Snoop Dogg albums discography</div></div></div>
-    <div class="stat"><div class="v"><em>6×</em></div><div><div class="l">Platine RIAA pour « Young, Wild & Free »</div><div class="s">Source : RIAA — certifié le 25 sept. 2019</div></div></div>
-  </div>
-</section>
-
-<!-- BIO -->
-<section class="section wrap line-t">
-  <div class="two">
-    <figure class="bio-img"><img data-parallax="8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg/960px-Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg" alt="Snoop Dogg à Sydney, 2023"><figcaption>© Bruce Baker · CC BY 2.0</figcaption></figure>
-    <div class="bio">
-      <span class="eyebrow">Biographie</span>
-      <h2 class="display" data-split style="font-size:clamp(56px,7vw,120px);margin:20px 0 34px">De Long Beach<br><span class="serif gold">au monde.</span></h2>
-      <p class="reveal">Sa mère le surnommait « Snoopy » pour sa ressemblance avec le chien des <i>Peanuts</i>. En 1992, <b>Calvin Broadus</b> se fait connaître avec « Deep Cover » puis sur <b><i>The Chronic</i> de Dr. Dre</b>.</p>
-      <p class="reveal">Le 23 novembre 1993, <b><i>Doggystyle</i></b> sort chez Death Row / Interscope et entre directement <b>n°1 du Billboard 200</b>. Suivent <i>Tha Doggfather</i> (n°1), les années No Limit, Geffen et Star Trak, et en 2004 son premier n°1 au Hot 100 : <b>« Drop It Like It’s Hot »</b>.</p>
-      <p class="reveal">Le 9 février 2022, il rachète la marque <b>Death Row Records</b>. Quatre jours plus tard, il se produit au <b>Super Bowl LVI</b>. En 2024, il porte la flamme olympique à Saint-Denis et chante à la cérémonie de clôture des <b>Jeux de Paris</b>.</p>
-      <blockquote class="quote reveal" style="margin-top:40px;color:var(--gold)">« I want to thank me for believing in me. »</blockquote>
-      <p class="note reveal" style="margin-top:10px">Discours au Hollywood Walk of Fame, 19/11/2018 — source : NBC Los Angeles</p>
+<!-- ============ BIO ============ -->
+<section class="section wrap" data-chapter="Biographie">
+  <div class="lbio">
+    <figure class="pic" id="bioPic"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg/960px-Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg" alt="Snoop Dogg à Sydney, 2023" loading="lazy"><figcaption>Sydney, 2023 · © Bruce Baker · CC BY 2.0</figcaption></figure>
+    <div class="txt" id="bioTxt">
+      <span class="eyebrow" style="margin-bottom:30px;display:inline-flex">Biographie</span>
+      <p>Sa mère le surnommait « Snoopy », pour sa ressemblance avec le chien des <em>Peanuts</em>. En 1992, Calvin Broadus se révèle avec « Deep Cover », puis sur <em>The Chronic</em> de Dr. Dre.</p>
+      <p>Le 23 novembre 1993, <em>Doggystyle</em> entre directement n°1 du Billboard 200. Suivent <em>Tha Doggfather</em>, les années No Limit, Geffen, et en 2004 son premier n°1 au Hot 100 : « Drop It Like It’s Hot ».</p>
+      <p>En 2022, il rachète la marque Death Row Records puis enflamme le Super Bowl LVI. En 2024, il porte la flamme olympique à Saint-Denis et chante à la clôture des Jeux de Paris.</p>
     </div>
   </div>
 </section>
+<div class="lquote" id="lquote">
+  <q class="gold-text" id="qText">« I want to thank me for believing in me. »</q>
+  <div class="by">Discours au Hollywood Walk of Fame · 19 novembre 2018 · source : NBC Los Angeles</div>
+</div>
 
-<!-- TIMELINE horizontal -->
-<section class="tl-h" data-hscroll>
-  <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;gap:50px">
-    <div class="wrap"><span class="eyebrow">Parcours</span><h2 class="display" style="font-size:clamp(56px,8vw,140px);margin-top:16px">La timeline<span class="serif gold"> d’une légende.</span></h2></div>
-    <div class="h-track" id="tl"></div>
+<!-- ============ TIMELINE ============ -->
+<section class="ltl" id="ltl" data-chapter="Parcours">
+  <div class="head"><div><span class="eyebrow">Parcours</span><h2 class="display" style="margin-top:14px">La timeline <span class="serif gold">d’une légende.</span></h2></div><div class="muted" style="font-size:13px">1971 → 2025</div></div>
+  <div class="rail"><i id="rail"></i></div>
+  <div class="track" id="tlTrack"></div>
+</section>
+
+<!-- ============ COVERFLOW ============ -->
+<section class="cf" id="cf" data-chapter="Discographie">
+  <div class="head"><span class="eyebrow">Discographie</span><h2 class="display" style="margin-top:14px">22 albums <span class="serif gold">studio.</span></h2></div>
+  <div class="cf-stage" id="cfStage"></div>
+  <div class="cf-info">
+    <div><div class="ttl" id="cfTitle"></div><div class="tg" id="cfTags"></div></div>
+    <div class="cnt" id="cfCnt">01<small> / 22</small></div>
+  </div>
+  <div class="cf-bar"><i id="cfBar"></i></div>
+</section>
+
+<!-- ============ SINGLES ============ -->
+<section class="section" data-chapter="Les hymnes" style="padding-bottom:60px">
+  <div class="hy-mq"><div class="row" id="hyRow"></div></div>
+  <div class="wrap" style="margin-top:clamp(60px,8vw,120px)">
+    <div class="sh"><div><span class="eyebrow">Singles iconiques</span><h2 class="display" data-split>Les <span class="serif gold">hymnes.</span></h2></div><p class="reveal">Meilleure position au Billboard Hot 100. Source : Wikipédia (EN), Snoop Dogg singles discography · RIAA.</p></div>
+    <div class="hymns" id="hymns"></div>
   </div>
 </section>
 
-<!-- MOMENTS -->
-<section class="section wrap">
-  <div class="sh"><div><span class="eyebrow">Grandes scènes</span><h2 class="display" data-split>Moments<br><span class="serif gold">légendaires.</span></h2></div></div>
-  <div class="moments" data-stagger>
-    <article class="mom w3"><img style="object-position:50% 25%" src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Snoop_Dogg_at_the_2024_Summer_Olympics_%28cropped%29.jpg" alt="Snoop Dogg aux JO de Paris 2024"><span class="cr">Domaine public · Diplomatic Security Service</span>
-      <span class="k">Paris · Juillet – août 2024</span><h3>Jeux Olympiques<br>de Paris 2024</h3><p>Porteur de la flamme à Saint-Denis le jour de la cérémonie d’ouverture, correspondant NBC/Peacock (2 Sports Emmy Awards), puis « Drop It Like It’s Hot » et « The Next Episode » avec Dr. Dre à la cérémonie de clôture, le 11 août 2024.</p></article>
-    <article class="mom w3 gold"><span class="k">13 février 2022 · SoFi Stadium</span><h3>Super Bowl LVI</h3><p>Halftime Show avec Dr. Dre, Eminem, Mary J. Blige et Kendrick Lamar. Récompensé d’un Primetime Emmy.</p></article>
-    <article class="mom w2"><span class="k">19 novembre 2018</span><h3>Hollywood Walk of Fame</h3><p>2 651e étoile, catégorie Recording, au 6840 Hollywood Boulevard.</p></article>
-    <article class="mom w4"><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Snoop_Dogg_Coachella-06.jpg/960px-Snoop_Dogg_Coachella-06.jpg" alt="Snoop Dogg à Coachella 2012"><span class="cr">© Jason Persse · CC BY-SA 2.0</span>
-      <span class="k">Indio, Californie · 2012, 2016, 2018</span><h3>Coachella</h3><p>Sur scène avec Dr. Dre en 2012, réunion de N.W.A. en 2016, aux côtés de Jamiroquai en 2018.</p></article>
-    <article class="mom w3"><span class="k">NBC · 2024 & 2025</span><h3>The Voice</h3><p>Coach des saisons 26 (sept. – déc. 2024) et 28 (sept. – déc. 2025).</p></article>
-    <article class="mom w3"><span class="k">9 février 2022</span><h3>Patron de Death Row</h3><p>Rachat de la marque Death Row Records auprès de MNRK Music Group — le label de ses débuts.</p></article>
+<!-- ============ EXPAND : COACHELLA ============ -->
+<section class="xp" id="xp" data-chapter="Grandes scènes">
+  <div class="im" id="xpIm"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Snoop_Dogg_Coachella-06.jpg" alt="Snoop Dogg à Coachella 2012" loading="lazy"></div>
+  <div class="side" id="xpSide"><span class="gold-text">Grandes</span><span>Scènes</span></div>
+  <span class="cr">Coachella 2012 · © Jason Persse · CC BY-SA 2.0</span>
+  <div class="cap" id="xpCap"><span class="k">Indio, Californie · 2012 · 2016 · 2018</span><h3 id="xpH">Coachella</h3><p>Sur scène avec Dr. Dre en 2012, réunion de N.W.A. en 2016, aux côtés de Jamiroquai en 2018.</p></div>
+</section>
+
+<section class="section wrap" style="padding-top:clamp(60px,8vw,120px)">
+  <div class="mgrid" id="mgrid" data-stagger>
+    <article class="mcard"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Snoop_Dogg_at_the_2024_Summer_Olympics_%28cropped%29.jpg" alt="" loading="lazy" style="object-position:50% 25%"><span class="cr">Domaine public · Diplomatic Security Service</span><div class="shine"></div><span class="big">24</span>
+      <span class="k">Paris · juillet – août 2024</span><h3>Jeux de Paris 2024</h3><p>Porteur de la flamme à Saint-Denis, correspondant NBC/Peacock (2 Sports Emmy Awards), puis « Drop It Like It’s Hot » et « The Next Episode » avec Dr. Dre à la clôture, le 11 août.</p></article>
+    <article class="mcard gold"><div class="shine"></div><span class="big">LVI</span><span class="k">13 février 2022 · SoFi Stadium</span><h3>Super Bowl LVI</h3><p>Halftime Show avec Dr. Dre, Eminem, Mary J. Blige et Kendrick Lamar. Récompensé d’un Primetime Emmy.</p></article>
+    <article class="mcard"><div class="shine"></div><span class="big">★</span><span class="k">19 novembre 2018</span><h3>Hollywood Walk of Fame</h3><p>2 651e étoile, catégorie Recording, au 6840 Hollywood Boulevard.</p></article>
+    <article class="mcard"><div class="shine"></div><span class="big">DR</span><span class="k">9 février 2022</span><h3>Patron de Death Row</h3><p>Rachat de la marque Death Row Records auprès de MNRK Music Group : le label de ses débuts.</p></article>
+    <article class="mcard"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Snoop_Dogg_and_Dr._Dre_3.jpg/960px-Snoop_Dogg_and_Dr._Dre_3.jpg" alt="" loading="lazy"><span class="cr">© Jason Persse · CC BY-SA 2.0</span><div class="shine"></div><span class="big">TV</span><span class="k">NBC · 2024 & 2025</span><h3>The Voice</h3><p>Coach des saisons 26 (sept. – déc. 2024) et 28 (sept. – déc. 2025).</p></article>
+    <article class="mcard"><div class="shine"></div><span class="big">US</span><span class="k">Décembre 2025</span><h3>Team USA</h3><p>Nommé premier « honorary coach » de Team USA pour les Jeux d’hiver 2026.</p></article>
   </div>
 </section>
 
-<!-- DISCO -->
-<section class="section wrap line-t">
-  <div class="sh"><div><span class="eyebrow">Discographie</span><h2 class="display" data-split>22 albums<br><span class="serif gold">studio.</span></h2></div>
-    <p class="reveal">Meilleure position au Billboard 200 et certification RIAA lorsqu’elle existe. ★ = album majeur.</p></div>
-  <div class="dfilter"><button class="chip on" data-df="all">Tous</button><button class="chip" data-df="major">★ Majeurs</button><button class="chip" data-df="cert">Certifiés RIAA</button><button class="chip" data-df="n1">N°1 Billboard</button></div>
-  <div class="disco" id="disco"></div>
-</section>
-
-<!-- SINGLES -->
-<section class="section wrap">
-  <div class="sh"><div><span class="eyebrow">Singles iconiques</span><h2 class="display" data-split>Les hymnes.</h2></div><p class="reveal">Meilleure position au Billboard Hot 100.</p></div>
-  <table class="singles reveal" id="singles"><thead><tr><th>#</th><th>Titre</th><th class="hide-m">Featuring</th><th>Année</th><th>Hot 100</th><th class="hide-m">RIAA</th></tr></thead><tbody></tbody></table>
-</section>
-
-<!-- LISTEN -->
-<section class="section wrap line-t">
-  <div class="two">
-    <div><span class="eyebrow">Écouter</span><h2 class="display" data-split style="font-size:clamp(56px,8vw,140px);margin-top:20px">Press<br><span class="serif gold">play.</span></h2>
-      <p class="reveal muted" style="margin-top:24px;max-width:420px">Lecteur officiel Spotify. Les titres les plus écoutés de l’artiste, à jour en temps réel.</p></div>
-    <div class="spot reveal"><iframe src="https://open.spotify.com/embed/artist/7hJcb9fa4alzcOq3EaNPoG?utm_source=generator&theme=0" width="100%" height="452" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+<!-- ============ LISTEN ============ -->
+<section class="section wrap line-t" data-chapter="Écouter">
+  <div class="listen" id="listen">
+    <div class="vwrap"><div class="vinyl" id="lVinyl"><div class="vl"><b>Snoop</b><b>Dogg</b><small>Top tracks</small></div></div><div class="arm"></div></div>
+    <div><span class="eyebrow">Écouter</span><h2 class="display" data-split style="font-size:clamp(56px,8vw,140px);margin:20px 0 30px">Press <span class="serif gold">play.</span></h2>
+      <div class="spot"><iframe src="https://open.spotify.com/embed/artist/7hJcb9fa4alzcOq3EaNPoG?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="section wrap">
+<!-- ============ GALLERY ============ -->
+<section class="section wrap" data-chapter="Galerie">
   <div class="sh"><div><span class="eyebrow">Galerie</span><h2 class="display" data-split>Images.</h2></div><p class="reveal">Photos sous licence libre (Wikimedia Commons). Crédits obligatoires en cas de réutilisation.</p></div>
-  <div class="gallery" data-stagger>
-    <figure><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt=""><figcaption>Portrait 2019 · © Glenn Francis · CC BY-SA 4.0</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Snoop_Dogg_Coachella-06.jpg/960px-Snoop_Dogg_Coachella-06.jpg" alt=""><figcaption>Coachella 2012 · © Jason Persse · CC BY-SA 2.0</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Snoop_Dogg_at_the_2024_Summer_Olympics_%28cropped%29.jpg" alt=""><figcaption>Paris 2024 · Domaine public</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg/960px-Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg" alt=""><figcaption>Sydney 2023 · © Bruce Baker · CC BY 2.0</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Snoop_Dogg_and_Dr._Dre_3.jpg/960px-Snoop_Dogg_and_Dr._Dre_3.jpg" alt=""><figcaption>Avec Dr. Dre · © Jason Persse · CC BY-SA 2.0</figcaption></figure>
+  <div class="pgal" id="pgal">
+    <div class="colm" data-speed="-6">
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="" loading="lazy"><figcaption>Portrait 2019 · © Glenn Francis · CC BY-SA 4.0</figcaption></figure>
+    </div>
+    <div class="colm" data-speed="8" style="margin-top:14vh">
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Snoop_Dogg_Coachella-06.jpg/960px-Snoop_Dogg_Coachella-06.jpg" alt="" loading="lazy"><figcaption>Coachella 2012 · © Jason Persse · CC BY-SA 2.0</figcaption></figure>
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Snoop_Dogg_at_the_2024_Summer_Olympics_%28cropped%29.jpg" alt="" loading="lazy"><figcaption>Paris 2024 · Domaine public</figcaption></figure>
+    </div>
+    <div class="colm" data-speed="-10">
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg/960px-Snoop_Dogg%2C_Sydney%2C_2023_-_53775197311.jpg" alt="" loading="lazy"><figcaption>Sydney 2023 · © Bruce Baker · CC BY 2.0</figcaption></figure>
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Snoop_Dogg_and_Dr._Dre_3.jpg/960px-Snoop_Dogg_and_Dr._Dre_3.jpg" alt="" loading="lazy"><figcaption>Avec Dr. Dre · © Jason Persse · CC BY-SA 2.0</figcaption></figure>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="cta-big wrap" id="contact-pk">
-  <div class="circle" style="background:radial-gradient(circle,rgba(214,180,106,.35),transparent 65%)"></div>
+<!-- ============ CTA ============ -->
+<section class="lcta" id="contact-pk" data-chapter="Contact">
+  <div class="bgmq" id="ctaMq">Snoop Dogg ✦ Snoop Dogg ✦ Snoop Dogg ✦</div>
   <span class="eyebrow" style="position:relative">Demandes professionnelles</span>
-  <h2 class="display" data-split style="position:relative;margin-top:20px">Un projet<br>avec une<br><span class="serif gold">légende ?</span></h2>
-  <p class="muted" style="position:relative;max-width:560px;margin:30px auto 0">Événements, partenariats, presse : adressez votre demande à l’équipe KoL Records, qui la transmettra.</p>
+  <h2 class="display" data-split style="margin-top:22px">Un projet<br>avec une<br><span class="serif gold-text">légende ?</span></h2>
+  <p>Événements, partenariats, presse : adressez votre demande à l’équipe KoL Records, qui la transmettra.</p>
   <div class="btns">
     <a href="booking.html?artist=Snoop%20Dogg" class="btn btn-accent" data-magnetic>Envoyer une demande <span class="arr">→</span></a>
     <a href="mailto:contact@kolrecords.com?subject=Snoop%20Dogg%20-%20demande%20pro" class="btn btn-ghost">contact@kolrecords.com</a>
   </div>
 </section>
 
-<!-- SOURCES -->
+<!-- ============ SOURCES ============ -->
 <section class="wrap" style="padding-bottom:80px">
   <span class="eyebrow">Sources</span>
-  <ul class="sources" style="margin-top:24px;list-style:none">
-    <li>Identité, ventes, surnoms, timeline : <a href="https://en.wikipedia.org/wiki/Snoop_Dogg" target="_blank">Wikipédia EN</a> · <a href="https://fr.wikipedia.org/wiki/Snoop_Dogg" target="_blank">Wikipédia FR</a></li>
-    <li>Discographie, positions Billboard : <a href="https://en.wikipedia.org/wiki/Snoop_Dogg_albums_discography" target="_blank">albums discography</a> · <a href="https://en.wikipedia.org/wiki/Snoop_Dogg_singles_discography" target="_blank">singles discography</a></li>
-    <li>Certifications : <a href="https://www.riaa.com/gold-platinum/?tab_active=default-award&se=snoop+dogg" target="_blank">RIAA Gold & Platinum</a></li>
-    <li>Grammy : <a href="https://www.grammy.com/news/rappers-who-have-the-most-grammy-wins/" target="_blank">Grammy.com (2 févr. 2026)</a></li>
-    <li>Walk of Fame : <a href="https://walkoffame.com/snoop-dogg" target="_blank">walkoffame.com</a> · citation : <a href="https://www.nbclosangeles.com/news/snoop-dogg-hollywood-walk-of-fame-star-celebrities/170973/" target="_blank">NBC Los Angeles</a></li>
-    <li>Death Row : <a href="https://www.blackstone.com/news/press/entertainment-icon-snoop-dogg-acquires-death-row-records-brand-from-blackstone-controlled-mnrk-music-group" target="_blank">Blackstone</a> · <a href="https://www.billboard.com/pro/snoop-dogg-buys-death-row-records/" target="_blank">Billboard</a></li>
-    <li>Super Bowl LVI : <a href="https://en.wikipedia.org/wiki/Super_Bowl_LVI_halftime_show" target="_blank">Wikipédia EN</a> · JO 2024 : <a href="https://www.bbc.co.uk/sport/articles/clkyjlm97p3o" target="_blank">BBC</a> · <a href="https://variety.com/2024/music/news/snoop-dogg-olympics-closing-ceremony-dr-dre-1236101718/" target="_blank">Variety</a></li>
-    <li>The Voice : <a href="https://deadline.com/2025/04/snoop-dogg-coach-the-voice-season-28-nbc-1236375342/" target="_blank">Deadline</a> · Coachella 2016 : <a href="https://consequence.net/2016/04/ice-cube-brings-out-n-w-a-members-common-snoop-dogg-at-coachella-watch/" target="_blank">Consequence</a></li>
-    <li>Audience : <a href="https://open.spotify.com/artist/7hJcb9fa4alzcOq3EaNPoG" target="_blank">Spotify</a> et <a href="https://www.instagram.com/snoopdogg/" target="_blank">Instagram</a>, lus le 30/10/2026</li>
-    <li>Photos : <a href="https://commons.wikimedia.org/wiki/Category:Snoop_Dogg" target="_blank">Wikimedia Commons</a> (licences indiquées sur chaque image)</li>
+  <ul class="sources" style="margin-top:24px;list-style:none;columns:2;column-gap:40px;font-size:13px;color:var(--muted)">
+    <li>Identité, ventes, surnoms, timeline : <a class="src-link" href="https://en.wikipedia.org/wiki/Snoop_Dogg" target="_blank">Wikipédia EN</a> · <a class="src-link" href="https://fr.wikipedia.org/wiki/Snoop_Dogg" target="_blank">Wikipédia FR</a></li>
+    <li>Discographie, positions Billboard : <a class="src-link" href="https://en.wikipedia.org/wiki/Snoop_Dogg_albums_discography" target="_blank">albums</a> · <a class="src-link" href="https://en.wikipedia.org/wiki/Snoop_Dogg_singles_discography" target="_blank">singles</a></li>
+    <li>Certifications : <a class="src-link" href="https://www.riaa.com/gold-platinum/?tab_active=default-award&se=snoop+dogg" target="_blank">RIAA Gold & Platinum</a></li>
+    <li>Grammy : <a class="src-link" href="https://www.grammy.com/news/rappers-who-have-the-most-grammy-wins/" target="_blank">Grammy.com (2 févr. 2026)</a></li>
+    <li>Walk of Fame : <a class="src-link" href="https://walkoffame.com/snoop-dogg" target="_blank">walkoffame.com</a> · citation : <a class="src-link" href="https://www.nbclosangeles.com/news/snoop-dogg-hollywood-walk-of-fame-star-celebrities/170973/" target="_blank">NBC Los Angeles</a></li>
+    <li>Death Row : <a class="src-link" href="https://www.blackstone.com/news/press/entertainment-icon-snoop-dogg-acquires-death-row-records-brand-from-blackstone-controlled-mnrk-music-group" target="_blank">Blackstone</a> · <a class="src-link" href="https://www.billboard.com/pro/snoop-dogg-buys-death-row-records/" target="_blank">Billboard</a></li>
+    <li>Super Bowl LVI : <a class="src-link" href="https://en.wikipedia.org/wiki/Super_Bowl_LVI_halftime_show" target="_blank">Wikipédia EN</a> · JO 2024 : <a class="src-link" href="https://www.bbc.co.uk/sport/articles/clkyjlm97p3o" target="_blank">BBC</a> · <a class="src-link" href="https://variety.com/2024/music/news/snoop-dogg-olympics-closing-ceremony-dr-dre-1236101718/" target="_blank">Variety</a></li>
+    <li>The Voice : <a class="src-link" href="https://deadline.com/2025/04/snoop-dogg-coach-the-voice-season-28-nbc-1236375342/" target="_blank">Deadline</a> · Team USA : <a class="src-link" href="https://www.bbc.co.uk/sport/articles/cy4xxdx8lpwo" target="_blank">BBC</a></li>
+    <li>Audience : <a class="src-link" href="https://open.spotify.com/artist/7hJcb9fa4alzcOq3EaNPoG" target="_blank">Spotify</a> et <a class="src-link" href="https://www.instagram.com/snoopdogg/" target="_blank">Instagram</a>, lus le 30/10/2026</li>
+    <li>Photos : <a class="src-link" href="https://commons.wikimedia.org/wiki/Category:Snoop_Dogg" target="_blank">Wikimedia Commons</a> (licence indiquée sur chaque image)</li>
   </ul>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script>
-(function(){
-  const TL = [
-    ['1971','20 oct. 1971','Naissance','Calvin Cordozar Broadus Jr. naît à Long Beach, Californie.'],
-    ['1992','1992','La révélation','« Deep Cover » puis <i>The Chronic</i> de Dr. Dre.'],
-    ['1993','23 nov. 1993','Doggystyle','Premier album, Death Row / Interscope : n°1 du Billboard 200 dès sa sortie.'],
-    ['1995','6 juil. 1995','Doggy Style Records','Création de sa propre structure, Doggy Style Records, Inc.'],
-    ['1996','12 nov. 1996','Tha Doggfather','Deuxième album, à nouveau n°1 du Billboard 200.'],
-    ['1998','Mars 1998','No Limit','Signature chez No Limit Records de Master P.'],
-    ['2004','Juin 2004','Drop It Like It’s Hot','Signature Geffen / Star Trak. Premier n°1 au Billboard Hot 100.'],
-    ['2009','2009','Priority Records','Nommé creative chairman de Priority Records.'],
-    ['2018','19 nov. 2018','Walk of Fame','Son étoile sur le Hollywood Walk of Fame.'],
-    ['2022','9 & 13 fév. 2022','Death Row & Super Bowl','Rachat de la marque Death Row, puis Halftime Show du Super Bowl LVI.'],
-    ['2024','Juil. – août 2024','Paris 2024','Porteur de la flamme, correspondant NBC, cérémonie de clôture avec Dr. Dre.'],
-    ['2024','13 déc. 2024','Missionary','Album entièrement produit par Dr. Dre.'],
-    ['2025','Déc. 2025','Team USA','Premier « honorary coach » de Team USA pour les JO d’hiver 2026.']
-  ];
-  document.getElementById('tl').innerHTML = '<div style="width:var(--pad);flex-shrink:0"></div>' + TL.map(t=>`<div class="tl-card"><div class="y">${t[0]}</div><div class="dt">${t[1]}</div><h4>${t[2]}</h4><p>${t[3]}</p></div>`).join('') + '<div style="width:20vw;flex-shrink:0"></div>';
-
-  const D = [
-    ['Doggystyle',1993,'1',1,'4× Platine'],['Tha Doggfather',1996,'1',1,'2× Platine'],['Da Game Is to Be Sold, Not to Be Told',1998,'1',0,'2× Platine'],
-    ['No Limit Top Dogg',1999,'2',0,'Platine'],['Tha Last Meal',2000,'4',1,'Platine'],['Paid tha Cost to Be da Boss',2002,'12',0,'Platine'],
-    ['R&G (Rhythm & Gangsta): The Masterpiece',2004,'6',1,'Platine'],['Tha Blue Carpet Treatment',2006,'5',0,'Or'],['Ego Trippin’',2008,'3',1,''],
-    ['Malice n Wonderland',2009,'23',0,''],['Doggumentary',2011,'8',0,''],['Reincarnated (Snoop Lion)',2013,'16',0,''],['Bush',2015,'14',1,''],
-    ['Coolaid',2016,'40',0,''],['Neva Left',2017,'54',0,''],['Bible of Love',2018,'148',0,''],['I Wanna Thank Me',2019,'76',0,''],
-    ['From tha Streets 2 tha Suites',2021,'—',0,''],['BODR',2022,'104',0,''],['Missionary',2024,'20',1,''],['Iz It a Crime?',2025,'—',0,''],['10 Til’ Midnight',2026,'—',0,'']
-  ];
-  const disco = document.getElementById('disco');
-  disco.innerHTML = D.map(a=>`<div class="alb ${a[3]?'major':''}" data-major="${a[3]}" data-cert="${a[4]?1:0}" data-n1="${a[2]==='1'?1:0}"><span class="yr">${a[1]}</span><h4>${a[0]}</h4><div class="tags"><span class="t">Billboard 200 · ${a[2]==='—'?'non classé':'n°'+a[2]}</span>${a[4]?`<span class="t g">RIAA ${a[4]}</span>`:''}</div></div>`).join('');
-  document.querySelectorAll('[data-df]').forEach(b=>b.addEventListener('click',()=>{
-    document.querySelectorAll('[data-df]').forEach(x=>x.classList.toggle('on',x===b));
-    const f=b.dataset.df;
-    disco.querySelectorAll('.alb').forEach(el=>{const show = f==='all' || el.dataset[f]==='1'; el.style.display=show?'':'none'; if(show && window.gsap) gsap.from(el,{opacity:0,y:20,duration:.5});});
-  }));
-
-  const S = [
-    ['Nuthin’ but a ‘G’ Thang','Dr. Dre feat. Snoop',1993,'2',''],['What’s My Name?','—',1993,'8','Or'],['Gin and Juice','—',1994,'8','Or'],
-    ['Still D.R.E.','Dr. Dre feat. Snoop',1999,'23',''],['The Next Episode','Dr. Dre feat. Snoop, Kurupt, Nate Dogg',2000,'23',''],
-    ['Beautiful','feat. Pharrell, Charlie Wilson',2003,'6',''],['Drop It Like It’s Hot','feat. Pharrell',2004,'1',''],
-    ['Signs','feat. Justin Timberlake, Charlie Wilson',2005,'46',''],['Sensual Seduction','—',2007,'7','Platine'],
-    ['Young, Wild & Free','avec Wiz Khalifa feat. Bruno Mars',2011,'7','6× Platine']
-  ];
-  document.querySelector('#singles tbody').innerHTML = S.map((s,i)=>`<tr><td class="f">${String(i+1).padStart(2,'0')}</td><td class="t">${s[0]}</td><td class="f hide-m">${s[1]}</td><td class="f">${s[2]}</td><td class="pk">${s[3]==='1'?'#1':'#'+s[3]}</td><td class="cert hide-m">${s[4]||'—'}</td></tr>`).join('');
-
-  // gate
-  const gate=document.getElementById('gate');
-  if (sessionStorage.getItem('kol_gate')) gate.remove();
-  document.getElementById('enter').addEventListener('click',()=>{
-    sessionStorage.setItem('kol_gate','1');
-    if (window.gsap){
-      gsap.to(gate,{clipPath:'circle(0% at 50% 50%)',duration:1.2,ease:'expo.inOut',onComplete:()=>gate.remove()});
-      gsap.from('#lname > span',{yPercent:100,opacity:0,stagger:.12,duration:1.4,ease:'expo.out',delay:.5});
-    } else gate.remove();
-  });
-  if (window.gsap) gsap.set(gate,{clipPath:'circle(150% at 50% 50%)'});
-})();
-</script>
-<script src="main.js?v=5"></script>
+<script src="main.js?v=6"></script>
+<script src="legend.js?v=6"></script>
 </body>
 </html>
