@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KoL Legends — Press kits · KoL Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=32">
+<style>
+  body{--accent:#d6b46a}
+  .lh-hub{padding-top:120px;min-height:100svh;display:flex;flex-direction:column}
+  .hub-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;padding-bottom:30px}
+  .hub-head h1{font-size:clamp(60px,9vw,160px)}
+  .hub-head p{max-width:420px;color:var(--bone-2)}
+  .panels{flex:1;display:flex;gap:10px;min-height:68vh;padding:0 var(--pad) 30px}
+  .pn{position:relative;flex:1;border-radius:22px;overflow:hidden;transition:flex .9s cubic-bezier(.7,0,.2,1);min-width:0;background:#111;isolation:isolate}
+  .panels:hover .pn{flex:.7}
+  .panels .pn:hover{flex:2.4}
+  .pn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.55);transform:scale(1.08);transition:filter .9s,transform 1.4s cubic-bezier(.2,.8,.2,1);z-index:-2}
+  .pn:hover img{filter:grayscale(0) brightness(.75);transform:scale(1)}
+  .pn:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.95) 0%,rgba(6,6,6,.2) 55%,rgba(6,6,6,.5) 100%);z-index:-1}
+  .pn .idx{position:absolute;top:22px;left:24px;font-size:12px;letter-spacing:.24em;color:var(--gold)}
+  .pn .vname{position:absolute;left:24px;bottom:28px;font-family:var(--display);text-transform:uppercase;font-size:clamp(48px,5vw,90px);line-height:.85;writing-mode:vertical-rl;transform:rotate(180deg);transition:opacity .4s}
+  .pn .body{position:absolute;left:30px;right:30px;bottom:30px;opacity:0;transform:translateY(30px);transition:opacity .5s .15s,transform .7s .15s cubic-bezier(.2,.8,.2,1)}
+  .pn:hover .vname{opacity:0}
+  .pn:hover .body{opacity:1;transform:none}
+  .pn .body .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .pn .body h2{font-family:var(--display);text-transform:uppercase;font-weight:400;font-size:clamp(64px,7vw,130px);line-height:.85;margin:10px 0 18px}
+  .pn .facts{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:22px}
+  .pn .facts div{border-left:2px solid var(--gold);padding-left:12px}
+  .pn .facts b{display:block;font-family:var(--display);font-weight:400;font-size:38px;line-height:1}
+  .pn .facts small{font-size:12px;color:var(--bone-2)}
+  .pn .go{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;background:var(--gold);color:#120d04;font-weight:700;font-size:14px}
+  .soon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .soon{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
+  .soon img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.45)}
+  .soon span{position:absolute;left:16px;bottom:14px;right:16px}
+  .soon b{display:block;font-family:var(--display);font-weight:400;font-size:30px;text-transform:uppercase;line-height:.95}
+  .soon small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:900px){.panels{flex-direction:column;min-height:0}.pn{min-height:62vh;flex:none!important}.pn .vname{display:none}.pn .body{opacity:1;transform:none}.pn img{filter:grayscale(.2) brightness(.6)}.soon-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="legend">
+
+<section class="lh-hub">
+  <div class="wrap hub-head">
+    <div><div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Légendes</span></div>
+      <h1 class="display" data-split>KoL <span class="serif gold">Legends.</span></h1></div>
+    <p class="reveal">Trois press kits premium, réservés aux plus grands noms. Survolez une légende, puis ouvrez son press kit.</p>
+  </div>
+  <div class="panels" id="panels">
+    <a class="pn" href="snoop-dogg.html" data-cursor="Ouvrir">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg" style="object-position:50% 18%">
+      <span class="idx">L—01</span><span class="vname">Snoop Dogg</span>
+      <div class="body"><span class="k">Long Beach · The Doggfather</span><h2>Snoop<br>Dogg</h2>
+        <div class="facts"><div><b>35M+</b><small>disques vendus dans le monde</small></div><div><b>16</b><small>nominations aux Grammy</small></div></div>
+        <span class="go">Ouvrir le press kit →</span></div>
+    </a>
+    <a class="pn" href="lil-wayne.html" data-cursor="Ouvrir">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/960px-Lil_Wayne_Feb._2020.jpg" alt="Lil Wayne" style="object-position:50% 20%">
+      <span class="idx">L—02</span><span class="vname">Lil Wayne</span>
+      <div class="body"><span class="k">La Nouvelle-Orléans · Young Money</span><h2>Lil<br>Wayne</h2>
+        <div class="facts"><div><b>120M+</b><small>disques vendus dans le monde</small></div><div><b>5</b><small>Grammy remportés</small></div></div>
+        <span class="go">Ouvrir le press kit →</span></div>
+    </a>
+    <a class="pn" href="gims.html" data-cursor="Ouvrir">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/960px-NDLE2025Gims_1.jpg" alt="Gims" style="object-position:50% 20%">
+      <span class="idx">L—03</span><span class="vname">Gims</span>
+      <div class="body"><span class="k">Kinshasa · Paris · Sexion d’Assaut</span><h2>Gims</h2>
+        <div class="facts"><div><b>3×</b><small>Diamant SNEP · Ceinture noire</small></div><div><b>72 000</b><small>au Stade de France, 2019</small></div></div>
+        <span class="go">Ouvrir le press kit →</span></div>
+    </a>
+  </div>
+  <p class="wrap note" style="padding-bottom:40px">Chiffres sourcés dans chaque press kit (Wikipédia, Grammy.com, SNEP, Le Parisien).</p>
+</section>
+
+<section class="section wrap line-t">
+  <div class="sh"><div><span class="eyebrow">À venir</span><h2 class="display" data-split>Prochains<br><span class="serif gold">press kits.</span></h2></div><p class="reveal">Les autres artistes internationaux avec lesquels KoL Records a travaillé.</p></div>
+  <div class="soon-grid" data-stagger id="soon"></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="data.js?v=32"></script>
+<script>
+  document.getElementById('soon').innerHTML = KOL.legends.filter(l=>!l.page).map(l=>`<div class="soon"><img src="${KOL_small(l.img)}" alt="${l.n}" loading="lazy"><span><small>Press kit · bientôt</small><b>${l.n}</b></span></div>`).join('');
+</script>
+<script src="main.js?v=32"></script>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+    if(!window.gsap) return;
+    gsap.from('.pn',{yPercent:30,opacity:0,duration:1.3,ease:'expo.out',stagger:.12,delay:.3,clearProps:'all'});
+  });
+</script>
+</body>
+</html>

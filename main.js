@@ -10,13 +10,18 @@
   /* ---------- shared layout ---------- */
   const NAV = [
     ['index.html','Accueil','home'],['label.html','Le Label','label'],['artistes.html','Artistes','artistes'],
-    ['snoop-dogg.html','Légendes','legend'],['booking.html','Booking','booking'],['clients.html','Références','clients'],['contact.html','Contact','contact']
+    ['legendes.html','Légendes','legend'],['booking.html','Booking','booking'],['clients.html','Références','clients'],['contact.html','Contact','contact']
   ];
+  const LEG = [
+    ['Snoop Dogg','snoop-dogg.html','https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/330px-Snoop_Dogg_2019_by_Glenn_Francis.jpg','Press kit · L—01'],
+    ['Lil Wayne','lil-wayne.html','https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/330px-Lil_Wayne_Feb._2020.jpg','Press kit · L—02'],
+    ['Gims','gims.html','https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/330px-NDLE2025Gims_1.jpg','Press kit · L—03']];
+  window.KOL_LEG = LEG;
   const navEl = document.createElement('header');
   navEl.className = 'nav';
   navEl.innerHTML = `
     <a href="index.html" class="logo" aria-label="KoL Records"><img src="kol-logo.png" alt="KoL Records"></a>
-    <nav class="links">${NAV.map(([h,t,k])=>`<a href="${h}" class="${k===page?'active':''} ${k==='legend'?'legend-link':''}">${t}</a>`).join('')}</nav>
+    <nav class="links">${NAV.map(([h,t,k])=>k==='legend' ? `<span class="nav-dd"><a href="${h}" class="${k===page?'active':''} legend-link">${t}<i class="chev"></i></a><span class="dd">${LEG.map(l=>`<a href="${l[1]}"><img src="${l[2]}" alt=""><span><b>${l[0]}</b><small>${l[3]}</small></span></a>`).join('')}<a href="legendes.html" class="all">Toutes les légendes →</a></span></span>` : `<a href="${h}" class="${k===page?'active':''}">${t}</a>`).join('')}</nav>
     <div class="right">
       <a href="booking.html" class="btn btn-accent btn-hide-m" data-magnetic>Booker un artiste <span class="badge" data-sl-count>0</span></a>
       <button class="burger" aria-label="Menu"><span></span><span></span></button>
@@ -24,7 +29,7 @@
   document.body.prepend(navEl);
   const mm = document.createElement('div');
   mm.className = 'mobile-menu';
-  mm.innerHTML = `<div>${NAV.map(([h,t],i)=>`<a class="big" href="${h}"><small>0${i+1}</small>${t}</a>`).join('')}</div>
+  mm.innerHTML = `<div>${NAV.map(([h,t,k],i)=>`<a class="big" href="${h}"><small>0${i+1}</small>${t}</a>`+(k==='legend'?`<div class="mm-sub">${LEG.map(l=>`<a href="${l[1]}">${l[0]}</a>`).join('')}</div>`:'')).join('')}</div>
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--bone-2)"><a href="tel:+33615296949">+33 6 15 29 69 49</a><a href="mailto:contact@kolrecords.com">contact@kolrecords.com</a></div>`;
   document.body.appendChild(mm);
   $('.burger').addEventListener('click',()=>document.documentElement.classList.toggle('menu-open'));

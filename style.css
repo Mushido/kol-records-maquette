@@ -549,3 +549,22 @@ body:has(.kdock.on) .shortlist{bottom:150px}
 
 .shortlist:not(.on){opacity:0;pointer-events:none}
 .shortlist{transition:transform .6s var(--ease),opacity .4s,bottom .6s var(--ease)}
+
+/* menu Légendes */
+.nav-dd{position:relative;display:inline-flex}
+.nav-dd > a small{font-size:9px;margin-left:2px;opacity:.7}
+.nav-dd .dd{position:absolute;left:50%;top:calc(100% + 12px);transform:translate(-50%,8px);width:300px;background:#111;border:1px solid rgba(214,180,106,.3);border-radius:18px;padding:8px;display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s var(--ease);box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.nav-dd .dd:before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+.nav-dd:hover .dd,.nav-dd:focus-within .dd{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.nav .links .nav-dd .dd a{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:12px;background:none;color:var(--bone)}
+.nav .links .nav-dd .dd a:hover{background:rgba(214,180,106,.12)}
+.nav-dd .dd img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);transition:filter .3s}
+.nav-dd .dd a:hover img{filter:none}
+.nav-dd .dd b{display:block;font-family:var(--display);font-weight:400;font-size:20px;text-transform:uppercase;line-height:1}
+.nav-dd .dd small{display:block;font-size:11px;color:var(--gold);margin-top:3px}
+.nav .links .nav-dd .dd a.all{justify-content:center;font-size:12px;color:var(--gold);border-top:1px solid var(--line);border-radius:0 0 12px 12px;margin-top:4px;padding:10px}
+.mm-sub{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 14px 34px}
+.mm-sub a{font-size:14px;padding:8px 14px;border:1px solid rgba(214,180,106,.4);border-radius:100px;color:var(--gold)}
+
+.nav-dd .chev{display:inline-block;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);margin-left:8px;transition:transform .3s}
+.nav-dd:hover .chev{transform:rotate(225deg) translate(-1px,-1px)}
