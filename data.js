@@ -9,7 +9,7 @@ window.KOL_small = u => u ? u.replace('/500px-', '/330px-') : u;
 
 window.KOL = {
   roster: [
-    { n: 'Gims', sp: '0GOx72r5AAEKRGQFn3xqXK', cat: 'urbain', d: 'Chanteur, rappeur, auteur-compositeur-interprète', img: I('6/67/NDLE2025Gims_1.jpg') },
+    { n: 'Gims', sp: '0GOx72r5AAEKRGQFn3xqXK', cat: 'urbain', d: 'Chanteur, rappeur, auteur-compositeur-interprète', img: I('6/67/NDLE2025Gims_1.jpg'), page: 'gims.html' },
     { n: 'Amel Bent', sp: '15jZ8OLtnGATWHlQkltG7f', cat: 'pop', d: 'Chanteuse et actrice', img: I('4/45/Amel_Bent%2C_2013_%28cropped%29.jpg') },
     { n: 'Kendji Girac', sp: '4IS4EyXNmiI2w5SRCjMtEF', cat: 'pop', d: 'Chanteur et guitariste', img: I('e/e2/Kendji_Girac_Belval_2016.jpg') },
     { n: 'Slimane', sp: '4OV6uYSnHxSYkjDYuBVBUz', cat: 'pop', d: 'Auteur-compositeur-interprète', img: I('1/1f/Slimane_Eurovision_Song_Contest_2024_semi_2_%28cropped%29.jpg') },
@@ -27,16 +27,17 @@ window.KOL = {
     { n: 'Koba LaD', sp: '1q7T9rFQ2a2ukA1PU51fo3', cat: 'urbain', d: 'Rappeur', img: I('6/64/KobaLaD.jpg') },
     { n: 'Eva Queen', sp: '5nH2klYTzn8CNvUv1GOGQO', cat: 'urbain', d: 'Chanteuse', img: I('e/ed/EvaQueenNRJMusicAward_%28cropped%29.jpg') },
     { n: 'Kev Adams', sp: '28fTXEL90HZCAWinBeKF9m', cat: 'show', d: 'Humoriste et acteur', img: I('d/dd/Kev_Adams_Cannes_2016.jpg') },
-    { n: 'Linh', sp: '15h1AB4jpLCdXLZNT7glWj', cat: 'pop', d: 'Chanteuse · pop, soul, variété', img: null },
-    { n: 'Jimmy Sax', sp: '3HUXmgW0AIko5psVtQmqWE', cat: 'instru', d: 'Saxophoniste · « No Man No Cry »', img: null },
-    { n: 'Julien Lieb', sp: '0rQDrh9l7FTDm7cywWpW8i', cat: 'pop', d: 'Chanteur', img: null }
+    { n: 'Linh', sp: '15h1AB4jpLCdXLZNT7glWj', cat: 'pop', d: 'Chanteuse · pop, soul, variété', img: 'https://image-cdn-fa.spotifycdn.com/image/ab6761610000e5ebf439388185d0bf96c1f8d3c4' },
+    { n: 'Jimmy Sax', sp: '3HUXmgW0AIko5psVtQmqWE', cat: 'instru', d: 'Saxophoniste · « No Man No Cry »', img: 'https://image-cdn-fa.spotifycdn.com/image/ab6761610000e5eb4ac861ab9e885ee5bf9ac937' },
+    { n: 'Julien Lieb', sp: '0rQDrh9l7FTDm7cywWpW8i', cat: 'pop', d: 'Chanteur', img: 'https://image-cdn-fa.spotifycdn.com/image/ab6761610000e5eba3450e7d9ef5536aa3c16d01' }
   ],
   cats: { all: 'Tous', pop: 'Pop & Variété', urbain: 'Urbain & RnB', afro: 'Afro', show: 'Humour & Show', instru: 'Instrumental' },
 
   legends: [
     { n: 'Snoop Dogg', sp: '7hJcb9fa4alzcOq3EaNPoG', d: 'Long Beach · Rap West Coast', img: I('1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg'), page: 'snoop-dogg.html' },
+    { n: 'Lil Wayne', sp: '55Aa2cqylxrFIXC767Z865', d: 'New Orleans · Rap', img: I('1/12/Lil_Wayne_Feb._2020.jpg'), page: 'lil-wayne.html' },
+    { n: 'Gims', sp: '0GOx72r5AAEKRGQFn3xqXK', d: 'Chanteur, rappeur · artiste du booking KoL', img: I('6/67/NDLE2025Gims_1.jpg'), page: 'gims.html' },
     { n: 'Coolio', sp: '3y24n3XhZ96wgwRXjvS17T', d: '« Gangsta’s Paradise »', img: I('c/c8/Coolio.jpg') },
-    { n: 'Lil Wayne', sp: '55Aa2cqylxrFIXC767Z865', d: 'New Orleans · Rap', img: I('1/12/Lil_Wayne_Feb._2020.jpg') },
     { n: 'Tha Dogg Pound', sp: '60CFNa0ggWjV8OSDey8aGT', d: 'Groupe de rap · Californie', img: I('9/94/Tha_Dogg_Pound.jpg') },
     { n: 'OneRepublic', sp: '5Pwc4xIPtQLFEnJriah9YJ', d: 'Groupe pop-rock américain', img: I('7/73/OneRepublic2013.jpg') },
     { n: 'Ricky Martin', sp: '7slfeZO9LsJbWgpkIoXBUJ', d: 'Pop latine', img: I('d/df/Ricky_Martin-4262.jpg') }

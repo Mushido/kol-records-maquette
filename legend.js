@@ -3,53 +3,9 @@
   const $ = (s,c=document)=>c.querySelector(s);
   const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
 
-  const TL = [
-    ['1971','20 oct. 1971','Naissance','Calvin Cordozar Broadus Jr. naît à Long Beach, Californie.'],
-    ['1992','1992','La révélation','« Deep Cover » puis <i>The Chronic</i> de Dr. Dre.'],
-    ['1993','23 nov. 1993','Doggystyle','Premier album, Death Row / Interscope : n°1 du Billboard 200 dès sa sortie.'],
-    ['1995','6 juil. 1995','Doggy Style Records','Création de sa propre structure, Doggy Style Records, Inc.'],
-    ['1996','12 nov. 1996','Tha Doggfather','Deuxième album, à nouveau n°1 du Billboard 200.'],
-    ['1998','Mars 1998','No Limit','Signature chez No Limit Records de Master P.'],
-    ['2004','Juin 2004','Drop It Like It’s Hot','Signature Geffen / Star Trak. Premier n°1 au Billboard Hot 100.'],
-    ['2009','2009','Priority Records','Nommé creative chairman de Priority Records.'],
-    ['2018','19 nov. 2018','Walk of Fame','Son étoile sur le Hollywood Walk of Fame.'],
-    ['2022','9 & 13 fév. 2022','Death Row & Super Bowl','Rachat de la marque Death Row, puis Halftime Show du Super Bowl LVI.'],
-    ['2024','Juil. – août 2024','Paris 2024','Porteur de la flamme, correspondant NBC, cérémonie de clôture avec Dr. Dre.'],
-    ['2024','13 déc. 2024','Missionary','Album entièrement produit par Dr. Dre.'],
-    ['2025','Déc. 2025','Team USA','Premier « honorary coach » de Team USA pour les JO d’hiver 2026.']
-  ];
-  // [titre, année, Billboard 200, majeur, RIAA, couleur1, couleur2, encre]
-  const D = [
-    ['Doggystyle',1993,'1',1,'4× Platine','#1b1b1b','#5a0f12','#f3e6c8'],
-    ['Tha Doggfather',1996,'1',1,'2× Platine','#0f0f0f','#7a5a1e','#f3dfa8'],
-    ['Da Game Is to Be Sold, Not to Be Told',1998,'1',0,'2× Platine','#2a2108','#c9a24a','#120d04'],
-    ['No Limit Top Dogg',1999,'2',0,'Platine','#3a2a06','#e0b64e','#120d04'],
-    ['Tha Last Meal',2000,'4',1,'Platine','#1d140a','#8a5a22','#f3dfa8'],
-    ['Paid tha Cost to Be da Boss',2002,'12',0,'Platine','#21143a','#6b3fa0','#efe6ff'],
-    ['R&G (Rhythm & Gangsta): The Masterpiece',2004,'6',1,'Platine','#0d1a2e','#2d5d8f','#e8f0ff'],
-    ['Tha Blue Carpet Treatment',2006,'5',0,'Or','#0a1f3d','#1f6fd1','#e8f0ff'],
-    ['Ego Trippin’',2008,'3',1,'','#2b0c0c','#b8342b','#ffe9e2'],
-    ['Malice n Wonderland',2009,'23',0,'','#1a1a1a','#555555','#f0f0f0'],
-    ['Doggumentary',2011,'8',0,'','#3b2a12','#a87b3a','#fff3dc'],
-    ['Reincarnated (Snoop Lion)',2013,'16',0,'','#0f3d1c','#d6a91e','#fff8e0'],
-    ['Bush',2015,'14',1,'','#e46b2e','#f5c26b','#2a1306'],
-    ['Coolaid',2016,'40',0,'','#3d0f3a','#e04f9a','#fff0f8'],
-    ['Neva Left',2017,'54',0,'','#14243a','#4f7fb3','#eaf3ff'],
-    ['Bible of Love',2018,'148',0,'','#f2e9d8','#c8a96b','#2a1d08'],
-    ['I Wanna Thank Me',2019,'76',0,'','#0b0b0b','#3a3a3a','#d6b46a'],
-    ['From tha Streets 2 tha Suites',2021,'—',0,'','#1f2a1a','#6c8a4a','#f3f7ea'],
-    ['BODR',2022,'104',0,'','#070707','#2a2a2a','#d6b46a'],
-    ['Missionary',2024,'20',1,'','#120e08','#a07d3a','#f3dfa8'],
-    ['Iz It a Crime?',2025,'—',0,'','#2a0f0f','#7d2a2a','#ffeaea'],
-    ['10 Til’ Midnight',2026,'—',0,'','#0c1024','#3b4aa0','#eef0ff']
-  ];
-  const S = [
-    ['Nuthin’ but a ‘G’ Thang','Dr. Dre feat. Snoop',1993,'2',''],['What’s My Name?','Snoop Doggy Dogg',1993,'8','Or'],['Gin and Juice','Snoop Doggy Dogg',1994,'8','Or'],
-    ['Still D.R.E.','Dr. Dre feat. Snoop',1999,'23',''],['The Next Episode','Dr. Dre feat. Snoop, Kurupt, Nate Dogg',2000,'23',''],
-    ['Beautiful','feat. Pharrell, Charlie Wilson',2003,'6',''],['Drop It Like It’s Hot','feat. Pharrell',2004,'1',''],
-    ['Signs','feat. Justin Timberlake, Charlie Wilson',2005,'46',''],['Sensual Seduction','Snoop Dogg',2007,'7','Platine'],
-    ['Young, Wild & Free','avec Wiz Khalifa feat. Bruno Mars',2011,'7','6× Platine']
-  ];
+  const LD = window.LEGEND || {};
+  const TL = LD.tl || [], D = LD.albums || [], S = LD.singles || [];
+  window.KOL_TRACKS = LD.tracks || window.KOL_TRACKS || [];
 
   const splitChars = el => { const t = el.textContent; el.innerHTML = [...t].map(c => c===' ' ? ' ' : `<span class="ch">${c}</span>`).join(''); return $$('.ch',el); };
   const splitWords = el => {
@@ -74,7 +30,7 @@
           <span class="ar">Snoop Dogg</span>${a[3]?'<span class="st">★</span>':''}
           <span class="tt">${a[0]}</span><span class="yr">${a[1]}</span>
         </div><div class="refl" style="--c2:${a[6]}"></div></div>`).join('');
-    $('#hymns').innerHTML = S.map((s,i)=>`<div class="hrow" data-i="${i}" data-cursor="Écouter" role="button" tabindex="0"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${s[0]}</span><span class="f">${s[1]} · ${s[2]}${s[4]?' · RIAA '+s[4]:''}</span><span class="eq"><i></i><i></i><i></i><i></i><i></i></span><span class="pk">#${s[3]}<small>Hot 100</small></span></div>`).join('');
+    $('#hymns').innerHTML = S.map((s,i)=>`<div class="hrow" data-i="${i}" data-cursor="Écouter" role="button" tabindex="0"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${s[0]}</span><span class="f">${s[1]&&s[1]!=='—'?s[1]+' · ':''}${s[2]}${s[4]?' · '+(LD.cert||'RIAA')+' '+s[4]:''}</span><span class="eq"><i></i><i></i><i></i><i></i><i></i></span><span class="pk">#${s[3]}<small>${LD.singlesChart||'Hot 100'}</small></span></div>`).join('');
     const titles = S.map(s=>s[0]);
     $('#hyRow').innerHTML = [...titles,...titles].map(t=>`<span>${t}</span>`).join('');
 
@@ -195,7 +151,7 @@
     let cur=-1;
     const info=i=>{ if(i===cur) return; cur=i; const a=D[i];
       cfT.textContent=a[0]; cfCnt.innerHTML=String(i+1).padStart(2,'0')+'<small> / '+n+'</small>';
-      cfTags.innerHTML=`<span>${a[1]}</span><span>Billboard 200 · ${a[2]==='—'?'non classé':'n°'+a[2]}</span>${a[4]?`<span class="g">RIAA ${a[4]}</span>`:''}${a[3]?'<span>★ Album majeur</span>':''}`;
+      cfTags.innerHTML=`<span>${a[1]}</span><span>${LD.chart||'Billboard 200'} · ${a[2]==='—'?'non classé':'n°'+a[2]}</span>${a[4]?`<span class="g">${LD.cert||'RIAA'} ${a[4]}</span>`:''}${a[3]?'<span>★ Album majeur</span>':''}`;
       gsap.fromTo([cfT,cfTags],{y:24,opacity:0},{y:0,opacity:1,duration:.5,ease:'expo.out',stagger:.05,overwrite:true});
     };
     const sp=mobile?120:250, sp2=mobile?55:115;
@@ -283,7 +239,7 @@
       ctrl.loadUri(uri); setTimeout(()=>ctrl.play(),350); highlight(uri,true);
     };
     const initSpotify = API => {
-      API.createController($('#dockEmbed'),{uri:'spotify:track:'+window.KOL_TRACKS[6],width:'100%',height:80},c=>{
+      API.createController($('#dockEmbed'),{uri:LD.artistUri||('spotify:track:'+window.KOL_TRACKS[0]),width:'100%',height:80},c=>{
         ctrl=c;
         c.addListener('playback_update',e=>{ const p=!e.data.isPaused; dock.classList.toggle('playing',p); highlight(e.data.playingURI||curUri,p); });
         c.addListener('ready',()=>{ if(pending){ c.loadUri(pending); setTimeout(()=>c.play(),350); pending=null; } });
@@ -304,7 +260,7 @@
       $('#apCover').src=a.cover; $('#apCover').alt=a.name;
       $('#apYear').textContent=m[1]+' · '+a.tracks.length+' titres · '+Math.round(a.tracks.reduce((s,t)=>s+t[2],0)/60)+' min';
       $('#apTitle').textContent=a.name;
-      $('#apTags').innerHTML=`<span>Billboard 200 · ${m[2]==='—'?'non classé':'n°'+m[2]}</span>${m[4]?`<span class="g">RIAA ${m[4]}</span>`:''}${m[3]?'<span>★ Album majeur</span>':''}`;
+      $('#apTags').innerHTML=`<span>${LD.chart||'Billboard 200'} · ${m[2]==='—'?'non classé':'n°'+m[2]}</span>${m[4]?`<span class="g">${LD.cert||'RIAA'} ${m[4]}</span>`:''}${m[3]?'<span>★ Album majeur</span>':''}`;
       const au='spotify:album:'+a.id; $('#apPlay').dataset.uri=au; $('#apPlay').onclick=()=>playUri(au,a.name);
       $('#apSpot').href='https://open.spotify.com/album/'+a.id;
       $('#apList').innerHTML=a.tracks.map((t,k)=>`<li class="ap-tr" data-uri="spotify:track:${t[1]}" tabindex="0"><span class="n">${String(k+1).padStart(2,'0')}</span><span class="tt"><b>${t[0]}</b><small>${t[3]}</small></span><span class="eq"><i></i><i></i><i></i><i></i></span><span class="du">${fmt(t[2])}</span></li>`).join('');

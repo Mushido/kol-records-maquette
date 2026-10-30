@@ -177,7 +177,9 @@
       gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',delay:(el.dataset.delay?+el.dataset.delay:0)+(inHero?.3:0),scrollTrigger: inHero ? null : {trigger:el,start:'top 95%',once:true}});
     });
     $$('[data-stagger]').forEach(g=>{
-      gsap.from(g.children,{opacity:0,y:50,duration:1,ease:'expo.out',stagger:.06,clearProps:'transform',scrollTrigger:{trigger:g,start:'top 88%',once:true}});
+      const kids=[...g.children]; gsap.fromTo(kids,{opacity:0,y:50},{opacity:1,y:0,duration:1,ease:'expo.out',stagger:.06,immediateRender:false,clearProps:'transform,opacity',scrollTrigger:{trigger:g,start:'top 92%',once:true}});
+      // filet de sécurité : si l'animation n'a pas tourné, on rend visible
+      setTimeout(()=>{ if(g.getBoundingClientRect().top<innerHeight) kids.forEach(k=>{ if(getComputedStyle(k).opacity==='0'){ k.style.opacity=''; k.style.transform=''; } }); },2500);
     });
     // manifesto words light-up on scroll
     $$('.manifesto').forEach(m=>{

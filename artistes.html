@@ -5,7 +5,7 @@
 <title>Artistes — Catalogue booking · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=21">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 <body data-page="artistes">
 
@@ -39,7 +39,7 @@
 <section class="section wrap" id="legendes">
   <div class="sh">
     <div><span class="eyebrow" style="color:var(--gold)">KoL Legends</span><h2 class="display" data-split>Les<br><span class="serif gold">légendes.</span></h2></div>
-    <p class="reveal">Artistes internationaux avec lesquels nos méthodes de travail et nos stratégies marketing ont fait leurs preuves. Les plus grands ont droit à un press kit dédié.</p>
+    <p class="reveal">Collaborations internationales et grands noms du booking. Les plus grands ont droit à un press kit dédié : Snoop Dogg, Lil Wayne et Gims.</p>
   </div>
   <div class="agrid" id="lgrid" data-stagger></div>
 </section>
@@ -76,9 +76,9 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=20"></script>
-<script src="poster.js?v=20"></script>
-<script src="player.js?v=20"></script>
+<script src="data.js?v=31"></script>
+<script src="poster.js?v=31"></script>
+<script src="player.js?v=31"></script>
 <script>
 (function(){
   const K = window.KOL;
@@ -87,7 +87,7 @@
       ${a.img?`<img src="${a.img}" alt="${a.n}" loading="lazy">`:`<div class="noimg">${a.n.split(' ').map(w=>w[0]).join('')}</div>`}
       ${a.sp?`<button class="listen" data-sp="${a.sp}" data-name="${a.n}" aria-label="Écouter ${a.n}"><i>▶</i>Écouter</button>`:''}
       ${legend? (a.page?`<a href="${a.page}" class="add on" style="background:var(--gold)">Press kit ↗</a>`:`<span class="add">Press kit · bientôt</span>`)
-              : `<button class="add" data-sl-add="${a.n}">+ Ajouter</button>`}
+              : `<button class="add" data-sl-add="${a.n}">+ Ajouter</button>${a.page?`<a href="${a.page}" class="add on" style="top:auto;bottom:96px;background:var(--gold);color:var(--ink)">Press kit ↗</a>`:''}`}
       <div class="info"><span class="c" ${legend?'style="color:var(--gold)"':''}>${legend?'Légende':K.cats[a.cat]}</span><h3>${a.n}</h3><p>${a.d}</p></div>
       ${legend&&a.page?`<a href="${a.page}" style="position:absolute;inset:0;z-index:0" aria-label="${a.n}"></a>`:''}
     </article>`;
@@ -111,7 +111,7 @@
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('on',x===b)); grid.classList.toggle('list',b.dataset.view==='list'); apply();}));
 })();
 </script>
-<script src="main.js?v=20"></script>
+<script src="main.js?v=31"></script>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
   /* écoute */
