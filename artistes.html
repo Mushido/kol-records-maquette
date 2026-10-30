@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artistes — Catalogue booking · KoL Records</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="artistes">
+
+<section class="phero wrap">
+  <div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Artistes</span></div>
+  <h1 class="display" data-split>Le<br><span class="serif accent">catalogue.</span></h1>
+  <div class="sub">
+    <p class="reveal">Les artistes avec lesquels nous travaillons pour vos événements. Filtrez, comparez, ajoutez-les à votre demande : nous revenons vers vous avec les disponibilités.</p>
+    <div class="reveal" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end"><a href="#legendes" class="btn btn-ghost">Les légendes ↓</a><a href="booking.html" class="btn btn-accent">Ma demande <span class="badge" data-sl-count>0</span></a></div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-bottom:120px">
+  <div class="toolbar">
+    <div class="chips" id="chips"></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <label class="search"><span class="muted">⌕</span><input id="q" placeholder="Rechercher un artiste…" autocomplete="off"></label>
+      <div class="viewtg"><button class="on" data-view="grid">Grille</button><button data-view="list">Liste</button></div>
+    </div>
+  </div>
+  <div class="agrid" id="grid"></div>
+  <p class="note" style="margin-top:30px">Et d’autres artistes sur demande. Descriptions : Wikipédia. Photos : Wikimedia Commons (licences libres).</p>
+</section>
+
+<div class="mq-band mq-accent">
+  <div class="marquee" style="--speed:30s"><div class="track">
+    <span class="item">KoL Legends <i>✦</i></span><span class="item">Press kits premium <i>✦</i></span><span class="item">Artistes internationaux <i>✦</i></span>
+  </div></div>
+</div>
+
+<section class="section wrap" id="legendes">
+  <div class="sh">
+    <div><span class="eyebrow" style="color:var(--gold)">KoL Legends</span><h2 class="display" data-split>Les<br><span class="serif gold">légendes.</span></h2></div>
+    <p class="reveal">Artistes internationaux avec lesquels nos méthodes de travail et nos stratégies marketing ont fait leurs preuves. Les plus grands ont droit à un press kit dédié.</p>
+  </div>
+  <div class="agrid" id="lgrid" data-stagger></div>
+</section>
+
+<section class="section wrap line-t">
+  <div class="collab">
+    <div><span class="eyebrow">À l’international</span><h3 class="display" style="font-size:clamp(48px,6vw,96px);margin-top:16px">Collaborations</h3>
+      <ul id="intl"></ul></div>
+    <div><span class="eyebrow">En France</span><h3 class="display" style="font-size:clamp(48px,6vw,96px);margin-top:16px">Artistes</h3>
+      <ul id="fr"></ul></div>
+  </div>
+</section>
+
+<div class="shortlist">
+  <span class="cnt">0</span>
+  <span class="names"></span>
+  <a href="booking.html" class="btn">Envoyer ma demande <span class="arr">→</span></a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+  const K = window.KOL;
+  const grid = document.getElementById('grid');
+  const card = (a, legend) => `<article class="acard" data-cat="${a.cat||'legend'}" data-name="${a.n.toLowerCase()}" ${legend&&a.page?'data-cursor="Press kit"':''}>
+      ${a.img?`<img src="${a.img}" alt="${a.n}" loading="lazy">`:`<div class="noimg">${a.n.split(' ').map(w=>w[0]).join('')}</div>`}
+      ${legend? (a.page?`<a href="${a.page}" class="add on" style="background:var(--gold)">Press kit ↗</a>`:`<span class="add">Press kit · bientôt</span>`)
+              : `<button class="add" data-sl-add="${a.n}">+ Ajouter</button>`}
+      <div class="info"><span class="c" ${legend?'style="color:var(--gold)"':''}>${legend?'Légende':K.cats[a.cat]}</span><h3>${a.n}</h3><p>${a.d}</p></div>
+      ${legend&&a.page?`<a href="${a.page}" style="position:absolute;inset:0;z-index:0" aria-label="${a.n}"></a>`:''}
+    </article>`;
+  grid.innerHTML = K.roster.map(a=>card(a,false)).join('');
+  document.getElementById('lgrid').innerHTML = K.legends.map(a=>card(a,true)).join('');
+  document.getElementById('intl').innerHTML = K.legends.map(l=>`<li>${l.n}</li>`).join('');
+  document.getElementById('fr').innerHTML = K.france.map(l=>`<li>${l}</li>`).join('');
+
+  // filters
+  const counts = {all:K.roster.length}; K.roster.forEach(a=>counts[a.cat]=(counts[a.cat]||0)+1);
+  const chips = document.getElementById('chips');
+  chips.innerHTML = Object.entries(K.cats).map(([k,v])=>`<button class="chip ${k==='all'?'on':''}" data-f="${k}">${v}<sup>${counts[k]||0}</sup></button>`).join('');
+  let f='all', q='';
+  const apply = () => {
+    const shown=[];
+    grid.querySelectorAll('.acard').forEach(c=>{const ok=(f==='all'||c.dataset.cat===f)&&c.dataset.name.includes(q); c.classList.toggle('hidden',!ok); if(ok) shown.push(c);});
+    if (window.gsap) gsap.fromTo(shown,{opacity:0,y:30},{opacity:1,y:0,duration:.6,stagger:.03,ease:'expo.out'});
+  };
+  chips.addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b) return; f=b.dataset.f; chips.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b)); apply();});
+  document.getElementById('q').addEventListener('input',e=>{q=e.target.value.toLowerCase().trim(); apply();});
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('on',x===b)); grid.classList.toggle('list',b.dataset.view==='list'); apply();}));
+})();
+</script>
+<script src="main.js"></script>
+</body>
+</html>

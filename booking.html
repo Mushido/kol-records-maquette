@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Booking d’artistes — Communes, festivals, entreprises · KoL Records</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="booking">
+
+<section class="phero wrap">
+  <div class="crumb reveal"><a href="index.html">Accueil</a><span>/</span><span>Booking</span></div>
+  <h1 class="display" data-split>Booker<br>un <span class="serif accent">artiste.</span></h1>
+  <div class="sub">
+    <p class="reveal">Depuis 2018, notre antenne booking accompagne communes, organisateurs et entreprises. Festivals, plateaux plein air, plateaux radio, événements corporate ou privés : dites-nous tout, nous trouvons l’artiste.</p>
+    <div class="reveal" style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+      <a href="#form" class="btn btn-accent" data-magnetic>Remplir la fiche <span class="arr">↓</span></a>
+      <a href="tel:+33652231000" class="btn btn-ghost">Être rappelé</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-bottom:clamp(60px,8vw,120px)">
+  <div class="formats" data-stagger>
+    <a href="#form" data-type="commune" class="fmt" data-cursor="Choisir"><div class="ic">◎</div><h4>Communes<br>& Mairies</h4><p>Fêtes de ville, plateaux plein air, saisons culturelles.</p><span class="big">01</span></a>
+    <a href="#form" data-type="festival" class="fmt" data-cursor="Choisir"><div class="ic">✦</div><h4>Festivals</h4><p>Têtes d’affiche et plateaux complets.</p><span class="big">02</span></a>
+    <a href="#form" data-type="corporate" class="fmt" data-cursor="Choisir"><div class="ic">◆</div><h4>Entreprises</h4><p>Corporate, galas, centres commerciaux, lancements.</p><span class="big">03</span></a>
+    <a href="#form" data-type="prive" class="fmt" data-cursor="Choisir"><div class="ic">❤</div><h4>Privé</h4><p>Mariages, anniversaires, soirées privées.</p><span class="big">04</span></a>
+  </div>
+</section>
+
+<section class="wrap line-t section" id="form" style="padding-top:clamp(60px,8vw,120px)">
+  <div class="bk">
+    <aside class="bk-aside">
+      <span class="eyebrow">Fiche de renseignements</span>
+      <h2 class="display" style="font-size:clamp(56px,7vw,120px);margin-top:18px">Votre<br><span class="serif accent">événement.</span></h2>
+      <p class="muted" style="margin-top:20px;max-width:420px">Quatre étapes, deux minutes. Plus votre brief est précis, plus notre proposition sera juste.</p>
+      <div class="card">
+        <a href="tel:+33652231000"><span>Booking</span><span>+33 6 52 23 10 00</span></a>
+        <a href="https://wa.me/33652231000" target="_blank"><span>WhatsApp</span><span>Écrire ↗</span></a>
+        <a href="mailto:contact@kolrecords.com"><span>E-mail</span><span>contact@kolrecords.com</span></a>
+        <a><span>Horaires booking</span><span>Lun – Ven · 9h – 18h30</span></a>
+      </div>
+    </aside>
+
+    <form class="form" id="bkf" onsubmit="return false">
+      <div class="progress" id="prog">
+        <div class="cur"><div class="bar"><i></i></div><span>01 · Vous</span></div>
+        <div><div class="bar"><i></i></div><span>02 · Événement</span></div>
+        <div><div class="bar"><i></i></div><span>03 · Show</span></div>
+        <div><div class="bar"><i></i></div><span>04 · Envoi</span></div>
+      </div>
+
+      <div class="fstep on" data-s="0">
+        <h3>Qui êtes-vous ?</h3>
+        <span class="flabel">Vous êtes</span>
+        <div class="pills" id="typePills">
+          <label><input type="radio" name="type" value="commune"><span>Commune / Mairie</span></label>
+          <label><input type="radio" name="type" value="festival"><span>Festival</span></label>
+          <label><input type="radio" name="type" value="corporate"><span>Entreprise</span></label>
+          <label><input type="radio" name="type" value="prive"><span>Particulier</span></label>
+        </div>
+        <div class="field"><input id="societe" placeholder=" "><label for="societe">Société / Collectivité</label></div>
+        <div class="frow"><div class="field"><input id="nom" placeholder=" " required><label for="nom">Nom</label></div><div class="field"><input id="prenom" placeholder=" "><label for="prenom">Prénom</label></div></div>
+        <div class="frow"><div class="field"><input id="email" type="email" placeholder=" " required><label for="email">E-mail</label></div><div class="field"><input id="tel" type="tel" placeholder=" "><label for="tel">Téléphone</label></div></div>
+      </div>
+
+      <div class="fstep" data-s="1">
+        <h3>L’événement</h3>
+        <span class="flabel">Artiste(s) demandé(s)</span>
+        <div class="sel-artists" id="selA"></div>
+        <div class="field"><input id="artiste" placeholder=" " list="artistsList"><label for="artiste">Ajouter un artiste (ou « pas d’idée, conseillez-moi »)</label></div>
+        <datalist id="artistsList"></datalist>
+        <div class="field"><input id="event" placeholder=" "><label for="event">Événement (nom, nature)</label></div>
+        <div class="frow"><div class="field"><input id="date" type="date" placeholder=" "><label for="date">Date de l’événement</label></div><div class="field"><input id="ville" placeholder=" "><label for="ville">Ville</label></div></div>
+        <div class="frow"><div class="field"><input id="lieu" placeholder=" "><label for="lieu">Lieu</label></div><div class="field"><input id="capa" type="number" placeholder=" "><label for="capa">Capacité</label></div></div>
+      </div>
+
+      <div class="fstep" data-s="2">
+        <h3>Le show</h3>
+        <span class="flabel">Format du show</span>
+        <div class="pills">
+          <label><input type="radio" name="format" value="Concert live"><span>Concert live</span></label>
+          <label><input type="radio" name="format" value="Showcase"><span>Showcase</span></label>
+          <label><input type="radio" name="format" value="Playback / PBO"><span>Playback / PBO</span></label>
+          <label><input type="radio" name="format" value="Acoustique"><span>Acoustique</span></label>
+          <label><input type="radio" name="format" value="À définir"><span>À définir</span></label>
+        </div>
+        <div class="frow"><div class="field"><input id="heure" type="time" placeholder=" "><label for="heure">Heure de passage</label></div><div class="field"><input id="duree" placeholder=" "><label for="duree">Durée du show</label></div></div>
+        <div class="frow"><div class="field"><input id="prix" placeholder=" "><label for="prix">Prix du billet (ou gratuit)</label></div><div class="field"><input id="offre" placeholder=" "><label for="offre">Offre / budget</label></div></div>
+        <div class="field"><textarea id="msg" placeholder=" "></textarea><label for="msg">Précisions (technique, hébergement, contraintes…)</label></div>
+      </div>
+
+      <div class="fstep" data-s="3">
+        <h3>Récapitulatif</h3>
+        <div class="recap" id="recap"></div>
+        <p class="note" style="margin-top:16px">En envoyant cette demande, vous acceptez d’être recontacté par l’équipe booking de KoL Records.</p>
+      </div>
+
+      <div class="fnav">
+        <button type="button" class="btn btn-ghost" id="prev" style="visibility:hidden">← Retour</button>
+        <button type="button" class="btn btn-accent" id="next">Continuer <span class="arr">→</span></button>
+      </div>
+
+      <div class="success" id="ok">
+        <span class="eyebrow" style="color:var(--ink)">Demande envoyée</span>
+        <h3 style="margin-top:16px">Merci,<br>on s’occupe<br>du reste.</h3>
+        <p style="margin-top:20px;max-width:420px">Notre équipe booking revient vers vous rapidement avec les disponibilités. (Maquette : aucun envoi réel.)</p>
+        <a href="artistes.html" class="btn btn-light" style="margin-top:26px;background:var(--ink);color:var(--bone)">Retour au catalogue</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const K = window.KOL, SL = window.KOL_SL;
+  const all = [...K.roster, ...K.legends];
+  document.getElementById('artistsList').innerHTML = all.map(a=>`<option value="${a.n}">`).join('');
+  const params = new URLSearchParams(location.search);
+  if (params.get('artist')) { const s=SL.get(); if(!s.includes(params.get('artist'))){s.push(params.get('artist')); SL.set(s);} }
+  const setType = t => { const r=document.querySelector(`input[name=type][value=${t}]`); if(r) r.checked=true; };
+  if (params.get('type')) setType(params.get('type'));
+  document.querySelectorAll('[data-type]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); setType(a.dataset.type); (window.__lenis? __lenis.scrollTo('#form',{offset:-80}) : document.getElementById('form').scrollIntoView());}));
+
+  const selA = document.getElementById('selA');
+  const renderSel = () => { const s=SL.get(); selA.innerHTML = s.length ? s.map(n=>{const a=all.find(x=>x.n===n); return `<span class="sa">${a&&a.img?`<img src="${a.img}" alt="">`:''}${n}<button type="button" data-rm="${n}">×</button></span>`}).join('') : '<span class="muted" style="font-size:14px">Aucun artiste sélectionné — <a href="artistes.html" style="text-decoration:underline">parcourir le catalogue</a></span>'; };
+  document.addEventListener('sl:change',renderSel); renderSel();
+  selA.addEventListener('click',e=>{const b=e.target.closest('[data-rm]'); if(b) SL.toggle(b.dataset.rm);});
+  const ai = document.getElementById('artiste');
+  ai.addEventListener('change',()=>{ const v=ai.value.trim(); if(v){ const s=SL.get(); if(!s.includes(v)){s.push(v);SL.set(s);} ai.value=''; }});
+  ai.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); ai.dispatchEvent(new Event('change')); }});
+
+  let step=0; const steps=[...document.querySelectorAll('.fstep')], prog=[...document.querySelectorAll('#prog > div')];
+  const prev=document.getElementById('prev'), next=document.getElementById('next');
+  const val = id => document.getElementById(id).value || '—';
+  const go = n => {
+    step=n; steps.forEach((s,i)=>s.classList.toggle('on',i===n));
+    prog.forEach((p,i)=>{p.classList.toggle('done',i<n);p.classList.toggle('cur',i===n);});
+    prev.style.visibility = n? 'visible':'hidden';
+    next.innerHTML = n===3 ? 'Envoyer la demande <span class="arr">→</span>' : 'Continuer <span class="arr">→</span>';
+    if (n===3){
+      const t=document.querySelector('input[name=type]:checked'), f=document.querySelector('input[name=format]:checked');
+      const rows=[['Profil',t?t.nextElementSibling.textContent:'—'],['Société',val('societe')],['Contact',[document.getElementById('prenom').value,document.getElementById('nom').value].filter(Boolean).join(' ')||'—'],['E-mail',val('email')],['Téléphone',val('tel')],['Artiste(s)',SL.get().join(', ')||'À conseiller'],['Événement',val('event')],['Date',val('date')],['Ville / Lieu',val('ville')+' · '+val('lieu')],['Capacité',val('capa')],['Format',f?f.value:'—'],['Passage / Durée',val('heure')+' · '+val('duree')],['Prix du billet',val('prix')],['Offre',val('offre')]];
+      document.getElementById('recap').innerHTML = rows.map(r=>`<div><small>${r[0]}</small>${r[1]}</div>`).join('');
+    }
+  };
+  next.addEventListener('click',()=>{ if(step<3) go(step+1); else document.getElementById('ok').classList.add('on'); });
+  prev.addEventListener('click',()=>go(Math.max(0,step-1)));
+});
+</script>
+<script src="main.js"></script>
+</body>
+</html>
