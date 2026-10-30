@@ -54,25 +54,25 @@
   </div>
   <div class="crates">
     <div class="rec-wrap">
-      <a class="rec" href="snoop-dogg.html" data-cursor="Play" aria-label="Press kit Snoop Dogg">
+      <a class="rec" href="snoop-dogg.html?v=35" data-cursor="Play" aria-label="Press kit Snoop Dogg">
         <div class="disc"><div class="vinyl"><div class="vl"><b>Snoop</b><b>Dogg</b><small>KoL Legends · L—01</small></div></div></div>
         <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg" alt="Snoop Dogg"><span class="sl-i">L—01</span><span class="sl-t"><small>Long Beach</small><b>Snoop Dogg</b></span></div>
       </a>
-      <div class="rec-meta"><span class="facts"><b>35M+</b> disques · <b>16</b> nominations Grammy</span><a class="go" href="snoop-dogg.html">Press kit →</a></div>
+      <div class="rec-meta"><span class="facts"><b>35M+</b> disques · <b>16</b> nominations Grammy</span><a class="go" href="snoop-dogg.html?v=35">Press kit →</a></div>
     </div>
     <div class="rec-wrap">
-      <a class="rec" href="lil-wayne.html" data-cursor="Play" aria-label="Press kit Lil Wayne">
+      <a class="rec" href="lil-wayne.html?v=35" data-cursor="Play" aria-label="Press kit Lil Wayne">
         <div class="disc"><div class="vinyl"><div class="vl"><b>Lil</b><b>Wayne</b><small>KoL Legends · L—02</small></div></div></div>
         <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/960px-Lil_Wayne_Feb._2020.jpg" alt="Lil Wayne"><span class="sl-i">L—02</span><span class="sl-t"><small>La Nouvelle-Orléans</small><b>Lil Wayne</b></span></div>
       </a>
-      <div class="rec-meta"><span class="facts"><b>120M+</b> disques · <b>5</b> Grammy</span><a class="go" href="lil-wayne.html">Press kit →</a></div>
+      <div class="rec-meta"><span class="facts"><b>120M+</b> disques · <b>5</b> Grammy</span><a class="go" href="lil-wayne.html?v=35">Press kit →</a></div>
     </div>
     <div class="rec-wrap">
-      <a class="rec" href="gims.html" data-cursor="Play" aria-label="Press kit Gims">
+      <a class="rec" href="gims.html?v=35" data-cursor="Play" aria-label="Press kit Gims">
         <div class="disc"><div class="vinyl"><div class="vl"><b>Gims</b><b>Djuna</b><small>KoL Legends · L—03</small></div></div></div>
         <div class="sleeve"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/960px-NDLE2025Gims_1.jpg" alt="Gims"><span class="sl-i">L—03</span><span class="sl-t"><small>Kinshasa · Paris</small><b>Gims</b></span></div>
       </a>
-      <div class="rec-meta"><span class="facts"><b>3× Diamant</b> SNEP · <b>Stade de France</b> 2019</span><a class="go" href="gims.html">Press kit →</a></div>
+      <div class="rec-meta"><span class="facts"><b>3× Diamant</b> SNEP · <b>Stade de France</b> 2019</span><a class="go" href="gims.html?v=35">Press kit →</a></div>
     </div>
   </div>
   <p class="wrap note" style="padding-bottom:40px">Chiffres sourcés dans chaque press kit (Wikipédia, Grammy.com, SNEP, Le Parisien).</p>
@@ -144,7 +144,7 @@
     document.querySelectorAll('.rec').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); go(a); },true));
     // retour via la flèche du press kit (chargement normal de la page)
     const backHref=sessionStorage.getItem('kol_vinyl_back');
-    if(backHref){ sessionStorage.removeItem('kol_vinyl_back'); const rec=[...document.querySelectorAll('.rec')].find(r=>r.getAttribute('href')===backHref); if(rec){ gsap.killTweensOf('.rec .sleeve, .rec .disc, .rec-meta'); gsap.set('.rec .sleeve, .rec .disc, .rec-meta',{clearProps:'all'}); requestAnimationFrame(()=>back(rec)); } }
+    if(backHref){ sessionStorage.removeItem('kol_vinyl_back'); const rec=[...document.querySelectorAll('.rec')].find(r=>r.getAttribute('href').split('?')[0]===backHref.split('?')[0]); if(rec){ gsap.killTweensOf('.rec .sleeve, .rec .disc, .rec-meta'); gsap.set('.rec .sleeve, .rec .disc, .rec-meta',{clearProps:'all'}); requestAnimationFrame(()=>back(rec)); } }
     // retour via le bouton « précédent » du navigateur (page restaurée telle quelle)
     addEventListener('pageshow',e=>{ if(!e.persisted) return; sessionStorage.removeItem('kol_vinyl_in'); if(current && zoomer) back(current); else cleanup(); });
   });

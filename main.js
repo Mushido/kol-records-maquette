@@ -13,9 +13,9 @@
     ['legendes.html','Légendes','legend'],['booking.html','Booking','booking'],['clients.html','Références','clients'],['contact.html','Contact','contact']
   ];
   const LEG = [
-    ['Snoop Dogg','snoop-dogg.html','https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/330px-Snoop_Dogg_2019_by_Glenn_Francis.jpg','Press kit · L—01'],
-    ['Lil Wayne','lil-wayne.html','https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/330px-Lil_Wayne_Feb._2020.jpg','Press kit · L—02'],
-    ['Gims','gims.html','https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/330px-NDLE2025Gims_1.jpg','Press kit · L—03']];
+    ['Snoop Dogg','snoop-dogg.html?v=35','https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/330px-Snoop_Dogg_2019_by_Glenn_Francis.jpg','Press kit · L—01'],
+    ['Lil Wayne','lil-wayne.html?v=35','https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Lil_Wayne_Feb._2020.jpg/330px-Lil_Wayne_Feb._2020.jpg','Press kit · L—02'],
+    ['Gims','gims.html?v=35','https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/NDLE2025Gims_1.jpg/330px-NDLE2025Gims_1.jpg','Press kit · L—03']];
   window.KOL_LEG = LEG;
   const navEl = document.createElement('header');
   navEl.className = 'nav';
