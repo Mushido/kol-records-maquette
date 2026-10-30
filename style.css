@@ -546,3 +546,6 @@ body:has(.kdock.on) .shortlist{bottom:150px}
 .drag-row .h-track{padding:0 var(--pad)}
 .logo-tile{background:#fff}
 .logo-tile img{width:auto;height:auto;max-width:100%;max-height:62px;object-fit:contain}
+
+.shortlist:not(.on){opacity:0;pointer-events:none}
+.shortlist{transition:transform .6s var(--ease),opacity .4s,bottom .6s var(--ease)}
