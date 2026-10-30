@@ -119,7 +119,6 @@
       photo.addEventListener('mousemove',e=>{const r=photo.getBoundingClientRect(); qx((e.clientX-r.left)/r.width*100+'%'); qy((e.clientY-r.top)/r.height*100+'%');});
       photo.addEventListener('mouseenter',()=>gsap.to(col,{'--r':'190px',duration:.6,ease:'power3.out',overwrite:'auto'}));
       photo.addEventListener('mouseleave',()=>gsap.to(col,{'--r':'0px',duration:.6,ease:'power3.out',overwrite:'auto'}));
-      photo.setAttribute('data-cursor','Couleur');
     }
     const heroST = {trigger:'.lh',start:'top top',end:'bottom top',scrub:.5};
     gsap.to('.lh-word.w1',{xPercent:-35,ease:'none',scrollTrigger:heroST});
