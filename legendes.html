@@ -5,8 +5,8 @@
 <title>KoL Legends — Press kits · KoL Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=34">
-<link rel="stylesheet" href="legend.css?v=34">
+<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="legend.css?v=35">
 <style>
   body{--accent:#d6b46a}
   .vhub{min-height:100svh;padding-top:120px;display:flex;flex-direction:column;background:radial-gradient(60% 55% at 50% 60%,#17120a,#060606 70%)}
@@ -86,42 +86,67 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="data.js?v=34"></script>
+<script src="data.js?v=35"></script>
 <script>
   document.getElementById('soon').innerHTML = KOL.legends.filter(l=>!l.page).map(l=>`<div class="soon"><img src="${KOL_small(l.img)}" alt="${l.n}" loading="lazy"><span><small>Press kit · bientôt</small><b>${l.n}</b></span></div>`).join('');
 </script>
-<script src="main.js?v=34"></script>
+<script src="main.js?v=35"></script>
 <script>
   document.addEventListener('DOMContentLoaded',()=>{
     if(!window.gsap) return;
-    gsap.from('.rec .sleeve',{y:80,opacity:0,rotate:-6,duration:1.3,ease:'expo.out',stagger:.15,delay:.25,clearProps:'transform,opacity'});
-    gsap.from('.rec .disc',{xPercent:-30,rotate:-180,opacity:0,duration:1.6,ease:'expo.out',stagger:.15,delay:.5,clearProps:'transform,opacity'});
-    gsap.from('.rec-meta',{y:20,opacity:0,duration:1,ease:'expo.out',stagger:.15,delay:.9,clearProps:'transform,opacity'});
-    // clic : le vinyle se centre et grossit jusqu'à remplir l'écran (animation 100 % GPU), puis le press kit s'ouvre
+    const comingBack=!!sessionStorage.getItem('kol_vinyl_back');
+    if(!comingBack) gsap.from('.rec .sleeve',{y:80,opacity:0,rotate:-6,duration:1.3,ease:'expo.out',stagger:.15,delay:.25,clearProps:'transform,opacity'});
+    if(!comingBack) gsap.from('.rec .disc',{xPercent:-30,rotate:-180,opacity:0,duration:1.6,ease:'expo.out',stagger:.15,delay:.5,clearProps:'transform,opacity'});
+    if(!comingBack) gsap.from('.rec-meta',{y:20,opacity:0,duration:1,ease:'expo.out',stagger:.15,delay:.9,clearProps:'transform,opacity'});
+    // ===== Transition vinyle : aller (clic) et retour (flèche ou bouton retour du navigateur) =====
     const veil=document.createElement('div'); Object.assign(veil.style,{position:'fixed',inset:'0',background:'#050505',opacity:'0',zIndex:'9989',pointerEvents:'none'}); document.body.appendChild(veil);
-    let busy=false;
-    document.querySelectorAll('.rec').forEach(a=>a.addEventListener('click',e=>{
-      e.preventDefault(); e.stopPropagation(); if(busy) return; busy=true;
-      const href=a.getAttribute('href'); const pre=document.createElement('link'); pre.rel='prefetch'; pre.href=href; document.head.appendChild(pre);
-      const disc=a.querySelector('.disc'), r=disc.getBoundingClientRect();
-      const D=Math.ceil(Math.hypot(innerWidth,innerHeight)*1.08);
-      const z=document.createElement('div'); z.className='zoomer';
-      z.innerHTML=disc.innerHTML;
-      Object.assign(z.style,{display:'block',left:(innerWidth-D)/2+'px',top:(innerHeight-D)/2+'px',width:D+'px',height:D+'px',willChange:'transform',transformOrigin:'50% 50%'});
+    let busy=false, zoomer=null, current=null;
+    const D=()=>Math.ceil(Math.hypot(innerWidth,innerHeight)*1.08);
+    const makeZoomer=(rec)=>{
+      const disc=rec.querySelector('.disc'), d=D();
+      const z=document.createElement('div'); z.className='zoomer'; z.innerHTML=disc.innerHTML;
+      Object.assign(z.style,{display:'block',left:(innerWidth-d)/2+'px',top:(innerHeight-d)/2+'px',width:d+'px',height:d+'px',willChange:'transform',transformOrigin:'50% 50%'});
       z.querySelector('.vinyl').style.cssText='width:100%;height:100%;animation:vspin 3s linear infinite;will-change:transform';
-      z.querySelectorAll('.vl b').forEach(b=>b.style.fontSize=(D*0.045)+'px'); const sm=z.querySelector('.vl small'); if(sm) sm.style.fontSize=(D*0.014)+'px';
-      document.body.appendChild(z);
-      gsap.set(z,{x:(r.left+r.width/2)-innerWidth/2,y:(r.top+r.height/2)-innerHeight/2,scale:r.width/D,force3D:true});
-      disc.style.visibility='hidden';
+      z.querySelectorAll('.vl b').forEach(b=>b.style.fontSize=(d*0.045)+'px'); const sm=z.querySelector('.vl small'); if(sm) sm.style.fontSize=(d*0.014)+'px';
+      document.body.appendChild(z); return z;
+    };
+    const discTarget=(rec,d)=>{ const r=rec.querySelector('.disc').getBoundingClientRect(); return {x:(r.left+r.width/2)-innerWidth/2,y:(r.top+r.height/2)-innerHeight/2,scale:r.width/d}; };
+    const cleanup=()=>{ if(zoomer){ gsap.killTweensOf(zoomer); zoomer.remove(); zoomer=null; } gsap.killTweensOf(veil); veil.style.opacity='0';
+      document.querySelectorAll('.rec-wrap').forEach(w=>{ gsap.killTweensOf(w); w.style.opacity=''; }); document.querySelectorAll('.disc').forEach(d=>d.style.visibility='');
+      busy=false; current=null; if(window.__lenis) __lenis.start(); document.documentElement.classList.remove('lenis-stopped'); };
+    // ALLER
+    const go=(rec)=>{
+      if(busy) return; busy=true; current=rec;
+      const href=rec.getAttribute('href'); const pre=document.createElement('link'); pre.rel='prefetch'; pre.href=href; document.head.appendChild(pre);
+      const d=D(); zoomer=makeZoomer(rec); gsap.set(zoomer,{...discTarget(rec,d),force3D:true});
+      rec.querySelector('.disc').style.visibility='hidden';
       if(window.__lenis) __lenis.stop();
       requestAnimationFrame(()=>requestAnimationFrame(()=>{
         gsap.timeline({onComplete:()=>{ sessionStorage.setItem('kol_vinyl_in',href); location.href=href; }})
-          .to('.crates .rec-wrap',{opacity:0,duration:.5,ease:'power2.out'},0)
-          .to(z,{x:0,y:0,scale:(r.width/D)*1.6,duration:.75,ease:'power3.inOut'},0)
-          .to(z,{scale:1,duration:1.05,ease:'expo.in'},'-=.15')
-          .to(veil,{opacity:1,duration:.45,ease:'power1.in'},'-=.4');
+          .to('.crates .rec-wrap',{opacity:0,duration:.45,ease:'power2.out'},0)
+          .to(zoomer,{x:0,y:0,scale:discTarget(rec,d).scale*1.6,duration:.7,ease:'power3.inOut'},0)
+          .to(zoomer,{scale:1,duration:1,ease:'expo.in'},'-=.15')
+          .to(veil,{opacity:1,duration:.4,ease:'power1.in'},'-=.4');
       }));
-    },true));
+    };
+    // RETOUR : le vinyle plein écran se rétrécit et rentre dans sa pochette
+    const back=(rec)=>{
+      busy=true; const d=D();
+      if(!zoomer){ zoomer=makeZoomer(rec); gsap.set(zoomer,{x:0,y:0,scale:1,force3D:true}); veil.style.opacity='1'; }
+      rec.querySelector('.disc').style.visibility='hidden';
+      document.querySelectorAll('.rec-wrap').forEach(w=>w.style.opacity='0');
+      gsap.timeline({onComplete:cleanup})
+        .to(veil,{opacity:0,duration:.6,ease:'power1.out'},0.15)
+        .to(zoomer,{scale:discTarget(rec,d).scale*1.6,duration:.9,ease:'expo.out'},0)
+        .to(zoomer,{...discTarget(rec,d),duration:.7,ease:'power3.inOut'},'-=.35')
+        .to('.crates .rec-wrap',{opacity:1,duration:.5,ease:'power2.out'},'-=.45');
+    };
+    document.querySelectorAll('.rec').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); go(a); },true));
+    // retour via la flèche du press kit (chargement normal de la page)
+    const backHref=sessionStorage.getItem('kol_vinyl_back');
+    if(backHref){ sessionStorage.removeItem('kol_vinyl_back'); const rec=[...document.querySelectorAll('.rec')].find(r=>r.getAttribute('href')===backHref); if(rec){ gsap.killTweensOf('.rec .sleeve, .rec .disc, .rec-meta'); gsap.set('.rec .sleeve, .rec .disc, .rec-meta',{clearProps:'all'}); requestAnimationFrame(()=>back(rec)); } }
+    // retour via le bouton « précédent » du navigateur (page restaurée telle quelle)
+    addEventListener('pageshow',e=>{ if(!e.persisted) return; sessionStorage.removeItem('kol_vinyl_in'); if(current && zoomer) back(current); else cleanup(); });
   });
 </script>
 </body>

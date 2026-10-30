@@ -102,7 +102,7 @@
   /* ---------- page transitions ---------- */
   const curtain = $('.curtain');
   if (hasGSAP){
-    if (sessionStorage.getItem('kol_vinyl_in')) gsap.set(curtain,{scaleY:0});
+    if (sessionStorage.getItem('kol_vinyl_in') || sessionStorage.getItem('kol_vinyl_back')) gsap.set(curtain,{scaleY:0});
     else { gsap.set(curtain,{scaleY:1,transformOrigin:'top'}); gsap.to(curtain,{scaleY:0,duration:.75,ease:'expo.inOut'}); }
   } else curtain.style.transform='scaleY(0)';
   document.addEventListener('click',e=>{
@@ -122,6 +122,12 @@
     b.innerHTML=`<svg viewBox="0 0 200 200"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#cp">KoL Records ✦ Paris ✦ Label indépendant ✦ Booking ✦ </textPath></text></svg><img src="kol-logo.png" alt="">`;
     h.appendChild(b);
   });
+
+  /* ---------- retour navigateur (page restaurée depuis le cache) : on nettoie les transitions ---------- */
+  addEventListener('pageshow',e=>{ if(!e.persisted) return;
+    if(hasGSAP){ gsap.killTweensOf(curtain); gsap.set(curtain,{scaleY:0}); } else curtain.style.transform='scaleY(0)';
+    document.documentElement.classList.remove('menu-open','lenis-stopped'); if(window.__lenis) window.__lenis.start();
+    const ov=document.getElementById('kolExit'); if(ov) ov.style.opacity='0'; });
 
   /* ---------- marquees: duplicate tracks ---------- */
   $$('.marquee').forEach(m=>{const t=$('.track',m); if(!t) return; for(let i=0;i<2;i++){const c=t.cloneNode(true);c.setAttribute('aria-hidden','true');m.appendChild(c);} });

@@ -22,6 +22,18 @@
     const mobile = innerWidth < 800;
     const touch = matchMedia('(hover:none)').matches;
 
+    /* ---------- flèche de sortie vers la page Légendes ---------- */
+    const exitBtn=document.createElement('a'); exitBtn.className='lk-back'; exitBtn.href='legendes.html'; exitBtn.innerHTML='<i>←</i>Légendes'; exitBtn.setAttribute('aria-label','Retour aux légendes');
+    const exitOv=document.createElement('div'); exitOv.id='kolExit';
+    document.body.appendChild(exitOv); document.body.appendChild(exitBtn);
+    const leave=()=>{ const me=location.pathname.split('/').pop()||'snoop-dogg.html'; sessionStorage.setItem('kol_vinyl_back',me); if(L) L.stop();
+      const g=document.getElementById('gate'), gv2=document.getElementById('gVinyl');
+      if(g && gv2){ const r=gv2.getBoundingClientRect(); const s=Math.hypot(innerWidth,innerHeight)*1.08/r.width;
+        gsap.timeline({onComplete:()=>location.href='legendes.html'}).to('#gTitle, #enter, .g-top, .g-bot',{opacity:0,duration:.3}).to(gv2,{scale:s,duration:.8,ease:'expo.in',force3D:true},0).to(exitOv,{opacity:1,duration:.35},'-=.3'); }
+      else gsap.to(exitOv,{opacity:1,duration:.45,ease:'power2.in',onComplete:()=>location.href='legendes.html'}); };
+    exitBtn.addEventListener('click',e=>{ e.preventDefault(); e.stopPropagation(); leave(); },true);
+    addEventListener('keydown',e=>{ if(e.key==='Escape' && document.getElementById('gate')) leave(); });
+
     /* ---------- build DOM ---------- */
     $('#tlTrack').innerHTML = TL.map(t=>`<div class="tlc"><div class="y">${t[0]}</div><div class="d">${t[1]}</div><h4>${t[2]}</h4><p>${t[3]}</p></div>`).join('');
     $('#cfStage').innerHTML = D.map((a,i)=>`<div class="cf-item" data-i="${i}" data-cursor="Écouter">
