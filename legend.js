@@ -81,15 +81,17 @@
     /* ---------- progress + chapters ---------- */
     gsap.to('#lgProg',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:.3}});
     const chNum=$('#chapter .num'), chLbl=$('#chapter .lbl2');
+    let chCur=-1;
     const setChapter = (i,name) => {
+      if (i===chCur) return; chCur=i;
       [ [chNum,String(i+1).padStart(2,'0')], [chLbl,name] ].forEach(([box,txt])=>{
-        const old=box.firstElementChild; if(old && old.textContent===txt) return;
+        [...box.children].slice(0,-1).forEach(o=>{ gsap.killTweensOf(o); o.remove(); });
+        const old=box.lastElementChild;
         const n=document.createElement('span'); n.textContent=txt; box.appendChild(n);
         gsap.fromTo(n,{yPercent:100},{yPercent:0,duration:.6,ease:'expo.out'});
         if(old) gsap.to(old,{yPercent:-100,duration:.6,ease:'expo.out',onComplete:()=>old.remove()});
       });
     };
-
     /* ---------- counters ---------- */
     $$('[data-cnt]').forEach(el=>{
       const end=parseFloat(el.dataset.cnt), dec=(el.dataset.cnt.split('.')[1]||'').length, o={v:0};
@@ -151,38 +153,41 @@
       addEventListener('keydown',e=>{ if(e.key==='Enter' && document.body.contains(gate)) enter(); },{once:true});
     } else heroIn();
 
-    /* ---------- ZOOM ---------- */
+    /* ---------- ZOOM (sans blocage) ---------- */
     const zt=$('#zt'), zo=$('#zo');
-    const setOrigin=()=>{ gsap.set(zt,{scale:1}); const a=zt.getBoundingClientRect(), b=zo.getBoundingClientRect(); zt.style.transformOrigin=`${b.left-a.left+b.width/2}px ${b.top-a.top+b.height*0.52}px`; };
+    const setOrigin=()=>{ const s=gsap.getProperty(zt,'scale'); gsap.set(zt,{scale:1}); const a=zt.getBoundingClientRect(), b=zo.getBoundingClientRect(); zt.style.transformOrigin=`${b.left-a.left+b.width/2}px ${b.top-a.top+b.height*0.52}px`; gsap.set(zt,{scale:s}); };
     setOrigin(); ScrollTrigger.addEventListener('refreshInit',setOrigin);
-    gsap.timeline({scrollTrigger:{trigger:'#zoom',start:'top top',end:'+=160%',pin:true,scrub:.6,anticipatePin:1}})
-      .from(zt,{yPercent:40,opacity:0,duration:.25,ease:'power2.out'})
-      .to('#zs',{opacity:0,y:30,duration:.15},'+=.05')
-      .to(zt,{scale:mobile?60:110,duration:1,ease:'power3.in'},'<')
-      .to('.zoom .zbg',{opacity:1,duration:.3},'-=.3');
+    gsap.from(zt,{yPercent:50,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'#zoom',start:'top 70%',once:true}});
+    gsap.to(zt,{scale:mobile?14:18,ease:'power2.in',scrollTrigger:{trigger:'#zoom',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('#zs',{opacity:0,y:40,ease:'none',scrollTrigger:{trigger:'#zoom',start:'top top',end:'30% top',scrub:true}});
+    gsap.to('.zoom .zbg',{opacity:1,ease:'none',scrollTrigger:{trigger:'#zoom',start:'top 60%',end:'top top',scrub:true}});
 
     /* ---------- STACK ---------- */
     const cards=$$('.scard');
     cards.forEach((c,i)=>{
       const next=cards[i+1]; if(!next) return;
-      gsap.fromTo(c,{scale:1,borderRadius:'0px',filter:'brightness(1)'},{scale:.86,borderRadius:'28px',filter:'brightness(.4)',ease:'none',scrollTrigger:{trigger:next,start:'top bottom',end:'top top',scrub:true}});
+      const ov=document.createElement('i'); ov.className='dim'; c.appendChild(ov);
+      const st={trigger:next,start:'top bottom',end:'top top',scrub:true};
+      gsap.fromTo(c,{scale:1},{scale:.9,ease:'none',scrollTrigger:st});
+      gsap.fromTo(ov,{opacity:0},{opacity:.6,ease:'none',scrollTrigger:{...st}});
     });
     cards.forEach(c=>{ gsap.from(c.querySelectorAll('.k,.lab,.src'),{y:40,opacity:0,stagger:.08,duration:1,ease:'expo.out',scrollTrigger:{trigger:c,start:'top 60%',once:true}});
       gsap.from(c.querySelector('.ghost'),{xPercent:30,ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top top',scrub:true}}); });
 
     /* ---------- BIO ---------- */
-    gsap.fromTo('#bioPic',{clipPath:'inset(100% 0% 0% 0% round 16px)'},{clipPath:'inset(0% 0% 0% 0% round 16px)',ease:'none',scrollTrigger:{trigger:'#bioPic',start:'top 90%',end:'top 25%',scrub:true}});
+    const bc=document.createElement('i'); bc.className='cover'; $('#bioPic').appendChild(bc);
+    gsap.fromTo(bc,{scaleY:1},{scaleY:0,ease:'none',scrollTrigger:{trigger:'#bioPic',start:'top 90%',end:'top 25%',scrub:true}});
     gsap.fromTo('#bioPic img',{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:'.lbio',start:'top bottom',end:'bottom top',scrub:true}});
     const bw=[]; $$('#bioTxt p').forEach(p=>bw.push(...splitWords(p)));
     gsap.to(bw,{opacity:1,stagger:.05,ease:'none',scrollTrigger:{trigger:'#bioTxt',start:'top 70%',end:'bottom 55%',scrub:true}});
     const q=$('#qText'); q.classList.remove('gold-text'); q.style.color='var(--gold)';
     gsap.from(splitChars(q),{yPercent:80,rotate:12,opacity:0,stagger:.018,duration:1,ease:'expo.out',scrollTrigger:{trigger:'#lquote',start:'top 70%',once:true}});
 
-    /* ---------- TIMELINE ---------- */
-    const track=$('#tlTrack'), tcs=$$('.tlc',track), rail=$('#rail');
-    const tlDist=()=>track.scrollWidth-innerWidth;
-    const tlTw=gsap.to(track,{x:()=>-tlDist(),ease:'none',scrollTrigger:{trigger:'#ltl',start:'top top',end:()=>'+='+tlDist(),pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true},
-      onUpdate:function(){ rail.style.transform=`scaleX(${this.progress()})`; const x=gsap.getProperty(track,'x'), lim=innerWidth*.62; tcs.forEach(c=>c.classList.toggle('on',c.offsetLeft+x<lim)); }});
+    /* ---------- TIMELINE verticale (sans blocage) ---------- */
+    const rail=$('#rail');
+    gsap.fromTo(rail,{scaleY:0},{scaleY:1,ease:'none',scrollTrigger:{trigger:'#tlTrack',start:'top 60%',end:'bottom 60%',scrub:true}});
+    $$('.tlc').forEach(c=>ScrollTrigger.create({trigger:c,start:'top 62%',toggleClass:{targets:c,className:'on'}}));
+    $$('.tlc').forEach((c,i)=>gsap.from(c,{x:(i%2?60:-60),opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:c,start:'top 88%',once:true}}));
 
     /* ---------- COVERFLOW ---------- */
     const items=$$('.cf-item'), n=items.length, discs=items.map(i=>i.querySelector('.disc'));
@@ -206,9 +211,20 @@
       info(Math.round(p));
     };
     render(0);
-    const cfST=ScrollTrigger.create({trigger:'#cf',start:'top top',end:'+='+(n*150),pin:true,scrub:.4,anticipatePin:1,
-      onUpdate:s=>{ render(s.progress*(n-1)); cfBar.style.transform=`scaleX(${s.progress})`; }});
-    items.forEach((el,i)=>el.addEventListener('click',()=>{ const y=cfST.start+(i/(n-1))*(cfST.end-cfST.start); L?L.scrollTo(y,{duration:1.2}):scrollTo({top:y,behavior:'smooth'}); }));
+    const state={p:0}; let target=0, auto=null, inView=false;
+    const go=i=>{ target=Math.max(0,Math.min(n-1,i)); gsap.to(state,{p:target,duration:1,ease:'expo.out',overwrite:true,onUpdate:()=>{render(state.p); cfBar.style.transform=`scaleX(${state.p/(n-1)})`;}}); };
+    const stopAuto=()=>{ clearInterval(auto); auto=null; };
+    const startAuto=()=>{ if(auto) return; auto=setInterval(()=>go(target>=n-1?0:target+1),3200); };
+    $('#cfPrev').addEventListener('click',()=>{stopAuto();go(target-1);});
+    $('#cfNext').addEventListener('click',()=>{stopAuto();go(target+1);});
+    items.forEach((el,i)=>el.addEventListener('click',()=>{ if(dragMoved) return; stopAuto(); go(i); }));
+    addEventListener('keydown',e=>{ if(!inView) return; if(e.key==='ArrowRight'){stopAuto();go(target+1);} if(e.key==='ArrowLeft'){stopAuto();go(target-1);} });
+    // glisser (souris / doigt)
+    const stage=$('#cfStage'); let dx0=null, p0=0, dragMoved=false;
+    stage.addEventListener('pointerdown',e=>{ dx0=e.clientX; p0=state.p; dragMoved=false; stopAuto(); gsap.killTweensOf(state); });
+    addEventListener('pointermove',e=>{ if(dx0===null) return; const d=(dx0-e.clientX)/(mobile?140:220); if(Math.abs(dx0-e.clientX)>6) dragMoved=true; state.p=Math.max(0,Math.min(n-1,p0+d)); render(state.p); cfBar.style.transform=`scaleX(${state.p/(n-1)})`; },{passive:true});
+    addEventListener('pointerup',()=>{ if(dx0===null) return; dx0=null; go(Math.round(state.p)); setTimeout(()=>dragMoved=false,50); });
+    ScrollTrigger.create({trigger:'#cf',start:'top 70%',end:'bottom 30%',onToggle:s=>{ inView=s.isActive; s.isActive?startAuto():stopAuto(); }});
     gsap.from('#cf .head',{y:40,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:'#cf',start:'top 60%',once:true}});
 
     /* ---------- SINGLES ---------- */
@@ -218,13 +234,14 @@
     /* ---------- EXPAND ---------- */
     const xpChars=splitChars($('#xpH')); $('#xpH').style.overflow='hidden';
     gsap.set('#xpCap .k, #xpCap p',{opacity:0,y:20}); gsap.set(xpChars,{yPercent:110});
-    gsap.timeline({scrollTrigger:{trigger:'#xp',start:'top top',end:'+=140%',pin:true,scrub:.6,anticipatePin:1}})
-      .fromTo('#xpIm',{clipPath:'inset(28% 34% 28% 34% round 18px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',duration:1,ease:'power2.inOut'})
-      .to('#xpIm img',{scale:1,duration:1,ease:'power2.inOut'},'<')
-      .to('#xpSide span:first-child',{xPercent:-160,opacity:0,duration:.8},'<')
-      .to('#xpSide span:last-child',{xPercent:160,opacity:0,duration:.8},'<')
-      .to(xpChars,{yPercent:0,stagger:.04,duration:.5,ease:'expo.out'},'-=.2')
-      .to('#xpCap .k, #xpCap p',{opacity:1,y:0,duration:.4,stagger:.1},'<.2');
+    const xpST={trigger:'#xp',start:'top 85%',end:'top 5%',scrub:true};
+    gsap.fromTo('#xpIm',{scaleX:.4,scaleY:.56,borderRadius:'40px'},{scaleX:1,scaleY:1,borderRadius:'0px',ease:'none',scrollTrigger:xpST});
+    gsap.fromTo('#xpIm img',{scaleX:1.9,scaleY:1.35},{scaleX:1,scaleY:1,ease:'none',scrollTrigger:{...xpST}});
+    gsap.to('#xpSide span:first-child',{xPercent:-160,opacity:0,ease:'none',scrollTrigger:{...xpST}});
+    gsap.to('#xpSide span:last-child',{xPercent:160,opacity:0,ease:'none',scrollTrigger:{...xpST}});
+    gsap.timeline({scrollTrigger:{trigger:'#xp',start:'top 25%',once:true}})
+      .to(xpChars,{yPercent:0,stagger:.04,duration:.9,ease:'expo.out'})
+      .to('#xpCap .k, #xpCap p',{opacity:1,y:0,duration:.7,stagger:.1,ease:'expo.out'},'<.3');
 
     /* ---------- MOMENT CARDS tilt ---------- */
     if(!touch) $$('.mcard').forEach(c=>{
@@ -240,14 +257,15 @@
 
     /* ---------- GALLERY ---------- */
     $$('#pgal .colm').forEach(c=>gsap.fromTo(c,{yPercent:-(+c.dataset.speed)},{yPercent:+c.dataset.speed,ease:'none',scrollTrigger:{trigger:'#pgal',start:'top bottom',end:'bottom top',scrub:true}}));
-    $$('#pgal figure').forEach(f=>{ gsap.fromTo(f,{clipPath:'inset(0% 0% 100% 0% round 14px)'},{clipPath:'inset(0% 0% 0% 0% round 14px)',duration:1.4,ease:'expo.inOut',scrollTrigger:{trigger:f,start:'top 88%',once:true}});
+    $$('#pgal figure').forEach(f=>{ const fc=document.createElement('i'); fc.className='cover'; f.appendChild(fc); gsap.to(fc,{scaleY:0,duration:1.4,ease:'expo.inOut',scrollTrigger:{trigger:f,start:'top 88%',once:true}});
       gsap.to(f.querySelector('img'),{scale:1,duration:1.8,ease:'expo.out',scrollTrigger:{trigger:f,start:'top 88%',once:true}}); });
 
     /* ---------- CTA ---------- */
     gsap.fromTo('#ctaMq',{xPercent:10},{xPercent:-30,ease:'none',scrollTrigger:{trigger:'.lcta',start:'top bottom',end:'bottom top',scrub:true}});
 
     const chSecs=$$('[data-chapter]'); let chTick=false;
-    const chUpd=()=>{ chTick=false; const lim=innerHeight*.55; let idx=0; chSecs.forEach((s,i)=>{ const box=s.parentElement.classList.contains('pin-spacer')?s.parentElement:s; if(box.getBoundingClientRect().top<lim) idx=i; }); setChapter(idx,chSecs[idx].dataset.chapter); };
+    let chTops=[]; const chMeasure=()=>{ chTops=chSecs.map(s=>s.getBoundingClientRect().top+scrollY); }; ScrollTrigger.addEventListener('refresh',chMeasure); chMeasure();
+    const chUpd=()=>{ chTick=false; const y=scrollY+innerHeight*.55; let idx=0; chTops.forEach((t,i)=>{ if(t<y) idx=i; }); setChapter(idx,chSecs[idx].dataset.chapter); };
     addEventListener('scroll',()=>{ if(!chTick){ chTick=true; requestAnimationFrame(chUpd);} },{passive:true});
     ScrollTrigger.sort(); ScrollTrigger.refresh();
     addEventListener('load',()=>ScrollTrigger.refresh());

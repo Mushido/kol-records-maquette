@@ -5,8 +5,8 @@
 <title>Snoop Dogg — Press kit · KoL Legends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=8">
-<link rel="stylesheet" href="legend.css?v=8">
+<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="legend.css?v=10">
 <link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg">
 </head>
 <body data-page="legend" class="legend">
@@ -92,10 +92,9 @@
 </div>
 
 <!-- ============ TIMELINE ============ -->
-<section class="ltl" id="ltl" data-chapter="Parcours">
-  <div class="head"><div><span class="eyebrow">Parcours</span><h2 class="display" style="margin-top:14px">La timeline <span class="serif gold">d’une légende.</span></h2></div><div class="muted" style="font-size:13px">1971 → 2025</div></div>
-  <div class="rail"><i id="rail"></i></div>
-  <div class="track" id="tlTrack"></div>
+<section class="ltl section wrap" id="ltl" data-chapter="Parcours">
+  <div class="head"><div><span class="eyebrow">Parcours</span><h2 class="display" data-split style="margin-top:14px">La timeline <span class="serif gold">d’une légende.</span></h2></div><div class="muted" style="font-size:13px">1971 → 2025</div></div>
+  <div class="tlv"><div class="rail"><i id="rail"></i></div><div class="track" id="tlTrack"></div></div>
 </section>
 
 <!-- ============ COVERFLOW ============ -->
@@ -107,6 +106,7 @@
     <div class="cnt" id="cfCnt">01<small> / 22</small></div>
   </div>
   <div class="cf-bar"><i id="cfBar"></i></div>
+  <div class="cf-nav"><span class="hint">Glissez, cliquez ou utilisez les flèches</span><button id="cfPrev" aria-label="Album précédent" data-cursor="Préc.">←</button><button id="cfNext" aria-label="Album suivant" data-cursor="Suiv.">→</button></div>
 </section>
 
 <!-- ============ SINGLES ============ -->
@@ -197,7 +197,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="main.js?v=8"></script>
-<script src="legend.js?v=8"></script>
+<script src="main.js?v=10"></script>
+<script src="legend.js?v=10"></script>
 </body>
 </html>
