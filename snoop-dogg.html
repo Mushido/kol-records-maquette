@@ -5,8 +5,8 @@
 <title>Snoop Dogg — Press kit · KoL Legends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=10">
-<link rel="stylesheet" href="legend.css?v=10">
+<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="legend.css?v=12">
 <link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg">
 </head>
 <body data-page="legend" class="legend">
@@ -18,7 +18,7 @@
 <div class="gate" id="gate">
   <div class="g-inner">
     <div class="g-top"><span>KoL Records présente</span><span>KoL Legends · L—01</span></div>
-    <div class="vinyl g-vinyl spin" id="gVinyl"><div class="vl"><b>KoL</b><b>Legends</b><small>Side A · 2026</small></div></div>
+    <div class="g-vinyl" id="gVinyl"><div class="vinyl spin" id="gDisc"><div class="vl"><b>KoL</b><b>Legends</b><small>Side A · 2026</small></div></div></div>
     <div class="g-title" id="gTitle"><div class="gold-text">Snoop</div><div>Dogg</div></div>
     <button class="g-enter" id="enter" data-cursor="Play"><i></i>Entrer</button>
     <div class="g-bot"><span>Press kit officiel</span><span>Long Beach · 1971 — Aujourd’hui</span></div>
@@ -113,7 +113,7 @@
 <section class="section" data-chapter="Les hymnes" style="padding-bottom:60px">
   <div class="hy-mq"><div class="row" id="hyRow"></div></div>
   <div class="wrap" style="margin-top:clamp(60px,8vw,120px)">
-    <div class="sh"><div><span class="eyebrow">Singles iconiques</span><h2 class="display" data-split>Les <span class="serif gold">hymnes.</span></h2></div><p class="reveal">Meilleure position au Billboard Hot 100. Source : Wikipédia (EN), Snoop Dogg singles discography · RIAA.</p></div>
+    <div class="sh"><div><span class="eyebrow">Singles iconiques</span><h2 class="display" data-split>Les <span class="serif gold">hymnes.</span></h2></div><p class="reveal">Cliquez sur un titre pour l’écouter. Meilleure position au Billboard Hot 100. Source : Wikipédia (EN), Snoop Dogg singles discography · RIAA.</p></div>
     <div class="hymns" id="hymns"></div>
   </div>
 </section>
@@ -141,7 +141,7 @@
 <!-- ============ LISTEN ============ -->
 <section class="section wrap line-t" data-chapter="Écouter">
   <div class="listen" id="listen">
-    <div class="vwrap"><div class="vinyl" id="lVinyl"><div class="vl"><b>Snoop</b><b>Dogg</b><small>Top tracks</small></div></div><div class="arm"></div></div>
+    <div class="vwrap"><div id="lVinyl"><div class="vinyl" id="lDisc"><div class="vl"><b>Snoop</b><b>Dogg</b><small>Top tracks</small></div></div></div><div class="arm"></div></div>
     <div><span class="eyebrow">Écouter</span><h2 class="display" data-split style="font-size:clamp(56px,8vw,140px);margin:20px 0 30px">Press <span class="serif gold">play.</span></h2>
       <div class="spot"><iframe src="https://open.spotify.com/embed/artist/7hJcb9fa4alzcOq3EaNPoG?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
   </div>
@@ -194,10 +194,16 @@
   </ul>
 </section>
 
+<div class="dock" id="dock">
+  <div class="dock-top"><div class="vinyl mini" id="dockDisc"><div class="vl"></div></div><div class="dock-t"><small>En écoute</small><b id="dockTitle">—</b></div><button class="dock-x" id="dockClose" aria-label="Fermer le lecteur">×</button></div>
+  <div id="dockEmbed"></div>
+</div>
+<script>window.onSpotifyIframeApiReady=function(API){window.__SPOTIFY_API=API;document.dispatchEvent(new Event("spotify-ready"));};window.KOL_TRACKS=["5Tbpp3OLLClPJF8t1DmrFD","0eO8MW9YSTK3CjdaTYKlhF","39QBkWKnap8wRSW4WB9OK0","503OTo2dSqe7qk76rgsbep","4LwU4Vp6od3Sb08CsP99GC","7FrJV8tydWEv1Mxu2mIQrm","2NBQmPrOEEjA8VbeWOQGxO","4HSAJpNocVNJbwbQvtCMdO","1wva1IlWLDNLgwipUWcmjy","5HQVUIKwCEXpe7JIHyY734"];</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="main.js?v=10"></script>
-<script src="legend.js?v=10"></script>
+<script src="main.js?v=12"></script>
+<script src="legend.js?v=12"></script>
 </body>
 </html>

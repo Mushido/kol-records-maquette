@@ -74,7 +74,7 @@
           <span class="ar">Snoop Dogg</span>${a[3]?'<span class="st">★</span>':''}
           <span class="tt">${a[0]}</span><span class="yr">${a[1]}</span>
         </div><div class="refl" style="--c2:${a[6]}"></div></div>`).join('');
-    $('#hymns').innerHTML = S.map((s,i)=>`<div class="hrow"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${s[0]}</span><span class="f">${s[1]} · ${s[2]}${s[4]?' · RIAA '+s[4]:''}</span><span class="eq"><i></i><i></i><i></i><i></i><i></i></span><span class="pk">#${s[3]}<small>Hot 100</small></span></div>`).join('');
+    $('#hymns').innerHTML = S.map((s,i)=>`<div class="hrow" data-i="${i}" data-cursor="Écouter" role="button" tabindex="0"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${s[0]}</span><span class="f">${s[1]} · ${s[2]}${s[4]?' · RIAA '+s[4]:''}</span><span class="eq"><i></i><i></i><i></i><i></i><i></i></span><span class="pk">#${s[3]}<small>Hot 100</small></span></div>`).join('');
     const titles = S.map(s=>s[0]);
     $('#hyRow').innerHTML = [...titles,...titles].map(t=>`<span>${t}</span>`).join('');
 
@@ -252,7 +252,7 @@
 
     /* ---------- LISTEN ---------- */
     const lv=$('#lVinyl');
-    ScrollTrigger.create({trigger:'#listen',start:'top 65%',end:'bottom 20%',onToggle:s=>{ $('#listen').classList.toggle('playing',s.isActive); lv.classList.toggle('spin',s.isActive); }});
+    ScrollTrigger.create({trigger:'#listen',start:'top 65%',end:'bottom 20%',onToggle:s=>{ $('#listen').classList.toggle('playing',s.isActive); }});
     gsap.from(lv,{scale:.6,rotate:-120,opacity:0,duration:1.6,ease:'expo.out',scrollTrigger:{trigger:'#listen',start:'top 75%',once:true}});
 
     /* ---------- GALLERY ---------- */
@@ -267,6 +267,29 @@
     let chTops=[]; const chMeasure=()=>{ chTops=chSecs.map(s=>s.getBoundingClientRect().top+scrollY); }; ScrollTrigger.addEventListener('refresh',chMeasure); chMeasure();
     const chUpd=()=>{ chTick=false; const y=scrollY+innerHeight*.55; let idx=0; chTops.forEach((t,i)=>{ if(t<y) idx=i; }); setChapter(idx,chSecs[idx].dataset.chapter); };
     addEventListener('scroll',()=>{ if(!chTick){ chTick=true; requestAnimationFrame(chUpd);} },{passive:true});
+    /* ---------- LECTEUR : clic sur un titre ---------- */
+    const dock=$('#dock'), rows=$$('.hrow'); let ctrl=null, pending=null, curRow=-1;
+    const markRow=(i,playing)=>rows.forEach((r,k)=>r.classList.toggle('playing',k===i&&playing));
+    const playTrack=i=>{
+      curRow=i; $('#dockTitle').textContent=S[i][0]; dock.classList.add('on');
+      const uri='spotify:track:'+window.KOL_TRACKS[i];
+      if(!ctrl){ pending=uri; markRow(i,true); return; }
+      ctrl.loadUri(uri); setTimeout(()=>ctrl.play(),350); markRow(i,true);
+    };
+    const initSpotify = API => {
+      API.createController($('#dockEmbed'),{uri:'spotify:track:'+window.KOL_TRACKS[6],width:'100%',height:80},c=>{
+        ctrl=c;
+        c.addListener('playback_update',e=>{ const p=!e.data.isPaused; dock.classList.toggle('playing',p); if(curRow>-1) markRow(curRow,p); });
+        c.addListener('ready',()=>{ if(pending){ c.loadUri(pending); setTimeout(()=>c.play(),350); pending=null; } });
+      });
+    };
+    if (window.__SPOTIFY_API) initSpotify(window.__SPOTIFY_API); else document.addEventListener('spotify-ready',()=>initSpotify(window.__SPOTIFY_API),{once:true});
+    rows.forEach((r,i)=>{
+      r.addEventListener('click',()=>{ if(curRow===i && ctrl){ ctrl.togglePlay(); return; } playTrack(i); });
+      r.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); r.click(); } });
+    });
+    $('#dockClose').addEventListener('click',()=>{ if(ctrl) ctrl.pause(); dock.classList.remove('on','playing'); markRow(-1,false); curRow=-1; });
+
     ScrollTrigger.sort(); ScrollTrigger.refresh();
     addEventListener('load',()=>ScrollTrigger.refresh());
   });
