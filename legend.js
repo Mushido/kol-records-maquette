@@ -70,7 +70,7 @@
     $('#tlTrack').innerHTML = TL.map(t=>`<div class="tlc"><div class="y">${t[0]}</div><div class="d">${t[1]}</div><h4>${t[2]}</h4><p>${t[3]}</p></div>`).join('');
     $('#cfStage').innerHTML = D.map((a,i)=>`<div class="cf-item" data-i="${i}" data-cursor="Écouter">
         <div class="vinyl disc"><div class="vl"><b style="font-size:12px">${a[1]}</b></div></div>
-        <div class="sleeve" style="--c1:${a[5]};--c2:${a[6]};color:${a[7]}">
+        <div class="sleeve" style="--c1:${a[5]};--c2:${a[6]};color:${a[7]}">${(window.KOL_ALBUMS&&window.KOL_ALBUMS[i]&&window.KOL_ALBUMS[i].cover)?`<img class="cv" src="${window.KOL_ALBUMS[i].cover}" alt="${a[0]}" loading="lazy" draggable="false">`:''}
           <span class="ar">Snoop Dogg</span>${a[3]?'<span class="st">★</span>':''}
           <span class="tt">${a[0]}</span><span class="yr">${a[1]}</span>
         </div><div class="refl" style="--c2:${a[6]}"></div></div>`).join('');
@@ -218,6 +218,7 @@
     $('#cfPrev').addEventListener('click',()=>{stopAuto();go(target-1);});
     $('#cfNext').addEventListener('click',()=>{stopAuto();go(target+1);});
     items.forEach((el,i)=>el.addEventListener('click',()=>{ if(dragMoved) return; stopAuto(); go(i); }));
+    window.__cfTarget=()=>target;
     addEventListener('keydown',e=>{ if(!inView) return; if(e.key==='ArrowRight'){stopAuto();go(target+1);} if(e.key==='ArrowLeft'){stopAuto();go(target-1);} });
     // glisser (souris / doigt)
     const stage=$('#cfStage'); let dx0=null, p0=0, dragMoved=false;
@@ -267,28 +268,60 @@
     let chTops=[]; const chMeasure=()=>{ chTops=chSecs.map(s=>s.getBoundingClientRect().top+scrollY); }; ScrollTrigger.addEventListener('refresh',chMeasure); chMeasure();
     const chUpd=()=>{ chTick=false; const y=scrollY+innerHeight*.55; let idx=0; chTops.forEach((t,i)=>{ if(t<y) idx=i; }); setChapter(idx,chSecs[idx].dataset.chapter); };
     addEventListener('scroll',()=>{ if(!chTick){ chTick=true; requestAnimationFrame(chUpd);} },{passive:true});
-    /* ---------- LECTEUR : clic sur un titre ---------- */
-    const dock=$('#dock'), rows=$$('.hrow'); let ctrl=null, pending=null, curRow=-1;
-    const markRow=(i,playing)=>rows.forEach((r,k)=>r.classList.toggle('playing',k===i&&playing));
-    const playTrack=i=>{
-      curRow=i; $('#dockTitle').textContent=S[i][0]; dock.classList.add('on');
-      const uri='spotify:track:'+window.KOL_TRACKS[i];
-      if(!ctrl){ pending=uri; markRow(i,true); return; }
-      ctrl.loadUri(uri); setTimeout(()=>ctrl.play(),350); markRow(i,true);
+    /* ---------- LECTEUR partagé (titres + albums) ---------- */
+    const dock=$('#dock'), rows=$$('.hrow'); let ctrl=null, pending=null, curUri=null;
+    const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    const highlight=(uri,on)=>{
+      rows.forEach((r,k)=>r.classList.toggle('playing',on&&uri==='spotify:track:'+window.KOL_TRACKS[k]));
+      $$('.ap-tr').forEach(t=>t.classList.toggle('playing',on&&t.dataset.uri===uri));
+      const ab=$('#apPlay'); if(ab) ab.classList.toggle('playing',on&&!!ab.dataset.uri&&curUri===ab.dataset.uri);
+    };
+    const playUri=(uri,title)=>{
+      if(curUri===uri && ctrl){ ctrl.togglePlay(); return; }
+      curUri=uri; $('#dockTitle').textContent=title; dock.classList.add('on');
+      if(!ctrl){ pending=uri; return; }
+      ctrl.loadUri(uri); setTimeout(()=>ctrl.play(),350); highlight(uri,true);
     };
     const initSpotify = API => {
       API.createController($('#dockEmbed'),{uri:'spotify:track:'+window.KOL_TRACKS[6],width:'100%',height:80},c=>{
         ctrl=c;
-        c.addListener('playback_update',e=>{ const p=!e.data.isPaused; dock.classList.toggle('playing',p); if(curRow>-1) markRow(curRow,p); });
+        c.addListener('playback_update',e=>{ const p=!e.data.isPaused; dock.classList.toggle('playing',p); highlight(e.data.playingURI||curUri,p); });
         c.addListener('ready',()=>{ if(pending){ c.loadUri(pending); setTimeout(()=>c.play(),350); pending=null; } });
       });
     };
     if (window.__SPOTIFY_API) initSpotify(window.__SPOTIFY_API); else document.addEventListener('spotify-ready',()=>initSpotify(window.__SPOTIFY_API),{once:true});
     rows.forEach((r,i)=>{
-      r.addEventListener('click',()=>{ if(curRow===i && ctrl){ ctrl.togglePlay(); return; } playTrack(i); });
+      r.addEventListener('click',()=>playUri('spotify:track:'+window.KOL_TRACKS[i],S[i][0]));
       r.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); r.click(); } });
     });
-    $('#dockClose').addEventListener('click',()=>{ if(ctrl) ctrl.pause(); dock.classList.remove('on','playing'); markRow(-1,false); curRow=-1; });
+    $('#dockClose').addEventListener('click',()=>{ if(ctrl) ctrl.pause(); dock.classList.remove('on','playing'); highlight(null,false); curUri=null; });
+
+    /* ---------- PANNEAU ALBUM (tracklist + écoute) ---------- */
+    const AL=window.KOL_ALBUMS||[], ap=$('#albumPanel'), apBox=$('#apBox');
+    const openAlbum=i=>{
+      const a=AL[i], m=D[i]; if(!a) return;
+      apBox.style.setProperty('--ac',a.color||'#2a2a2a');
+      $('#apCover').src=a.cover; $('#apCover').alt=a.name;
+      $('#apYear').textContent=m[1]+' · '+a.tracks.length+' titres · '+Math.round(a.tracks.reduce((s,t)=>s+t[2],0)/60)+' min';
+      $('#apTitle').textContent=a.name;
+      $('#apTags').innerHTML=`<span>Billboard 200 · ${m[2]==='—'?'non classé':'n°'+m[2]}</span>${m[4]?`<span class="g">RIAA ${m[4]}</span>`:''}${m[3]?'<span>★ Album majeur</span>':''}`;
+      const au='spotify:album:'+a.id; $('#apPlay').dataset.uri=au; $('#apPlay').onclick=()=>playUri(au,a.name);
+      $('#apSpot').href='https://open.spotify.com/album/'+a.id;
+      $('#apList').innerHTML=a.tracks.map((t,k)=>`<li class="ap-tr" data-uri="spotify:track:${t[1]}" tabindex="0"><span class="n">${String(k+1).padStart(2,'0')}</span><span class="tt"><b>${t[0]}</b><small>${t[3]}</small></span><span class="eq"><i></i><i></i><i></i><i></i></span><span class="du">${fmt(t[2])}</span></li>`).join('');
+      $$('.ap-tr',ap).forEach((li,k)=>{ li.onclick=()=>playUri(li.dataset.uri,a.tracks[k][0]); li.onkeydown=e=>{ if(e.key==='Enter'){ li.click(); } }; });
+      highlight(curUri,dock.classList.contains('playing'));
+      ap.classList.add('on'); if(L) L.stop();
+      gsap.fromTo(apBox,{xPercent:100},{xPercent:0,duration:.8,ease:'expo.out'});
+      gsap.fromTo('#apCoverWrap',{scale:.7,rotate:-8,opacity:0},{scale:1,rotate:0,opacity:1,duration:1,ease:'expo.out',delay:.15});
+      gsap.fromTo('#apDisc',{xPercent:0,rotate:0},{xPercent:48,rotate:200,duration:1.4,ease:'expo.out',delay:.45});
+      gsap.fromTo('.ap-tr',{y:24,opacity:0},{y:0,opacity:1,duration:.6,ease:'expo.out',stagger:.025,delay:.3});
+    };
+    const closeAlbum=()=>{ if(!ap.classList.contains('on')) return; gsap.to(apBox,{xPercent:100,duration:.5,ease:'expo.in',onComplete:()=>{ ap.classList.remove('on'); if(L) L.start(); }}); };
+    $('#apClose').addEventListener('click',closeAlbum);
+    ap.addEventListener('click',e=>{ if(e.target===ap) closeAlbum(); });
+    addEventListener('keydown',e=>{ if(e.key==='Escape') closeAlbum(); });
+    items.forEach((el,i)=>el.addEventListener('click',()=>{ if(dragMoved) return; if(i!==target) setTimeout(()=>openAlbum(i),450); else openAlbum(i); }));
+    $('#cfOpen').addEventListener('click',()=>{ stopAuto(); openAlbum(target); });
 
     ScrollTrigger.sort(); ScrollTrigger.refresh();
     addEventListener('load',()=>ScrollTrigger.refresh());

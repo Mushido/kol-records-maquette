@@ -5,8 +5,8 @@
 <title>Snoop Dogg — Press kit · KoL Legends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://upload.wikimedia.org" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=13">
-<link rel="stylesheet" href="legend.css?v=13">
+<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="legend.css?v=14">
 <link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/960px-Snoop_Dogg_2019_by_Glenn_Francis.jpg">
 </head>
 <body data-page="legend" class="legend">
@@ -106,7 +106,7 @@
     <div class="cnt" id="cfCnt">01<small> / 22</small></div>
   </div>
   <div class="cf-bar"><i id="cfBar"></i></div>
-  <div class="cf-nav"><span class="hint">Glissez, cliquez ou utilisez les flèches</span><button id="cfPrev" aria-label="Album précédent" data-cursor="Préc.">←</button><button id="cfNext" aria-label="Album suivant" data-cursor="Suiv.">→</button></div>
+  <div class="cf-nav"><span class="hint">Cliquez sur un album pour voir les titres et l’écouter</span><button class="cf-open" id="cfOpen" data-cursor="Écouter">▶ Titres & écoute</button><button id="cfPrev" aria-label="Album précédent" data-cursor="Préc.">←</button><button id="cfNext" aria-label="Album suivant" data-cursor="Suiv.">→</button></div>
 </section>
 
 <!-- ============ SINGLES ============ -->
@@ -194,16 +194,29 @@
   </ul>
 </section>
 
+<div class="ap" id="albumPanel" aria-hidden="true">
+  <div class="ap-box" id="apBox" data-lenis-prevent>
+    <button class="ap-x" id="apClose" aria-label="Fermer">×</button>
+    <div class="ap-head">
+      <div class="ap-cw" id="apCoverWrap"><div class="vinyl" id="apDisc"><div class="vl"></div></div><img id="apCover" alt=""></div>
+      <div class="ap-meta"><small id="apYear"></small><h3 id="apTitle"></h3><div class="ap-tags" id="apTags"></div>
+        <div class="ap-btns"><button class="btn btn-accent" id="apPlay">▶ Écouter l’album</button><a class="btn btn-ghost" id="apSpot" target="_blank">Spotify ↗</a></div></div>
+    </div>
+    <ol class="ap-list" id="apList"></ol>
+    <p class="ap-src">Titres et durées : Spotify. Sans compte Spotify connecté, la lecture se limite à un extrait de 30 secondes.</p>
+  </div>
+</div>
 <div class="dock" id="dock">
   <div class="dock-top"><div class="vinyl mini" id="dockDisc"><div class="vl"></div></div><div class="dock-t"><small>En écoute</small><b id="dockTitle">—</b></div><button class="dock-x" id="dockClose" aria-label="Fermer le lecteur">×</button></div>
   <div id="dockEmbed"></div>
 </div>
+<script src="albums.js?v=14"></script>
 <script>window.onSpotifyIframeApiReady=function(API){window.__SPOTIFY_API=API;document.dispatchEvent(new Event("spotify-ready"));};window.KOL_TRACKS=["5Tbpp3OLLClPJF8t1DmrFD","0eO8MW9YSTK3CjdaTYKlhF","39QBkWKnap8wRSW4WB9OK0","503OTo2dSqe7qk76rgsbep","4LwU4Vp6od3Sb08CsP99GC","7FrJV8tydWEv1Mxu2mIQrm","2NBQmPrOEEjA8VbeWOQGxO","4HSAJpNocVNJbwbQvtCMdO","1wva1IlWLDNLgwipUWcmjy","5HQVUIKwCEXpe7JIHyY734"];</script>
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="main.js?v=13"></script>
-<script src="legend.js?v=13"></script>
+<script src="main.js?v=14"></script>
+<script src="legend.js?v=14"></script>
 </body>
 </html>
